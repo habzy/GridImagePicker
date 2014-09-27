@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/GridImagePicker"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/Universal-Image-Loader"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

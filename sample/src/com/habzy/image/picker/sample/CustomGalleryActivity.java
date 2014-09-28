@@ -1,15 +1,12 @@
 package com.habzy.image.picker.sample;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
@@ -22,14 +19,9 @@ import android.widget.ImageView;
 
 import com.habzy.image.picker.CustomGallery;
 import com.habzy.image.picker.GalleryAdapter;
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.habzy.image.tools.ImageTools;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
-import com.nostra13.universalimageloader.utils.StorageUtils;
 
 public class CustomGalleryActivity extends Activity {
 
@@ -53,35 +45,8 @@ public class CustomGalleryActivity extends Activity {
         if (action == null) {
             finish();
         }
-        initImageLoader();
+        imageLoader = ImageTools.getImageLoader(this);
         init();
-    }
-
-    private void initImageLoader() {
-        try {
-            String CACHE_DIR =
-                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/.temp_tmp";
-            new File(CACHE_DIR).mkdirs();
-
-            File cacheDir = StorageUtils.getOwnCacheDirectory(getBaseContext(), CACHE_DIR);
-
-            DisplayImageOptions defaultOptions =
-                    new DisplayImageOptions.Builder().cacheOnDisk(true)
-                            .imageScaleType(ImageScaleType.EXACTLY)
-                            .bitmapConfig(Bitmap.Config.RGB_565).build();
-            ImageLoaderConfiguration.Builder builder =
-                    new ImageLoaderConfiguration.Builder(getBaseContext())
-                            .defaultDisplayImageOptions(defaultOptions)
-                            .diskCache(new UnlimitedDiskCache(cacheDir))
-                            .memoryCache(new WeakMemoryCache());
-
-            ImageLoaderConfiguration config = builder.build();
-            imageLoader = ImageLoader.getInstance();
-            imageLoader.init(config);
-
-        } catch (Exception e) {
-
-        }
     }
 
     private void init() {

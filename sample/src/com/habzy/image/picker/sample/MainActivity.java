@@ -4,15 +4,11 @@ import java.util.ArrayList;
 
 import com.habzy.image.picker.CustomGallery;
 import com.habzy.image.picker.GalleryAdapter;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.habzy.image.tools.ImageTools;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -40,22 +36,8 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        initImageLoader();
+        imageLoader = ImageTools.getImageLoader(this);
         init();
-    }
-
-    private void initImageLoader() {
-        DisplayImageOptions defaultOptions =
-                new DisplayImageOptions.Builder().cacheOnDisk(true)
-                        .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
-                        .bitmapConfig(Bitmap.Config.RGB_565).build();
-        ImageLoaderConfiguration.Builder builder =
-                new ImageLoaderConfiguration.Builder(this).defaultDisplayImageOptions(
-                        defaultOptions).memoryCache(new WeakMemoryCache());
-
-        ImageLoaderConfiguration config = builder.build();
-        imageLoader = ImageLoader.getInstance();
-        imageLoader.init(config);
     }
 
     private void init() {

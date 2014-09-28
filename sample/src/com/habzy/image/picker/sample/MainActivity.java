@@ -2,7 +2,7 @@ package com.habzy.image.picker.sample;
 
 import java.util.ArrayList;
 
-import com.habzy.image.picker.CustomGallery;
+import com.habzy.image.picker.GridItemModel;
 import com.habzy.image.picker.GalleryAdapter;
 import com.habzy.image.tools.ImageTools;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -91,11 +91,11 @@ public class MainActivity extends Activity {
         } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             String[] all_path = data.getStringArrayExtra("all_path");
 
-            ArrayList<CustomGallery> dataT = new ArrayList<CustomGallery>();
+            ArrayList<GridItemModel> dataT = new ArrayList<GridItemModel>();
 
             for (String string : all_path) {
-                CustomGallery item = new CustomGallery();
-                item.mSdcardPath = string;
+                GridItemModel item = new GridItemModel();
+                item.mPath = string;
 
                 dataT.add(item);
             }

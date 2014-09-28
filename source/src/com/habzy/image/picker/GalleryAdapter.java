@@ -19,7 +19,7 @@ public class GalleryAdapter extends BaseAdapter {
     private final static int DEFAULT_NUM_CLUMNS = 3;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
 
-    private ArrayList<CustomGallery> data = new ArrayList<CustomGallery>();
+    private ArrayList<GridItemModel> data = new ArrayList<GridItemModel>();
     private LayoutInflater mInfalter;
     private ImageLoader mImageLoader;
 
@@ -37,7 +37,7 @@ public class GalleryAdapter extends BaseAdapter {
     }
 
     @Override
-    public CustomGallery getItem(int position) {
+    public GridItemModel getItem(int position) {
         return data.get(position);
     }
 
@@ -84,8 +84,8 @@ public class GalleryAdapter extends BaseAdapter {
         return isAnySelected;
     }
 
-    public ArrayList<CustomGallery> getSelected() {
-        ArrayList<CustomGallery> dataT = new ArrayList<CustomGallery>();
+    public ArrayList<GridItemModel> getSelected() {
+        ArrayList<GridItemModel> dataT = new ArrayList<GridItemModel>();
 
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).isSeleted) {
@@ -96,7 +96,7 @@ public class GalleryAdapter extends BaseAdapter {
         return dataT;
     }
 
-    public void addAll(ArrayList<CustomGallery> files) {
+    public void addAll(ArrayList<GridItemModel> files) {
 
         try {
             this.data.clear();
@@ -152,7 +152,7 @@ public class GalleryAdapter extends BaseAdapter {
         holder.imgQueue.setTag(position);
 
         try {
-            mImageLoader.displayImage("file://" + data.get(position).mSdcardPath, holder.imgQueue,
+            mImageLoader.displayImage("file://" + data.get(position).mPath, holder.imgQueue,
                     new SimpleImageLoadingListener() {
                         @Override
                         public void onLoadingStarted(String imageUri, View view) {

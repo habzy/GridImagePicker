@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.habzy.image.picker.CustomGallery;
+import com.habzy.image.picker.GridItemModel;
 import com.habzy.image.picker.GalleryAdapter;
 import com.habzy.image.tools.ImageTools;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,7 +33,6 @@ public class CustomGalleryActivity extends Activity {
     Button btnGalleryOk;
 
     String action;
-    private ImageLoader imageLoader;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,6 @@ public class CustomGalleryActivity extends Activity {
         if (action == null) {
             finish();
         }
-        imageLoader = ImageTools.getImageLoader(this);
         init();
     }
 
@@ -54,6 +52,8 @@ public class CustomGalleryActivity extends Activity {
         handler = new Handler();
         mGridGallery = (GridView) findViewById(R.id.gridGallery);
         mGridGallery.setFastScrollEnabled(true);
+
+        ImageLoader imageLoader = ImageTools.getImageLoader(this);
         adapter = new GalleryAdapter(getApplicationContext(), imageLoader, 4);
         PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, true, true);
         mGridGallery.setOnScrollListener(listener);
@@ -110,11 +110,11 @@ public class CustomGalleryActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            ArrayList<CustomGallery> selected = adapter.getSelected();
+            ArrayList<GridItemModel> selected = adapter.getSelected();
 
             String[] allPath = new String[selected.size()];
             for (int i = 0; i < allPath.length; i++) {
-                allPath[i] = selected.get(i).mSdcardPath;
+                allPath[i] = selected.get(i).mPath;
             }
 
             Intent data = new Intent().putExtra("all_path", allPath);
@@ -137,15 +137,15 @@ public class CustomGalleryActivity extends Activity {
 
                 @Override
                 public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-                    CustomGallery item = adapter.getItem(position);
-                    Intent data = new Intent().putExtra("single_path", item.mSdcardPath);
+                    GridItemModel item = adapter.getItem(position);
+                    Intent data = new Intent().putExtra("single_path", item.mPath);
                     setResult(RESULT_OK, data);
                     finish();
                 }
             };
 
-    private ArrayList<CustomGallery> getGalleryPhotos() {
-        ArrayList<CustomGallery> galleryList = new ArrayList<CustomGallery>();
+    private ArrayList<GridItemModel> getGalleryPhotos() {
+        ArrayList<GridItemModel> galleryList = new ArrayList<GridItemModel>();
 
         try {
             final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
@@ -158,11 +158,11 @@ public class CustomGalleryActivity extends Activity {
             if (imagecursor != null && imagecursor.getCount() > 0) {
 
                 while (imagecursor.moveToNext()) {
-                    CustomGallery item = new CustomGallery();
+                    GridItemModel item = new GridItemModel();
 
                     int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
 
-                    item.mSdcardPath = imagecursor.getString(dataColumnIndex);
+                    item.mPath = imagecursor.getString(dataColumnIndex);
 
                     galleryList.add(item);
                 }

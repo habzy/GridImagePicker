@@ -1,8 +1,8 @@
 package com.habzy.image.picker;
 
-public class CustomGallery {
+public class GridItemModel {
 
-	public String mSdcardPath;
+	public String mPath;
 	public boolean isSeleted = false;
 
 }

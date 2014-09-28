@@ -6,11 +6,17 @@
 package com.habzy.image.tools;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.provider.MediaStore;
 
+import com.habzy.image.picker.GridItemModel;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -49,5 +55,38 @@ public class ImageTools {
         }
         return imageLoader;
     }
+
+    public static ArrayList<GridItemModel> getGalleryPhotos(ContentResolver resolver) {
+        ArrayList<GridItemModel> galleryList = new ArrayList<GridItemModel>();
+
+        try {
+            final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
+            final String orderBy = MediaStore.Images.Media._ID;
+
+            Cursor imagecursor =
+                    resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null,
+                            null, orderBy);
+
+            if (imagecursor != null && imagecursor.getCount() > 0) {
+
+                while (imagecursor.moveToNext()) {
+                    GridItemModel item = new GridItemModel();
+
+                    int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
+
+                    item.mPath = imagecursor.getString(dataColumnIndex);
+
+                    galleryList.add(item);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // show newest photo at beginning of the list
+        Collections.reverse(galleryList);
+        return galleryList;
+    }
+
 
 }

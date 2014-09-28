@@ -1,15 +1,12 @@
 package com.habzy.image.picker.sample;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -87,7 +84,8 @@ public class CustomGalleryActivity extends Activity {
 
                     @Override
                     public void run() {
-                        adapter.addAll(getGalleryPhotos());
+                        adapter.addAll(ImageTools.getGalleryPhotos(CustomGalleryActivity.this
+                                .getContentResolver()));
                         checkImageStatus();
                     }
                 });
@@ -143,37 +141,5 @@ public class CustomGalleryActivity extends Activity {
                     finish();
                 }
             };
-
-    private ArrayList<GridItemModel> getGalleryPhotos() {
-        ArrayList<GridItemModel> galleryList = new ArrayList<GridItemModel>();
-
-        try {
-            final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
-            final String orderBy = MediaStore.Images.Media._ID;
-
-            Cursor imagecursor =
-                    getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            columns, null, null, orderBy);
-
-            if (imagecursor != null && imagecursor.getCount() > 0) {
-
-                while (imagecursor.moveToNext()) {
-                    GridItemModel item = new GridItemModel();
-
-                    int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
-
-                    item.mPath = imagecursor.getString(dataColumnIndex);
-
-                    galleryList.add(item);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // show newest photo at beginning of the list
-        Collections.reverse(galleryList);
-        return galleryList;
-    }
 
 }

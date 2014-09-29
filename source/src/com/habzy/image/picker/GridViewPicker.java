@@ -1,9 +1,11 @@
 /**
- * 
+ *
  * Copyright habzy
- * 
+ *
  */
 package com.habzy.image.picker;
+
+import java.util.ArrayList;
 
 import com.habzy.image.tools.ImageTools;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -40,13 +42,16 @@ public class GridViewPicker {
 
     private Button mBtnDone;
     private LinearLayout mParentLayout;
+    private ViewPickerListener mListener;
+    private Button mBtnBack;
 
     /**
      * @param parentView
      */
-    public GridViewPicker(LinearLayout parentView) {
-        mContext = parentView.getContext();
+    public GridViewPicker(LinearLayout parentView, ViewPickerListener listener) {
         mParentLayout = parentView;
+        mContext = parentView.getContext();
+        mListener = listener;
         mHandler = new Handler();
     }
 
@@ -75,6 +80,9 @@ public class GridViewPicker {
 
         mBtnDone = (Button) mTitleBar.findViewById(R.id.picker_done);
         mBtnDone.setOnClickListener(mDoneClickListener);
+
+        mBtnBack = (Button) mTitleBar.findViewById(R.id.picker_back);
+        mBtnBack.setOnClickListener(mBackClickListener);
 
         new Thread() {
 
@@ -131,19 +139,26 @@ public class GridViewPicker {
 
         @Override
         public void onClick(View v) {
-            // ArrayList<GridItemModel> selected = adapter.getSelected();
-            //
-            // String[] allPath = new String[selected.size()];
-            // for (int i = 0; i < allPath.length; i++) {
-            // allPath[i] = selected.get(i).mPath;
-            // }
+            ArrayList<GridItemModel> selected = mAdapter.getSelected();
 
-            // Intent data = new Intent().putExtra("all_path", allPath);
-            // setResult(RESULT_OK, data);
-            // finish();
+            String[] allPath = new String[selected.size()];
+            for (int i = 0; i < allPath.length; i++) {
+                allPath[i] = selected.get(i).mPath;
+            }
+            mListener.onDone(allPath);
 
         }
     };
+
+    View.OnClickListener mBackClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            mListener.onCanceled();
+        }
+    };
+
+
 
     AdapterView.OnItemClickListener mItemMulClickListener = new AdapterView.OnItemClickListener() {
 

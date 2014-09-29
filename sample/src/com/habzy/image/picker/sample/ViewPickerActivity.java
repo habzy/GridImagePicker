@@ -3,6 +3,7 @@ package com.habzy.image.picker.sample;
 import com.habzy.image.picker.GridViewPicker;
 import com.habzy.image.picker.ViewPickerListener;
 import com.habzy.image.picker.ViewPickerParams;
+import com.habzy.image.tools.ImageTools;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +28,7 @@ public class ViewPickerActivity extends Activity {
         mLayout = (LinearLayout) findViewById(R.id.picker_layout);
         mImagePicker = new GridViewPicker(mLayout, params, mViewPickerListener);
         mImagePicker.initialize();
+        mImagePicker.setImagePath(ImageTools.getGalleryPhotos(getContentResolver()));
     }
 
     private void initParams(ViewPickerParams params) {

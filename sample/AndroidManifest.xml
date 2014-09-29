@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="CustomGalleryActivity" >
+        <activity android:name="ViewPickerActivity" >
             <intent-filter>
                 <action android:name="com.habzy.image.picker.sample.ACTION_PICK" />
                 <action android:name="com.habzy.image.picker.sample.ACTION_MULTIPLE_PICK" />

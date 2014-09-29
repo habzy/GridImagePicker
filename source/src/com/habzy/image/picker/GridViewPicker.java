@@ -68,6 +68,27 @@ public class GridViewPicker {
         updateViews();
     }
 
+    public void setImagePath(final ArrayList<GridItemModel> modelsList) {
+        new Thread() {
+            // TODO Move to thread pools.
+
+            @Override
+            public void run() {
+                Looper.prepare();
+                mHandler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        mAdapter.addAll(modelsList);
+                        checkImageStatus();
+                    }
+                });
+                Looper.loop();
+            };
+
+        }.start();
+    }
+
     private void init() {
         mGridGallery = (GridView) mImagePicker.findViewById(R.id.gridGallery);
         mGridGallery.setFastScrollEnabled(true);
@@ -84,24 +105,6 @@ public class GridViewPicker {
 
         mBtnBack = (Button) mTitleBar.findViewById(R.id.picker_back);
         mBtnBack.setOnClickListener(mBackClickListener);
-
-        new Thread() {
-
-            @Override
-            public void run() {
-                Looper.prepare();
-                mHandler.post(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        mAdapter.addAll(ImageTools.getGalleryPhotos(mContext.getContentResolver()));
-                        checkImageStatus();
-                    }
-                });
-                Looper.loop();
-            };
-
-        }.start();
     }
 
     private void updateViews() {

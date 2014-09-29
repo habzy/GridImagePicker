@@ -3,9 +3,9 @@ package com.habzy.image.picker.sample;
 import java.util.ArrayList;
 
 import com.habzy.image.picker.GridItemModel;
-import com.habzy.image.picker.GalleryAdapter;
-import com.habzy.image.tools.ImageTools;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.habzy.image.picker.GridViewPicker;
+import com.habzy.image.picker.ViewPickerListener;
+import com.habzy.image.picker.ViewPickerParams;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,20 +13,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ViewSwitcher;
-
+import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
-    private GridView mGridGallery;
-    private GalleryAdapter adapter;
+    private GridViewPicker mImagePicker;
+    private LinearLayout mLayout;
 
     private Button btnGalleryPick;
     private Button btnGalleryPickMul;
-
-    private ViewSwitcher viewSwitcher;
-    private ImageLoader imageLoader;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,20 +29,25 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        imageLoader = ImageTools.getImageLoader(this);
+        ViewPickerParams params = new ViewPickerParams(true);
+        initParams(params);
+
+        mLayout = (LinearLayout) findViewById(R.id.shown_layout);
+        mImagePicker = new GridViewPicker(mLayout, params, mViewPickerListener);
+        mImagePicker.initialize();
+
         init();
     }
 
+    private void initParams(ViewPickerParams params) {
+        params.setMutiPick(false);
+
+        params.setReadOnly(true);
+        params.setNumClumns(5);
+    }
+
+
     private void init() {
-
-        mGridGallery = (GridView) findViewById(R.id.gridGallery);
-        mGridGallery.setFastScrollEnabled(true);
-        adapter = new GalleryAdapter(getApplicationContext(), imageLoader, 5);
-        adapter.setMultiplePick(false);
-        mGridGallery.setAdapter(adapter);
-
-        viewSwitcher = (ViewSwitcher) findViewById(R.id.viewSwitcher);
-        viewSwitcher.setDisplayedChild(1);
 
         btnGalleryPick = (Button) findViewById(R.id.btnGalleryPick);
         btnGalleryPick.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,6 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
-            adapter.clear();
             String[] all_path = data.getStringArrayExtra("all_path");
 
             ArrayList<GridItemModel> dataT = new ArrayList<GridItemModel>();
@@ -89,9 +88,22 @@ public class MainActivity extends Activity {
 
                 dataT.add(item);
             }
-
-            viewSwitcher.setDisplayedChild(0);
-            adapter.addAll(dataT);
+            mImagePicker.setImagePath(dataT);
         }
     }
+
+    ViewPickerListener mViewPickerListener = new ViewPickerListener() {
+
+        @Override
+        public void onDone(String[] paths) {
+            // Intent data = new Intent().putExtra("all_path", paths);
+            // setResult(RESULT_OK, data);
+            // finish();
+        }
+
+        @Override
+        public void onCanceled() {
+            // finish();
+        }
+    };
 }

@@ -74,7 +74,7 @@ public class GridViewPicker {
         mImgNoMedia = (ImageView) mImagePicker.findViewById(R.id.imgNoMedia);
 
         ImageLoader imageLoader = ImageTools.getImageLoader(mContext);
-        mAdapter = new GalleryAdapter(mContext, imageLoader, 4);
+        mAdapter = new GalleryAdapter(mContext, imageLoader, mParams.getNumClumns());
         PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, true, true);
         mGridGallery.setOnScrollListener(listener);
         mGridGallery.setAdapter(mAdapter);
@@ -105,7 +105,6 @@ public class GridViewPicker {
     }
 
     private void updateViews() {
-
         mGridGallery.setNumColumns(mParams.getNumClumns());
         mAdapter.setNumColumns(mParams.getNumClumns());
 

@@ -19,7 +19,7 @@ public class CustomGalleryActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.gallery);
         mLayout = (LinearLayout) findViewById(R.id.picker_layout);
-        mImagePicker = new GridViewPicker(this, mLayout);
+        mImagePicker = new GridViewPicker(mLayout);
         mImagePicker.initialize();
     }
 }

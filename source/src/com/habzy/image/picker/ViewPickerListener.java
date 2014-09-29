@@ -14,7 +14,7 @@ public interface ViewPickerListener {
 
     /**
      * When finish the intent of picking images.
-     * @return the images' paths which are picked.
+     * @param paths The images' paths which are picked.
      */
-    String[] onDone();
+    void onDone(String[] paths);
 }

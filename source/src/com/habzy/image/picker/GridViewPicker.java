@@ -42,13 +42,12 @@ public class GridViewPicker {
     private LinearLayout mParentLayout;
 
     /**
-     * @param context
+     * @param parentView
      */
-    public GridViewPicker(Context context, LinearLayout parentView) {
-        mContext = context;
+    public GridViewPicker(LinearLayout parentView) {
+        mContext = parentView.getContext();
         mParentLayout = parentView;
         mHandler = new Handler();
-
     }
 
     @SuppressLint("InflateParams")

@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.LinearLayout;
 
-public class CustomGalleryActivity extends Activity {
+public class ViewPickerActivity extends Activity {
 
     private GridViewPicker mImagePicker;
     private LinearLayout mLayout;
@@ -34,9 +34,9 @@ public class CustomGalleryActivity extends Activity {
         if (action == null) {
             finish();
         }
-        if (action.equalsIgnoreCase(Action.ACTION_MULTIPLE_PICK)) {
+        if (action.equalsIgnoreCase(ViewPickerActivity.ACTION_MULTIPLE_PICK)) {
             params.setMutiPick(true);
-        } else if (action.equalsIgnoreCase(Action.ACTION_PICK)) {
+        } else if (action.equalsIgnoreCase(ViewPickerActivity.ACTION_PICK)) {
             params.setMutiPick(false);
         }
 
@@ -58,4 +58,6 @@ public class CustomGalleryActivity extends Activity {
             finish();
         }
     };
+    public static final String ACTION_MULTIPLE_PICK = "com.habzy.image.picker.sample.ACTION_MULTIPLE_PICK";
+    public static final String ACTION_PICK = "com.habzy.image.picker.sample.ACTION_PICK";
 }

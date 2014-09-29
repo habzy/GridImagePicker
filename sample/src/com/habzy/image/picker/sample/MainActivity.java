@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Action.ACTION_PICK);
+                Intent i = new Intent(ViewPickerActivity.ACTION_PICK);
                 startActivityForResult(i, 100);
 
             }
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Action.ACTION_MULTIPLE_PICK);
+                Intent i = new Intent(ViewPickerActivity.ACTION_MULTIPLE_PICK);
                 startActivityForResult(i, 200);
             }
         });

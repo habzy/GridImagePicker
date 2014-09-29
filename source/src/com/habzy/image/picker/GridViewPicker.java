@@ -39,14 +39,14 @@ public class GridViewPicker {
     private Context mContext;
 
     private Button mBtnDone;
-    private LinearLayout mLayoutParent;
+    private LinearLayout mParentLayout;
 
     /**
      * @param context
      */
-    public GridViewPicker(Context context, LinearLayout parent) {
+    public GridViewPicker(Context context, LinearLayout parentView) {
         mContext = context;
-        mLayoutParent = parent;
+        mParentLayout = parentView;
         mHandler = new Handler();
 
     }
@@ -58,8 +58,8 @@ public class GridViewPicker {
         mImagePicker = (View) mInfalter.inflate(R.layout.image_picker, null);
 
         init();
-        mLayoutParent.addView(mTitleBar);
-        mLayoutParent.addView(mImagePicker);
+        mParentLayout.addView(mTitleBar);
+        mParentLayout.addView(mImagePicker);
         updateViews();
     }
 
@@ -97,15 +97,14 @@ public class GridViewPicker {
     }
 
     private void updateViews() {
-        // mSwitcher.setDisplayedChild(1);
 
         if (isMultiPicker) {
-            // mTitleBar.setVisibility(View.VISIBLE);
-            // mGridGallery.setOnItemClickListener(mItemMulClickListener);
+            mTitleBar.setVisibility(View.VISIBLE);
+            mGridGallery.setOnItemClickListener(mItemMulClickListener);
             mAdapter.setMultiplePick(true);
         } else {
-            // mTitleBar.setVisibility(View.GONE);
-            // mGridGallery.setOnItemClickListener(mItemSingleClickListener);
+            mTitleBar.setVisibility(View.GONE);
+            mGridGallery.setOnItemClickListener(mItemSingleClickListener);
             mAdapter.setMultiplePick(false);
         }
     }

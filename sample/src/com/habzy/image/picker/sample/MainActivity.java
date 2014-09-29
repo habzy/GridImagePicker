@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
 
@@ -23,7 +22,6 @@ public class MainActivity extends Activity {
     private GridView mGridGallery;
     private GalleryAdapter adapter;
 
-    private ImageView imgSinglePick;
     private Button btnGalleryPick;
     private Button btnGalleryPickMul;
 
@@ -50,8 +48,6 @@ public class MainActivity extends Activity {
 
         viewSwitcher = (ViewSwitcher) findViewById(R.id.viewSwitcher);
         viewSwitcher.setDisplayedChild(1);
-
-        imgSinglePick = (ImageView) findViewById(R.id.imgSinglePick);
 
         btnGalleryPick = (Button) findViewById(R.id.btnGalleryPick);
         btnGalleryPick.setOnClickListener(new View.OnClickListener() {
@@ -81,14 +77,8 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             adapter.clear();
-
-            viewSwitcher.setDisplayedChild(1);
-            String single_path = data.getStringExtra("single_path");
-            imageLoader.displayImage("file://" + single_path, imgSinglePick);
-
-        } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             String[] all_path = data.getStringArrayExtra("all_path");
 
             ArrayList<GridItemModel> dataT = new ArrayList<GridItemModel>();

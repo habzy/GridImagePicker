@@ -2,6 +2,7 @@ package com.habzy.image.picker.sample;
 
 import com.habzy.image.picker.GridViewPicker;
 import com.habzy.image.picker.ViewPickerListener;
+import com.habzy.image.picker.ViewPickerParams;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,22 +15,33 @@ public class CustomGalleryActivity extends Activity {
     private GridViewPicker mImagePicker;
     private LinearLayout mLayout;
 
-    // private String action;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.gallery);
 
-        // action = getIntent().getAction();
-        // if (action == null) {
-        // finish();
-        // }
+        ViewPickerParams params = new ViewPickerParams(true);
+        initParams(params);
 
         mLayout = (LinearLayout) findViewById(R.id.picker_layout);
-        mImagePicker = new GridViewPicker(mLayout, mViewPickerListener);
+        mImagePicker = new GridViewPicker(mLayout, params, mViewPickerListener);
         mImagePicker.initialize();
+    }
+
+    private void initParams(ViewPickerParams params) {
+        String action = getIntent().getAction();
+        if (action == null) {
+            finish();
+        }
+        if (action.equalsIgnoreCase(Action.ACTION_MULTIPLE_PICK)) {
+            params.setMutiPick(true);
+        } else if (action.equalsIgnoreCase(Action.ACTION_PICK)) {
+            params.setMutiPick(false);
+        }
+
+        params.setReadOnly(false);
+        params.setNumClumns(4);
     }
 
     ViewPickerListener mViewPickerListener = new ViewPickerListener() {

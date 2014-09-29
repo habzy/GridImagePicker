@@ -34,8 +34,7 @@ public class GridViewPicker {
     private GalleryAdapter mAdapter;
     private ImageView mImgNoMedia;
 
-
-    private boolean isMultiPicker = true;
+    private ViewPickerParams mParams;
 
     private Handler mHandler;
     private Context mContext;
@@ -48,10 +47,12 @@ public class GridViewPicker {
     /**
      * @param parentView
      */
-    public GridViewPicker(LinearLayout parentView, ViewPickerListener listener) {
+    public GridViewPicker(LinearLayout parentView, ViewPickerParams params,
+            ViewPickerListener listener) {
         mParentLayout = parentView;
-        mContext = parentView.getContext();
+        mParams = params;
         mListener = listener;
+        mContext = parentView.getContext();
         mHandler = new Handler();
     }
 
@@ -105,7 +106,10 @@ public class GridViewPicker {
 
     private void updateViews() {
 
-        if (isMultiPicker) {
+        mGridGallery.setNumColumns(mParams.getNumClumns());
+        mAdapter.setNumColumns(mParams.getNumClumns());
+
+        if (mParams.isMutiPick()) {
             mTitleBar.setVisibility(View.VISIBLE);
             mGridGallery.setOnItemClickListener(mItemMulClickListener);
             mAdapter.setMultiplePick(true);
@@ -114,16 +118,6 @@ public class GridViewPicker {
             mGridGallery.setOnItemClickListener(mItemSingleClickListener);
             mAdapter.setMultiplePick(false);
         }
-    }
-
-
-    public boolean isMultiPicker() {
-        return isMultiPicker;
-    }
-
-    public void setMultiPicker(boolean isMultiPicker) {
-        this.isMultiPicker = isMultiPicker;
-        updateViews();
     }
 
     private void checkImageStatus() {
@@ -141,11 +135,11 @@ public class GridViewPicker {
         public void onClick(View v) {
             ArrayList<GridItemModel> selected = mAdapter.getSelected();
 
-            String[] allPath = new String[selected.size()];
-            for (int i = 0; i < allPath.length; i++) {
-                allPath[i] = selected.get(i).mPath;
+            String[] paths = new String[selected.size()];
+            for (int i = 0; i < paths.length; i++) {
+                paths[i] = selected.get(i).mPath;
             }
-            mListener.onDone(allPath);
+            mListener.onDone(paths);
 
         }
     };
@@ -173,10 +167,10 @@ public class GridViewPicker {
 
                 @Override
                 public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-                    // GridItemModel item = adapter.getItem(position);
-                    // Intent data = new Intent().putExtra("single_path", item.mPath);
-                    // setResult(RESULT_OK, data);
-                    // finish();
+                    GridItemModel item = mAdapter.getItem(position);
+                    String[] paths = new String[1];
+                    paths[0] = item.mPath;
+                    mListener.onDone(paths);
                 }
             };
 

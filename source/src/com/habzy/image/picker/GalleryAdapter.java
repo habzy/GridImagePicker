@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 public class GalleryAdapter extends BaseAdapter {
 
     private final static int DEFAULT_NUM_CLUMNS = 3;
+    private static final String TAG = null;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
 
     private ArrayList<GridItemModel> data = new ArrayList<GridItemModel>();
@@ -110,14 +112,18 @@ public class GalleryAdapter extends BaseAdapter {
     }
 
     public void changeSelection(View v, int position) {
-
-        if (data.get(position).isSeleted) {
-            data.get(position).isSeleted = false;
+        if (data.get(position).isCameraPhoto) {
+            Log.d(TAG, "======Wana to take photo.");
         } else {
-            data.get(position).isSeleted = true;
-        }
+            if (data.get(position).isSeleted) {
+                data.get(position).isSeleted = false;
+            } else {
+                data.get(position).isSeleted = true;
+            }
 
-        ((ViewHolder) v.getTag()).imgQueueMultiSelected.setSelected(data.get(position).isSeleted);
+            ((ViewHolder) v.getTag()).imgQueueMultiSelected
+                    .setSelected(data.get(position).isSeleted);
+        }
     }
 
     @SuppressLint("InflateParams")
@@ -152,19 +158,24 @@ public class GalleryAdapter extends BaseAdapter {
         holder.imgQueue.setTag(position);
 
         try {
-            mImageLoader.displayImage("file://" + data.get(position).mPath, holder.imgQueue,
-                    new SimpleImageLoadingListener() {
-                        @Override
-                        public void onLoadingStarted(String imageUri, View view) {
-                            holder.imgQueue.setImageResource(R.drawable.no_media);
-                            super.onLoadingStarted(imageUri, view);
-                        }
-                    });
+            if (data.get(position).isCameraPhoto) {
+                holder.imgQueueMultiSelected.setVisibility(View.GONE);
+                holder.imgQueue.setImageResource(R.drawable.take_photo);
+            } else {
+                mImageLoader.displayImage("file://" + data.get(position).mPath, holder.imgQueue,
+                        new SimpleImageLoadingListener() {
+                            @Override
+                            public void onLoadingStarted(String imageUri, View view) {
+                                holder.imgQueue.setImageResource(R.drawable.no_media);
+                                super.onLoadingStarted(imageUri, view);
+                            }
+                        });
 
-            if (isActionMultiplePick) {
+                if (isActionMultiplePick) {
 
-                holder.imgQueueMultiSelected.setSelected(data.get(position).isSeleted);
+                    holder.imgQueueMultiSelected.setSelected(data.get(position).isSeleted);
 
+                }
             }
 
         } catch (Exception e) {

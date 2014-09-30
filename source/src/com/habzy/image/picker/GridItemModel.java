@@ -4,5 +4,6 @@ public class GridItemModel {
 
 	public String mPath;
 	public boolean isSeleted = false;
+	public boolean isCameraPhoto = false;
 
 }

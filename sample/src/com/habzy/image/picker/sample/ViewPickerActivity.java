@@ -1,5 +1,8 @@
 package com.habzy.image.picker.sample;
 
+import java.util.ArrayList;
+
+import com.habzy.image.picker.GridItemModel;
 import com.habzy.image.picker.GridViewPicker;
 import com.habzy.image.picker.ViewPickerListener;
 import com.habzy.image.picker.ViewPickerParams;
@@ -28,7 +31,13 @@ public class ViewPickerActivity extends Activity {
         mLayout = (LinearLayout) findViewById(R.id.picker_layout);
         mImagePicker = new GridViewPicker(mLayout, params, mViewPickerListener);
         mImagePicker.initialize();
-        mImagePicker.setImagePath(ImageTools.getGalleryPhotos(getContentResolver()));
+
+        ArrayList<GridItemModel> modelList = new ArrayList<GridItemModel>();
+        GridItemModel item = new GridItemModel();
+        item.isCameraPhoto = true;
+        modelList.add(item);
+        modelList.addAll(ImageTools.getGalleryPhotos(getContentResolver()));
+        mImagePicker.setImagePath(modelList);
     }
 
     private void initParams(ViewPickerParams params) {

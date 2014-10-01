@@ -17,11 +17,14 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
-    private GridViewPicker mImagePicker;
     private LinearLayout mLayout;
+    private Button mBtnGalleryPick;
+    private Button mBtnGalleryPickMul;
 
-    private Button btnGalleryPick;
-    private Button btnGalleryPickMul;
+    /*
+     * The grid view to manage all images.
+     */
+    private GridViewPicker mImagePicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ public class MainActivity extends Activity {
 
     private void initParams(ViewPickerParams params) {
         params.setMutiPick(false);
-
         params.setReadOnly(true);
         params.setNumClumns(5);
     }
@@ -49,21 +51,18 @@ public class MainActivity extends Activity {
 
     private void init() {
 
-        btnGalleryPick = (Button) findViewById(R.id.btnGalleryPick);
-        btnGalleryPick.setOnClickListener(new View.OnClickListener() {
-
+        mBtnGalleryPick = (Button) findViewById(R.id.btnGalleryPick);
+        mBtnGalleryPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent i = new Intent(ViewPickerActivity.ACTION_PICK);
-                startActivityForResult(i, 100);
+                startActivityForResult(i, 200);
 
             }
         });
 
-        btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
-        btnGalleryPickMul.setOnClickListener(new View.OnClickListener() {
-
+        mBtnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
+        mBtnGalleryPickMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ViewPickerActivity.ACTION_MULTIPLE_PICK);
@@ -78,14 +77,12 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
-            String[] all_path = data.getStringArrayExtra("all_path");
-
+            String[] paths = data.getStringArrayExtra(ViewPickerActivity.PATH_STRING);
             ArrayList<GridItemModel> dataT = new ArrayList<GridItemModel>();
 
-            for (String string : all_path) {
+            for (String string : paths) {
                 GridItemModel item = new GridItemModel();
                 item.mPath = string;
-
                 dataT.add(item);
             }
             mImagePicker.setImagePath(dataT);
@@ -95,15 +92,9 @@ public class MainActivity extends Activity {
     ViewPickerListener mViewPickerListener = new ViewPickerListener() {
 
         @Override
-        public void onDone(String[] paths) {
-            // Intent data = new Intent().putExtra("all_path", paths);
-            // setResult(RESULT_OK, data);
-            // finish();
-        }
+        public void onDone(String[] paths) {}
 
         @Override
-        public void onCanceled() {
-            // finish();
-        }
+        public void onCanceled() {}
     };
 }

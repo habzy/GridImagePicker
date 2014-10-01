@@ -15,6 +15,11 @@ import android.view.Window;
 import android.widget.LinearLayout;
 
 public class ViewPickerActivity extends Activity {
+    public static final String ACTION_MULTIPLE_PICK =
+            "com.habzy.image.picker.sample.ACTION_MULTIPLE_PICK";
+    public static final String ACTION_PICK = "com.habzy.image.picker.sample.ACTION_PICK";
+
+    public static final String PATH_STRING = "all_path";
 
     private GridViewPicker mImagePicker;
     private LinearLayout mLayout;
@@ -59,7 +64,7 @@ public class ViewPickerActivity extends Activity {
 
         @Override
         public void onDone(String[] paths) {
-            Intent data = new Intent().putExtra("all_path", paths);
+            Intent data = new Intent().putExtra(PATH_STRING, paths);
             setResult(RESULT_OK, data);
             finish();
         }
@@ -69,6 +74,4 @@ public class ViewPickerActivity extends Activity {
             finish();
         }
     };
-    public static final String ACTION_MULTIPLE_PICK = "com.habzy.image.picker.sample.ACTION_MULTIPLE_PICK";
-    public static final String ACTION_PICK = "com.habzy.image.picker.sample.ACTION_PICK";
 }

@@ -9,10 +9,12 @@ import java.util.Collections;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.TypedValue;
 
 import com.habzy.image.picker.GridItemModel;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -86,5 +88,8 @@ public class ImageTools {
         return galleryList;
     }
 
+    public static int dpToPx(Resources res, int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.getDisplayMetrics());
+    }
 
 }

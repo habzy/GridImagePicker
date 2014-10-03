@@ -13,6 +13,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,8 @@ public class GridViewPicker {
     private ViewPickerListener mListener;
     private Button mBtnBack;
 
+    private FragmentManager mFragmentManager; // Required
+
     /**
      * @param parentView
      */
@@ -55,7 +58,9 @@ public class GridViewPicker {
     }
 
     @SuppressLint("InflateParams")
-    public void initialize() {
+    public void initialize(FragmentManager manager) {
+        mFragmentManager = manager;
+
         mInfalter = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mTitleBar = (ViewGroup) mInfalter.inflate(R.layout.title_bar, null);
         mImagePicker = (View) mInfalter.inflate(R.layout.image_picker, null);
@@ -69,7 +74,6 @@ public class GridViewPicker {
     public void setImagePath(final ArrayList<GridItemModel> modelsList) {
         new Thread() {
             // TODO Move to thread pools.
-
             @Override
             public void run() {
                 Looper.prepare();
@@ -158,7 +162,9 @@ public class GridViewPicker {
 
         @Override
         public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-            mAdapter.changeSelection(v, position);
+            // mAdapter.changeSelection(v, position);
+            ViewPagerDialogFragment fragment = new ViewPagerDialogFragment(mContext);
+            fragment.show(mFragmentManager, "yox");
         }
     };
 

@@ -71,8 +71,6 @@ public class JazzyViewPager extends ViewPager {
                 setFadeEnabled(true);
         }
         ta.recycle();
-        mAdapter = new JazzyPagerAdapter(this);
-        setAdapter(mAdapter);
     }
 
     public void setTransitionEffect(TransitionEffect effect) {
@@ -570,7 +568,9 @@ public class JazzyViewPager extends ViewPager {
     }
 
     public void setImagePath(ArrayList<GridItemModel> galleryPhotos) {
+        mAdapter = new JazzyPagerAdapter(this);
         mAdapter.setImagePath(galleryPhotos);
+        setAdapter(mAdapter);
     }
 
 }

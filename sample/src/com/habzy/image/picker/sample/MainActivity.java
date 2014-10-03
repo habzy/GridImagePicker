@@ -10,12 +10,13 @@ import com.habzy.image.picker.ViewPickerParams;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
     private LinearLayout mLayout;
     private Button mBtnGalleryPick;
@@ -37,8 +38,7 @@ public class MainActivity extends Activity {
 
         mLayout = (LinearLayout) findViewById(R.id.shown_layout);
         mImagePicker = new GridViewPicker(mLayout, params, mViewPickerListener);
-        mImagePicker.initialize();
-
+        mImagePicker.initialize(getSupportFragmentManager());
         init();
     }
 

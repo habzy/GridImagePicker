@@ -8,13 +8,13 @@ import com.habzy.image.picker.ViewPickerListener;
 import com.habzy.image.picker.ViewPickerParams;
 import com.habzy.image.tools.ImageTools;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.widget.LinearLayout;
 
-public class ViewPickerActivity extends Activity {
+public class ViewPickerActivity extends FragmentActivity {
     public static final String ACTION_MULTIPLE_PICK =
             "com.habzy.image.picker.sample.ACTION_MULTIPLE_PICK";
     public static final String ACTION_PICK = "com.habzy.image.picker.sample.ACTION_PICK";
@@ -35,7 +35,7 @@ public class ViewPickerActivity extends Activity {
 
         mLayout = (LinearLayout) findViewById(R.id.picker_layout);
         mImagePicker = new GridViewPicker(mLayout, params, mViewPickerListener);
-        mImagePicker.initialize();
+        mImagePicker.initialize(getSupportFragmentManager());
 
         ArrayList<GridItemModel> modelList = new ArrayList<GridItemModel>();
         GridItemModel item = new GridItemModel();

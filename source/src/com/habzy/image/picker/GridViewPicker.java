@@ -10,10 +10,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import android.annotation.SuppressLint;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import android.widget.LinearLayout;
 
 public class GridViewPicker {
 
+    private static final String TAG = GridViewPicker.class.getName();
     private LayoutInflater mInfalter;
     private ViewGroup mTitleBar;
 
@@ -44,6 +47,7 @@ public class GridViewPicker {
     private Button mBtnBack;
 
     private FragmentManager mFragmentManager; // Required
+    private ArrayList<GridItemModel> mModelsList;
 
     /**
      * @param parentView
@@ -72,6 +76,7 @@ public class GridViewPicker {
     }
 
     public void setImagePath(final ArrayList<GridItemModel> modelsList) {
+        mModelsList = modelsList;
         new Thread() {
             // TODO Move to thread pools.
             @Override
@@ -163,8 +168,18 @@ public class GridViewPicker {
         @Override
         public void onItemClick(AdapterView<?> l, View v, int position, long id) {
             // mAdapter.changeSelection(v, position);
-            ViewPagerDialogFragment fragment = new ViewPagerDialogFragment(mContext);
-            fragment.show(mFragmentManager, "yox");
+            if (mModelsList.get(position).isCameraPhoto) {
+                Log.d(TAG, "======Wana to take photo.");
+                return;
+            }
+
+            int currentItem = position;
+            if (mModelsList.get(0).isCameraPhoto) {
+                currentItem = currentItem - 1;
+            }
+            ViewPagerDialogFragment fragment = new ViewPagerDialogFragment(mContext, currentItem);
+            fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
+            fragment.show(mFragmentManager, "viewpager");
         }
     };
 

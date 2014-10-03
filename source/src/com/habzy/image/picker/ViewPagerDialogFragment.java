@@ -22,9 +22,11 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private static final String TAG = ViewPagerDialogFragment.class.getName();
     private JazzyViewPager mJazzy;
     private Context mContext;
+    private int mCurrentItem;
 
-    public ViewPagerDialogFragment(Context context) {
+    public ViewPagerDialogFragment(Context context, int currentItem) {
         mContext = context;
+        mCurrentItem = currentItem;
     }
 
     @Override
@@ -42,6 +44,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mJazzy = (JazzyViewPager) view_pager.findViewById(R.id.jazzy_pager);
         mJazzy.setTransitionEffect(TransitionEffect.Tablet);
         mJazzy.setImagePath(ImageTools.getGalleryPhotos(mContext.getContentResolver()));
+        mJazzy.setCurrentItem(mCurrentItem);
         mJazzy.setPageMargin(0);
 
         return mJazzy;

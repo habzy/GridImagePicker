@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
@@ -18,7 +18,6 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 public class GalleryAdapter extends BaseAdapter {
 
     private final static int DEFAULT_NUM_CLUMNS = 3;
-    private static final String TAG = null;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
 
     private ArrayList<GridItemModel> data = new ArrayList<GridItemModel>();
@@ -111,21 +110,6 @@ public class GalleryAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void changeSelection(View v, int position) {
-        if (data.get(position).isCameraPhoto) {
-            Log.d(TAG, "======Wana to take photo.");
-        } else {
-            if (data.get(position).isSeleted) {
-                data.get(position).isSeleted = false;
-            } else {
-                data.get(position).isSeleted = true;
-            }
-
-            ((ViewHolder) v.getTag()).imgQueueMultiSelected
-                    .setSelected(data.get(position).isSeleted);
-        }
-    }
-
     @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -145,6 +129,8 @@ public class GalleryAdapter extends BaseAdapter {
                     (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);
 
             if (isActionMultiplePick) {
+                holder.imgQueueMultiSelected.setOnClickListener(mCheckboxListener);
+                holder.imgQueueMultiSelected.setTag(position);
                 holder.imgQueueMultiSelected.setVisibility(View.VISIBLE);
             } else {
                 holder.imgQueueMultiSelected.setVisibility(View.GONE);
@@ -203,4 +189,19 @@ public class GalleryAdapter extends BaseAdapter {
     public void setNumColumns(int numClumns) {
         mNumClumns = numClumns;
     }
+
+    private OnClickListener mCheckboxListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            int position = (Integer) v.getTag();
+            if (data.get(position).isSeleted) {
+                data.get(position).isSeleted = false;
+            } else {
+                data.get(position).isSeleted = true;
+            }
+
+            v.setSelected(data.get(position).isSeleted);
+        }
+    };
 }

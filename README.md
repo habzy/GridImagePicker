@@ -13,3 +13,5 @@ Library
 =============
 
 [Android-Universal-Image-Loader](https://github.com/nostra13/Android-Universal-Image-Loader)
+[PhotoView](https://github.com/habzy/PhotoView)
+[NineOldAndroids](http://nineoldandroids.com/) or [NineOldAndroids-Github](https://github.com/JakeWharton/NineOldAndroids)

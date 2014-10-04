@@ -170,7 +170,8 @@ public class GridViewPicker {
                 Log.d(TAG, "======Wana to take photo.");
                 return;
             }
-            ViewPagerDialogFragment fragment = new ViewPagerDialogFragment(mModelsList, position);
+            ViewPagerDialogFragment fragment =
+                    new ViewPagerDialogFragment(mModelsList, mParams, position);
             fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
             fragment.setOnDismissListener(mViewPagerDismissListener);
             fragment.show(mFragmentManager, "viewpager");
@@ -182,6 +183,23 @@ public class GridViewPicker {
         @Override
         public void OnDismiss() {
             mAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void OnDone(int currentPosition) {
+            if (mParams.isMutiPick()) {
+                ArrayList<GridItemModel> selected = mAdapter.getSelected();
+
+                String[] paths = new String[selected.size()];
+                for (int i = 0; i < paths.length; i++) {
+                    paths[i] = selected.get(i).mPath;
+                }
+                mListener.onDone(paths);
+            } else {
+                String[] paths = new String[1];
+                paths[0] = mModelsList.get(currentPosition).mPath;
+                mListener.onDone(paths);
+            }
         }
     };
 

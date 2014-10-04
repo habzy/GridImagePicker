@@ -5,4 +5,5 @@ package com.habzy.image.viewpager.wrap;
 
 public interface ViewPagerEventListener {
     void OnDismiss();
+    void OnDone(int currentPosition);
 }

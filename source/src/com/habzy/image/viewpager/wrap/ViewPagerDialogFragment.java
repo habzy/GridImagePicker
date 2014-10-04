@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.habzy.image.picker.GridItemModel;
 import com.habzy.image.picker.R;
+import com.habzy.image.picker.ViewPickerParams;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager.TransitionEffect;
 
@@ -36,10 +37,13 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private Button mBtnBack;
     private Button mBtnDone;
     private ImageView mCheckBox;
+    private ViewPickerParams mParams;
 
-    public ViewPagerDialogFragment(ArrayList<GridItemModel> modelsList, int currentItem) {
+    public ViewPagerDialogFragment(ArrayList<GridItemModel> modelsList, ViewPickerParams params,
+            int currentItem) {
         mModelsList = modelsList;
         mCurrentItem = currentItem;
+        mParams = params;
     }
 
     @Override
@@ -72,12 +76,24 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mBtnBack = (Button) mPagerTitleBar.findViewById(R.id.picker_back);
         mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
         mCheckBox = (ImageView) mPagerBottomBar.findViewById(R.id.focus_checkbox);
-        mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
 
         mJazzy.setOnPageChangeListener(mOnPageChangeListener);
         mBtnBack.setOnClickListener(mOnBackClickListener);
         mBtnDone.setOnClickListener(mOnDoneClickListener);
-        mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
+
+        if (mParams.isMutiPick()) {
+            mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
+            mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
+        } else {
+            mPagerBottomBar.setVisibility(View.GONE);
+        }
+
+        if (mParams.isReadOnly()) {
+            mBtnDone.setVisibility(View.GONE);
+            mPagerBottomBar.setVisibility(View.GONE);
+        } else {
+            mBtnDone.setVisibility(View.VISIBLE);
+        }
     }
 
     private OnClickListener mOnBackClickListener = new OnClickListener() {
@@ -93,7 +109,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            mViewPagerDismissListener.OnDismiss();
+            mViewPagerDismissListener.OnDone(mCurrentItem);
             ViewPagerDialogFragment.this.dismiss();
         }
     };
@@ -114,6 +130,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onPageSelected(int position) {
+            mCurrentItem = position;
             boolean isSelected = mModelsList.get(position).isSeleted;
             mCheckBox.setSelected(isSelected);
         }

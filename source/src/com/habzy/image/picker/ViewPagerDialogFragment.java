@@ -3,7 +3,8 @@
  */
 package com.habzy.image.picker;
 
-import com.habzy.image.tools.ImageTools;
+import java.util.ArrayList;
+
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager.TransitionEffect;
 
@@ -21,11 +22,11 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
     private static final String TAG = ViewPagerDialogFragment.class.getName();
     private JazzyViewPager mJazzy;
-    private Context mContext;
     private int mCurrentItem;
+    private ArrayList<GridItemModel> mModelsList;
 
-    public ViewPagerDialogFragment(Context context, int currentItem) {
-        mContext = context;
+    public ViewPagerDialogFragment(ArrayList<GridItemModel> modelsList, int currentItem) {
+        mModelsList = modelsList;
         mCurrentItem = currentItem;
     }
 
@@ -43,7 +44,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         View view_pager = inflater.inflate(R.layout.view_pager, null);
         mJazzy = (JazzyViewPager) view_pager.findViewById(R.id.jazzy_pager);
         mJazzy.setTransitionEffect(TransitionEffect.Tablet);
-        mJazzy.setImagePath(ImageTools.getGalleryPhotos(mContext.getContentResolver()));
+        mJazzy.setImagePath(mModelsList);
         mJazzy.setCurrentItem(mCurrentItem);
         mJazzy.setPageMargin(0);
 

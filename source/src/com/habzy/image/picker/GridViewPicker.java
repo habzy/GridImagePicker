@@ -118,13 +118,12 @@ public class GridViewPicker {
         mGridGallery.setNumColumns(mParams.getNumClumns());
         mAdapter.setNumColumns(mParams.getNumClumns());
 
+        mGridGallery.setOnItemClickListener(mItemClickListener);
         if (mParams.isMutiPick()) {
             mTitleBar.setVisibility(View.VISIBLE);
-            mGridGallery.setOnItemClickListener(mItemMulClickListener);
             mAdapter.setMultiplePick(true);
         } else {
             mTitleBar.setVisibility(View.GONE);
-            mGridGallery.setOnItemClickListener(mItemSingleClickListener);
             mAdapter.setMultiplePick(false);
         }
     }
@@ -163,7 +162,7 @@ public class GridViewPicker {
 
 
 
-    AdapterView.OnItemClickListener mItemMulClickListener = new AdapterView.OnItemClickListener() {
+    AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> l, View v, int position, long id) {
@@ -172,28 +171,23 @@ public class GridViewPicker {
                 Log.d(TAG, "======Wana to take photo.");
                 return;
             }
-
-            int currentItem = position;
-            if (mModelsList.get(0).isCameraPhoto) {
-                currentItem = currentItem - 1;
-            }
-            ViewPagerDialogFragment fragment = new ViewPagerDialogFragment(mContext, currentItem);
+            ViewPagerDialogFragment fragment = new ViewPagerDialogFragment(mModelsList, position);
             fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
             fragment.show(mFragmentManager, "viewpager");
         }
     };
 
-    AdapterView.OnItemClickListener mItemSingleClickListener =
-            new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-                    GridItemModel item = mAdapter.getItem(position);
-                    String[] paths = new String[1];
-                    paths[0] = item.mPath;
-                    mListener.onDone(paths);
-                }
-            };
+//    AdapterView.OnItemClickListener mItemSingleClickListener =
+//            new AdapterView.OnItemClickListener() {
+//
+//                @Override
+//                public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+//                    GridItemModel item = mAdapter.getItem(position);
+//                    String[] paths = new String[1];
+//                    paths[0] = item.mPath;
+//                    mListener.onDone(paths);
+//                }
+//            };
 
 
 }

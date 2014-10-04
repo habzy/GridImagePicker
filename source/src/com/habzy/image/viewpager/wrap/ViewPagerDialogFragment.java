@@ -14,6 +14,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,6 @@ public class ViewPagerDialogFragment extends DialogFragment {
     }
 
     private void initViews() {
-        // TODO Auto-generated method stub
         mJazzy.setTransitionEffect(TransitionEffect.Tablet);
         mJazzy.setImagePath(mModelsList);
         mJazzy.setCurrentItem(mCurrentItem);
@@ -72,6 +72,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
         mCheckBox = (ImageView) mPagerBottomBar.findViewById(R.id.focus_checkbox);
 
+        mJazzy.setOnPageChangeListener(mOnPageChangeListener);
         mBtnBack.setOnClickListener(mOnBackClickListener);
         mBtnDone.setOnClickListener(mOnDoneClickListener);
         mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
@@ -98,10 +99,26 @@ public class ViewPagerDialogFragment extends DialogFragment {
         @Override
         public void onClick(View v) {
             int position = mJazzy.getCurrentItem();
-            boolean isSelected = ((ImageView) v).isSelected();
-            ((ImageView) v).setSelected(!isSelected);
+            boolean isSelected = mModelsList.get(position).isSeleted;
+            mCheckBox.setSelected(!isSelected);
             mModelsList.get(position).isSeleted = !isSelected;
         }
+
+    };
+
+    private OnPageChangeListener mOnPageChangeListener = new OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            boolean isSelected = mModelsList.get(position).isSeleted;
+            mCheckBox.setSelected(isSelected);
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {}
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {}
     };
 
 }

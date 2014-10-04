@@ -88,7 +88,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
             mPagerBottomBar.setVisibility(View.GONE);
         }
 
-        if (mParams.isReadOnly()) {
+        if (mParams.isViewOnlyModel()) {
             mBtnDone.setVisibility(View.GONE);
             mPagerBottomBar.setVisibility(View.GONE);
         } else {

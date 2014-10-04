@@ -56,7 +56,7 @@ public class ViewPickerActivity extends FragmentActivity {
             params.setMutiPick(false);
         }
 
-        params.setReadOnly(false);
+        params.setViewOnlyModel(false);
         params.setNumClumns(4);
     }
 

@@ -8,7 +8,7 @@ public class ViewPickerParams {
     private final static int DEFAULT_NUM_CLUMNS = 3;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
     private boolean isMutiPick = true;
-    private boolean isReadOnly = false;
+    private boolean isViewOnlyModel = false;
 
     public ViewPickerParams(boolean isMutiPick) {
         this.isMutiPick = isMutiPick;
@@ -23,17 +23,17 @@ public class ViewPickerParams {
     }
 
     /**
-     * @return the mReadOnly
+     * @return the isViewModel
      */
-    public boolean isReadOnly() {
-        return isReadOnly;
+    public boolean isViewOnlyModel() {
+        return isViewOnlyModel;
     }
 
     /**
-     * @param mReadOnly the mReadOnly to set
+     * @param isViewModel the isViewModel to set
      */
-    public void setReadOnly(boolean isReadOnly) {
-        this.isReadOnly = isReadOnly;
+    public void setViewOnlyModel(boolean isViewOnlyModel) {
+        this.isViewOnlyModel = isViewOnlyModel;
     }
 
     /**

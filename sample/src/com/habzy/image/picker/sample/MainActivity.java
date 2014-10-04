@@ -44,7 +44,7 @@ public class MainActivity extends FragmentActivity {
 
     private void initParams(ViewPickerParams params) {
         params.setMutiPick(false);
-        params.setReadOnly(true);
+        params.setViewOnlyModel(true);
         params.setNumClumns(5);
     }
 

@@ -6,6 +6,7 @@ package com.habzy.image.picker;
 import java.util.ArrayList;
 
 import com.habzy.image.tools.ImageTools;
+import com.habzy.image.viewpager.wrap.ViewPagerDialogFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 

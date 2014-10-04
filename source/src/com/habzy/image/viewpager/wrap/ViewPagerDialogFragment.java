@@ -1,10 +1,12 @@
 /*
  * Copyright 2014 Habzy Huang
  */
-package com.habzy.image.picker;
+package com.habzy.image.viewpager.wrap;
 
 import java.util.ArrayList;
 
+import com.habzy.image.picker.GridItemModel;
+import com.habzy.image.picker.R;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager.TransitionEffect;
 

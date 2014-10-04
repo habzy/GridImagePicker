@@ -1,6 +1,32 @@
-<com.jfeinstein.jazzyviewpager.JazzyViewPager
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/jazzy_pager"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:minHeight="1500dp"
+    android:minWidth="1500dp"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/pager_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        layout="@layout/title_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.jfeinstein.jazzyviewpager.JazzyViewPager
+            android:id="@+id/jazzy_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/pager_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            layout="@layout/bottom_bar" />
+    </RelativeLayout>
+
+</LinearLayout>

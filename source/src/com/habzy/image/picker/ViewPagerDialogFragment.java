@@ -9,7 +9,6 @@ import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager.TransitionEffect;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -48,7 +47,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mJazzy.setCurrentItem(mCurrentItem);
         mJazzy.setPageMargin(0);
 
-        return mJazzy;
+        return view_pager;
     }
 
 }

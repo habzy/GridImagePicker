@@ -16,17 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <com.jfeinstein.jazzyviewpager.JazzyViewPager
-            android:id="@+id/jazzy_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
         <include
             android:id="@+id/pager_bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_alignParentBottom="true"
             layout="@layout/bottom_bar" />
+
+        <com.jfeinstein.jazzyviewpager.JazzyViewPager
+            android:id="@+id/jazzy_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/pager_bottom_bar" />
     </RelativeLayout>
 
 </LinearLayout>

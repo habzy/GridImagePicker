@@ -4,12 +4,13 @@
     android:layout_height="50dp"
     android:background="@color/bg_title_bar" >
 
-    <ImageButton
-        android:id="@+id/picker_done"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageView
+        android:id="@+id/focus_checkbox"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_margin="3dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/on_focus_checkbox" />
 

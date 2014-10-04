@@ -16,6 +16,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 public class ViewPagerDialogFragment extends DialogFragment {
 
@@ -23,6 +26,11 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private JazzyViewPager mJazzy;
     private int mCurrentItem;
     private ArrayList<GridItemModel> mModelsList;
+    private RelativeLayout mPagerTitleBar;
+    private RelativeLayout mPagerBottomBar;
+    private Button mBtnBack;
+    private Button mBtnDone;
+    private ImageView mCheckBox;
 
     public ViewPagerDialogFragment(ArrayList<GridItemModel> modelsList, int currentItem) {
         mModelsList = modelsList;
@@ -42,12 +50,24 @@ public class ViewPagerDialogFragment extends DialogFragment {
         Log.d(TAG, "====== onCreateView.");
         View view_pager = inflater.inflate(R.layout.view_pager, null);
         mJazzy = (JazzyViewPager) view_pager.findViewById(R.id.jazzy_pager);
+        mPagerTitleBar = (RelativeLayout) view_pager.findViewById(R.id.pager_title_bar);
+        mPagerBottomBar = (RelativeLayout) view_pager.findViewById(R.id.pager_bottom_bar);
+
+        initViews();
+
+        return view_pager;
+    }
+
+    private void initViews() {
+        // TODO Auto-generated method stub
         mJazzy.setTransitionEffect(TransitionEffect.Tablet);
         mJazzy.setImagePath(mModelsList);
         mJazzy.setCurrentItem(mCurrentItem);
         mJazzy.setPageMargin(0);
 
-        return view_pager;
+        mBtnBack = (Button) mPagerTitleBar.findViewById(R.id.picker_back);
+        mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
+        mCheckBox = (ImageView) mPagerBottomBar.findViewById(R.id.focus_checkbox);
     }
 
 }

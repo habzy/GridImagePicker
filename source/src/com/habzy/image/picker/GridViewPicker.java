@@ -6,6 +6,7 @@ package com.habzy.image.picker;
 import java.util.ArrayList;
 
 import com.habzy.image.tools.ImageTools;
+import com.habzy.image.viewpager.wrap.ViewPagerEventListener;
 import com.habzy.image.viewpager.wrap.ViewPagerDialogFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
@@ -161,34 +162,27 @@ public class GridViewPicker {
         }
     };
 
-
-
     AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-            // mAdapter.changeSelection(v, position);
             if (mModelsList.get(position).isCameraPhoto) {
                 Log.d(TAG, "======Wana to take photo.");
                 return;
             }
             ViewPagerDialogFragment fragment = new ViewPagerDialogFragment(mModelsList, position);
             fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
+            fragment.setOnDismissListener(mViewPagerDismissListener);
             fragment.show(mFragmentManager, "viewpager");
         }
     };
 
-//    AdapterView.OnItemClickListener mItemSingleClickListener =
-//            new AdapterView.OnItemClickListener() {
-//
-//                @Override
-//                public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-//                    GridItemModel item = mAdapter.getItem(position);
-//                    String[] paths = new String[1];
-//                    paths[0] = item.mPath;
-//                    mListener.onDone(paths);
-//                }
-//            };
+    ViewPagerEventListener mViewPagerDismissListener = new ViewPagerEventListener() {
 
+        @Override
+        public void OnDismiss() {
+            mAdapter.notifyDataSetChanged();
+        }
+    };
 
 }

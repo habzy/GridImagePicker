@@ -30,6 +30,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private JazzyViewPager mJazzy;
     private int mCurrentItem;
     private ArrayList<GridItemModel> mModelsList;
+    private ViewPagerEventListener mViewPagerDismissListener;
     private RelativeLayout mPagerTitleBar;
     private RelativeLayout mPagerBottomBar;
     private Button mBtnBack;
@@ -71,6 +72,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mBtnBack = (Button) mPagerTitleBar.findViewById(R.id.picker_back);
         mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
         mCheckBox = (ImageView) mPagerBottomBar.findViewById(R.id.focus_checkbox);
+        mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
 
         mJazzy.setOnPageChangeListener(mOnPageChangeListener);
         mBtnBack.setOnClickListener(mOnBackClickListener);
@@ -82,6 +84,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
+            mViewPagerDismissListener.OnDismiss();
             ViewPagerDialogFragment.this.dismiss();
         }
     };
@@ -90,6 +93,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
+            mViewPagerDismissListener.OnDismiss();
             ViewPagerDialogFragment.this.dismiss();
         }
     };
@@ -120,5 +124,9 @@ public class ViewPagerDialogFragment extends DialogFragment {
         @Override
         public void onPageScrollStateChanged(int arg0) {}
     };
+
+    public void setOnDismissListener(ViewPagerEventListener viewPagerDismissListener) {
+        mViewPagerDismissListener = viewPagerDismissListener;
+    }
 
 }

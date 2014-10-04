@@ -15,6 +15,7 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -68,6 +69,37 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mBtnBack = (Button) mPagerTitleBar.findViewById(R.id.picker_back);
         mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
         mCheckBox = (ImageView) mPagerBottomBar.findViewById(R.id.focus_checkbox);
+
+        mBtnBack.setOnClickListener(mOnBackClickListener);
+        mBtnDone.setOnClickListener(mOnDoneClickListener);
+        mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
     }
+
+    private OnClickListener mOnBackClickListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            ViewPagerDialogFragment.this.dismiss();
+        }
+    };
+
+    private OnClickListener mOnDoneClickListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            ViewPagerDialogFragment.this.dismiss();
+        }
+    };
+
+    private OnClickListener mOnCheckBoxClickedListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            int position = mJazzy.getCurrentItem();
+            boolean isSelected = ((ImageView) v).isSelected();
+            ((ImageView) v).setSelected(!isSelected);
+            mModelsList.get(position).isSeleted = !isSelected;
+        }
+    };
 
 }

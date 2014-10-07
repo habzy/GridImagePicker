@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +26,7 @@ public class GalleryAdapter extends BaseAdapter {
     private ImageLoader mImageLoader;
 
     private boolean isActionMultiplePick;
+    private Drawable mCheckBoxDrawable = null;
 
     public GalleryAdapter(Context context, ImageLoader imageLoader, int numClumns) {
         mInfalter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -120,7 +122,6 @@ public class GalleryAdapter extends BaseAdapter {
             convertView = mInfalter.inflate(R.layout.gallery_item, null);
             holder = new ViewHolder();
             holder.imgQueue = (ImageView) convertView.findViewById(R.id.imgQueue);
-
             LayoutParams params = holder.imgQueue.getLayoutParams();
             params.height = params.width / mNumClumns * 3;
             holder.imgQueue.setLayoutParams(params);
@@ -128,6 +129,10 @@ public class GalleryAdapter extends BaseAdapter {
             holder.imgQueueMultiSelected =
                     (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);
 
+            if (mCheckBoxDrawable != null) {
+                Drawable cloneDrawable = mCheckBoxDrawable.getConstantState().newDrawable();
+                holder.imgQueueMultiSelected.setImageDrawable(cloneDrawable);
+            }
             if (isActionMultiplePick) {
                 holder.imgQueueMultiSelected.setOnClickListener(mCheckboxListener);
                 holder.imgQueueMultiSelected.setTag(position);
@@ -142,7 +147,6 @@ public class GalleryAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.imgQueue.setTag(position);
-
         try {
             if (data.get(position).isCameraPhoto) {
                 holder.imgQueueMultiSelected.setVisibility(View.GONE);
@@ -158,9 +162,7 @@ public class GalleryAdapter extends BaseAdapter {
                         });
 
                 if (isActionMultiplePick) {
-
                     holder.imgQueueMultiSelected.setSelected(data.get(position).isSeleted);
-
                 }
             }
 
@@ -204,4 +206,13 @@ public class GalleryAdapter extends BaseAdapter {
             v.setSelected(data.get(position).isSeleted);
         }
     };
+
+    public void setCheckBoxDrawable(Drawable checkBoxDrawable) {
+        this.mCheckBoxDrawable = checkBoxDrawable;
+    }
+
+    public void updateStatus(int currentPosition, boolean isSelected) {
+        data.get(currentPosition).isSeleted = isSelected;
+        notifyDataSetChanged();
+    }
 }

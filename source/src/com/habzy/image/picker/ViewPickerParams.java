@@ -3,12 +3,15 @@
  */
 package com.habzy.image.picker;
 
+import android.graphics.drawable.Drawable;
+
 public class ViewPickerParams {
 
     private final static int DEFAULT_NUM_CLUMNS = 3;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
     private boolean isMutiPick = true;
     private boolean isViewOnlyModel = false;
+    private Drawable mCheckBoxDrawable = null;
 
     public ViewPickerParams(boolean isMutiPick) {
         this.isMutiPick = isMutiPick;
@@ -48,6 +51,20 @@ public class ViewPickerParams {
      */
     public void setMutiPick(boolean isMutiPick) {
         this.isMutiPick = isMutiPick;
+    }
+
+    /**
+     * @return the mCheckBoxDrawable
+     */
+    public Drawable getCheckBoxDrawable() {
+        return mCheckBoxDrawable;
+    }
+
+    /**
+     * @param checkBoxDrawable the mCheckBoxDrawable to set
+     */
+    public void setCheckBoxDrawable(Drawable checkBoxDrawable) {
+        this.mCheckBoxDrawable = checkBoxDrawable;
     }
 
 }

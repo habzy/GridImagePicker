@@ -4,6 +4,7 @@
 package com.habzy.image.viewpager.wrap;
 
 public interface ViewPagerEventListener {
-    void OnDismiss();
-    void OnDone(int currentPosition);
+    void onStatusChanged(int currentPosition, boolean isSelected);
+
+    void onDone(int currentPosition);
 }

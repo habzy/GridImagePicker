@@ -31,7 +31,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private JazzyViewPager mJazzy;
     private int mCurrentItem;
     private ArrayList<GridItemModel> mModelsList;
-    private ViewPagerEventListener mViewPagerDismissListener;
+    private ViewPagerEventListener mViewPagerEventListener;
     private RelativeLayout mPagerTitleBar;
     private RelativeLayout mPagerBottomBar;
     private Button mBtnBack;
@@ -81,6 +81,9 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mBtnBack.setOnClickListener(mOnBackClickListener);
         mBtnDone.setOnClickListener(mOnDoneClickListener);
 
+        if (mParams.getCheckBoxDrawable() != null) {
+            mCheckBox.setImageDrawable(mParams.getCheckBoxDrawable());
+        }
         if (mParams.isMutiPick()) {
             mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
             mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
@@ -100,7 +103,6 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            mViewPagerDismissListener.OnDismiss();
             ViewPagerDialogFragment.this.dismiss();
         }
     };
@@ -109,7 +111,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            mViewPagerDismissListener.OnDone(mCurrentItem);
+            mViewPagerEventListener.onDone(mCurrentItem);
             ViewPagerDialogFragment.this.dismiss();
         }
     };
@@ -122,6 +124,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
             boolean isSelected = mModelsList.get(position).isSeleted;
             mCheckBox.setSelected(!isSelected);
             mModelsList.get(position).isSeleted = !isSelected;
+            mViewPagerEventListener.onStatusChanged(position, !isSelected);
         }
 
     };
@@ -142,8 +145,8 @@ public class ViewPagerDialogFragment extends DialogFragment {
         public void onPageScrollStateChanged(int arg0) {}
     };
 
-    public void setOnDismissListener(ViewPagerEventListener viewPagerDismissListener) {
-        mViewPagerDismissListener = viewPagerDismissListener;
+    public void setOnDismissListener(ViewPagerEventListener viewPagerEventListener) {
+        mViewPagerEventListener = viewPagerEventListener;
     }
 
 }

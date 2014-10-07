@@ -20,10 +20,10 @@
         android:layout_gravity="right"
         android:layout_marginRight="2dp"
         android:layout_marginTop="2dp"
-        android:background="@drawable/on_focus_checkbox"
         android:contentDescription="@string/app_name"
         android:gravity="center"
         android:scaleType="center"
+        android:src="@drawable/on_focus_checkbox"
         android:visibility="gone" />
 
 </FrameLayout>

@@ -105,6 +105,7 @@ public class GridViewPicker {
 
         ImageLoader imageLoader = ImageTools.getImageLoader(mContext);
         mAdapter = new GalleryAdapter(mContext, imageLoader, mParams.getNumClumns());
+        mAdapter.setCheckBoxDrawable(mParams.getCheckBoxDrawable());
         PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, true, true);
         mGridGallery.setOnScrollListener(listener);
         mGridGallery.setAdapter(mAdapter);
@@ -181,12 +182,12 @@ public class GridViewPicker {
     ViewPagerEventListener mViewPagerDismissListener = new ViewPagerEventListener() {
 
         @Override
-        public void OnDismiss() {
-            mAdapter.notifyDataSetChanged();
+        public void onStatusChanged(int currentPosition, boolean isSelected) {
+            mAdapter.updateStatus(currentPosition,isSelected);
         }
 
         @Override
-        public void OnDone(int currentPosition) {
+        public void onDone(int currentPosition) {
             if (mParams.isMutiPick()) {
                 ArrayList<GridItemModel> selected = mAdapter.getSelected();
 

@@ -2,10 +2,10 @@ package com.habzy.image.picker.sample;
 
 import java.util.ArrayList;
 
-import com.habzy.image.picker.GridItemModel;
+import com.habzy.image.models.ItemModel;
+import com.habzy.image.models.ViewParams;
 import com.habzy.image.picker.GridViewPicker;
 import com.habzy.image.picker.ViewPickerListener;
-import com.habzy.image.picker.ViewPickerParams;
 import com.habzy.image.tools.ImageTools;
 
 import android.content.Intent;
@@ -30,22 +30,22 @@ public class ViewPickerActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.gallery);
 
-        ViewPickerParams params = new ViewPickerParams(true);
+        ViewParams params = new ViewParams(true);
         initParams(params);
 
         mLayout = (LinearLayout) findViewById(R.id.picker_layout);
         mImagePicker = new GridViewPicker(mLayout, params, mViewPickerListener);
         mImagePicker.initialize(getSupportFragmentManager());
 
-        ArrayList<GridItemModel> modelList = new ArrayList<GridItemModel>();
-        GridItemModel item = new GridItemModel();
+        ArrayList<ItemModel> modelList = new ArrayList<ItemModel>();
+        ItemModel item = new ItemModel();
         item.isCameraPhoto = true;
         modelList.add(item);
         modelList.addAll(ImageTools.getGalleryPhotos(getContentResolver()));
         mImagePicker.setImagePath(modelList);
     }
 
-    private void initParams(ViewPickerParams params) {
+    private void initParams(ViewParams params) {
         String action = getIntent().getAction();
         if (action == null) {
             finish();

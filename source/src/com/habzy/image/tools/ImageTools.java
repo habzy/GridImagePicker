@@ -16,7 +16,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.TypedValue;
 
-import com.habzy.image.picker.GridItemModel;
+import com.habzy.image.models.ItemModel;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -56,8 +56,8 @@ public class ImageTools {
         return imageLoader;
     }
 
-    public static ArrayList<GridItemModel> getGalleryPhotos(ContentResolver resolver) {
-        ArrayList<GridItemModel> galleryList = new ArrayList<GridItemModel>();
+    public static ArrayList<ItemModel> getGalleryPhotos(ContentResolver resolver) {
+        ArrayList<ItemModel> galleryList = new ArrayList<ItemModel>();
 
         try {
             final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
@@ -70,7 +70,7 @@ public class ImageTools {
             if (imagecursor != null && imagecursor.getCount() > 0) {
 
                 while (imagecursor.moveToNext()) {
-                    GridItemModel item = new GridItemModel();
+                    ItemModel item = new ItemModel();
 
                     int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
 

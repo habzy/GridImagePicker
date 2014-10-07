@@ -13,6 +13,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.habzy.image.models.ItemModel;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
@@ -21,7 +22,7 @@ public class GalleryAdapter extends BaseAdapter {
     private final static int DEFAULT_NUM_CLUMNS = 3;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
 
-    private ArrayList<GridItemModel> data = new ArrayList<GridItemModel>();
+    private ArrayList<ItemModel> data = new ArrayList<ItemModel>();
     private LayoutInflater mInfalter;
     private ImageLoader mImageLoader;
 
@@ -40,7 +41,7 @@ public class GalleryAdapter extends BaseAdapter {
     }
 
     @Override
-    public GridItemModel getItem(int position) {
+    public ItemModel getItem(int position) {
         return data.get(position);
     }
 
@@ -87,8 +88,8 @@ public class GalleryAdapter extends BaseAdapter {
         return isAnySelected;
     }
 
-    public ArrayList<GridItemModel> getSelected() {
-        ArrayList<GridItemModel> dataT = new ArrayList<GridItemModel>();
+    public ArrayList<ItemModel> getSelected() {
+        ArrayList<ItemModel> dataT = new ArrayList<ItemModel>();
 
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).isSeleted) {
@@ -99,7 +100,7 @@ public class GalleryAdapter extends BaseAdapter {
         return dataT;
     }
 
-    public void addAll(ArrayList<GridItemModel> files) {
+    public void addAll(ArrayList<ItemModel> files) {
 
         try {
             this.data.clear();

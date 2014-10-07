@@ -5,9 +5,9 @@ package com.habzy.image.viewpager.wrap;
 
 import java.util.ArrayList;
 
-import com.habzy.image.picker.GridItemModel;
+import com.habzy.image.models.ItemModel;
+import com.habzy.image.models.ViewParams;
 import com.habzy.image.picker.R;
-import com.habzy.image.picker.ViewPickerParams;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager.TransitionEffect;
 
@@ -30,16 +30,16 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private static final String TAG = ViewPagerDialogFragment.class.getName();
     private JazzyViewPager mJazzy;
     private int mCurrentItem;
-    private ArrayList<GridItemModel> mModelsList;
-    private ViewPagerEventListener mViewPagerEventListener;
+    private ArrayList<ItemModel> mModelsList;
+    private ViewPagerListener mViewPagerEventListener;
     private RelativeLayout mPagerTitleBar;
     private RelativeLayout mPagerBottomBar;
     private Button mBtnBack;
     private Button mBtnDone;
     private ImageView mCheckBox;
-    private ViewPickerParams mParams;
+    private ViewParams mParams;
 
-    public ViewPagerDialogFragment(ArrayList<GridItemModel> modelsList, ViewPickerParams params,
+    public ViewPagerDialogFragment(ArrayList<ItemModel> modelsList, ViewParams params,
             int currentItem) {
         mModelsList = modelsList;
         mCurrentItem = currentItem;
@@ -145,7 +145,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         public void onPageScrollStateChanged(int arg0) {}
     };
 
-    public void setOnDismissListener(ViewPagerEventListener viewPagerEventListener) {
+    public void setOnDismissListener(ViewPagerListener viewPagerEventListener) {
         mViewPagerEventListener = viewPagerEventListener;
     }
 

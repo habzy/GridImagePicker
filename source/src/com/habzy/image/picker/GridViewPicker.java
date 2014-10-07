@@ -5,8 +5,10 @@ package com.habzy.image.picker;
 
 import java.util.ArrayList;
 
+import com.habzy.image.models.ItemModel;
+import com.habzy.image.models.ViewParams;
 import com.habzy.image.tools.ImageTools;
-import com.habzy.image.viewpager.wrap.ViewPagerEventListener;
+import com.habzy.image.viewpager.wrap.ViewPagerListener;
 import com.habzy.image.viewpager.wrap.ViewPagerDialogFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
@@ -38,7 +40,7 @@ public class GridViewPicker {
     private GalleryAdapter mAdapter;
     private ImageView mImgNoMedia;
 
-    private ViewPickerParams mParams;
+    private ViewParams mParams;
 
     private Handler mHandler;
     private Context mContext;
@@ -49,12 +51,12 @@ public class GridViewPicker {
     private Button mBtnBack;
 
     private FragmentManager mFragmentManager; // Required
-    private ArrayList<GridItemModel> mModelsList;
+    private ArrayList<ItemModel> mModelsList;
 
     /**
      * @param parentView
      */
-    public GridViewPicker(LinearLayout parentView, ViewPickerParams params,
+    public GridViewPicker(LinearLayout parentView, ViewParams params,
             ViewPickerListener listener) {
         mParentLayout = parentView;
         mParams = params;
@@ -77,7 +79,7 @@ public class GridViewPicker {
         updateViews();
     }
 
-    public void setImagePath(final ArrayList<GridItemModel> modelsList) {
+    public void setImagePath(final ArrayList<ItemModel> modelsList) {
         mModelsList = modelsList;
         new Thread() {
             // TODO Move to thread pools.
@@ -144,7 +146,7 @@ public class GridViewPicker {
 
         @Override
         public void onClick(View v) {
-            ArrayList<GridItemModel> selected = mAdapter.getSelected();
+            ArrayList<ItemModel> selected = mAdapter.getSelected();
 
             String[] paths = new String[selected.size()];
             for (int i = 0; i < paths.length; i++) {
@@ -179,7 +181,7 @@ public class GridViewPicker {
         }
     };
 
-    ViewPagerEventListener mViewPagerDismissListener = new ViewPagerEventListener() {
+    ViewPagerListener mViewPagerDismissListener = new ViewPagerListener() {
 
         @Override
         public void onStatusChanged(int currentPosition, boolean isSelected) {
@@ -189,7 +191,7 @@ public class GridViewPicker {
         @Override
         public void onDone(int currentPosition) {
             if (mParams.isMutiPick()) {
-                ArrayList<GridItemModel> selected = mAdapter.getSelected();
+                ArrayList<ItemModel> selected = mAdapter.getSelected();
 
                 String[] paths = new String[selected.size()];
                 for (int i = 0; i < paths.length; i++) {

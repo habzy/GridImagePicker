@@ -2,7 +2,7 @@ package com.jfeinstein.jazzyviewpager;
 
 import java.util.ArrayList;
 
-import com.habzy.image.picker.GridItemModel;
+import com.habzy.image.models.ItemModel;
 import com.habzy.image.tools.ImageTools;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -15,7 +15,7 @@ import android.view.ViewGroup.LayoutParams;
 public class JazzyPagerAdapter extends PagerAdapter {
 
     private ImageLoader mImageLoader;
-    ArrayList<GridItemModel> mModelList;
+    ArrayList<ItemModel> mModelList;
     private JazzyViewPager mJazzy;
 
     public JazzyPagerAdapter(JazzyViewPager jazzy) {
@@ -51,7 +51,7 @@ public class JazzyPagerAdapter extends PagerAdapter {
         }
     }
 
-    public void setImagePath(ArrayList<GridItemModel> galleryPhotos) {
+    public void setImagePath(ArrayList<ItemModel> galleryPhotos) {
         mModelList = galleryPhotos;
     }
 }

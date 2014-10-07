@@ -18,7 +18,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.habzy.image.picker.GridItemModel;
+import com.habzy.image.models.ItemModel;
 import com.habzy.image.picker.R;
 import com.nineoldandroids.view.ViewHelper;
 
@@ -567,7 +567,7 @@ public class JazzyViewPager extends ViewPager {
         return null;
     }
 
-    public void setImagePath(ArrayList<GridItemModel> galleryPhotos) {
+    public void setImagePath(ArrayList<ItemModel> galleryPhotos) {
         mAdapter = new JazzyPagerAdapter(this);
         mAdapter.setImagePath(galleryPhotos);
         setAdapter(mAdapter);

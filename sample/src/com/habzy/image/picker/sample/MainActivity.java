@@ -2,10 +2,10 @@ package com.habzy.image.picker.sample;
 
 import java.util.ArrayList;
 
-import com.habzy.image.picker.GridItemModel;
+import com.habzy.image.models.ItemModel;
+import com.habzy.image.models.ViewParams;
 import com.habzy.image.picker.GridViewPicker;
 import com.habzy.image.picker.ViewPickerListener;
-import com.habzy.image.picker.ViewPickerParams;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        ViewPickerParams params = new ViewPickerParams(true);
+        ViewParams params = new ViewParams(true);
         initParams(params);
 
         mLayout = (LinearLayout) findViewById(R.id.shown_layout);
@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity {
         init();
     }
 
-    private void initParams(ViewPickerParams params) {
+    private void initParams(ViewParams params) {
         params.setMutiPick(false);
         params.setViewOnlyModel(true);
         params.setNumClumns(5);
@@ -78,10 +78,10 @@ public class MainActivity extends FragmentActivity {
 
         if (resultCode == Activity.RESULT_OK) {
             String[] paths = data.getStringArrayExtra(ViewPickerActivity.PATH_STRING);
-            ArrayList<GridItemModel> dataT = new ArrayList<GridItemModel>();
+            ArrayList<ItemModel> dataT = new ArrayList<ItemModel>();
 
             for (String string : paths) {
-                GridItemModel item = new GridItemModel();
+                ItemModel item = new ItemModel();
                 item.mPath = string;
                 dataT.add(item);
             }

@@ -1,6 +1,6 @@
-package com.habzy.image.picker;
+package com.habzy.image.models;
 
-public class GridItemModel {
+public class ItemModel {
 
 	public String mPath;
 	public boolean isSeleted = false;

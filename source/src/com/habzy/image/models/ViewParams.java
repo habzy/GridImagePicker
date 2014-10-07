@@ -1,11 +1,11 @@
 /*
  * Copyright 2014 Habzy Huang
  */
-package com.habzy.image.picker;
+package com.habzy.image.models;
 
 import android.graphics.drawable.Drawable;
 
-public class ViewPickerParams {
+public class ViewParams {
 
     private final static int DEFAULT_NUM_CLUMNS = 3;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
@@ -13,7 +13,7 @@ public class ViewPickerParams {
     private boolean isViewOnlyModel = false;
     private Drawable mCheckBoxDrawable = null;
 
-    public ViewPickerParams(boolean isMutiPick) {
+    public ViewParams(boolean isMutiPick) {
         this.isMutiPick = isMutiPick;
     }
 

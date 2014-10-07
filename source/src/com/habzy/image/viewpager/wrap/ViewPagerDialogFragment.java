@@ -27,7 +27,7 @@ import android.widget.RelativeLayout;
 
 public class ViewPagerDialogFragment extends DialogFragment {
 
-    private static final String TAG = ViewPagerDialogFragment.class.getName();
+    private static final String TAG = ViewPagerDialogFragment.class.getSimpleName();
     private JazzyViewPager mJazzy;
     private int mCurrentItem;
     private ArrayList<ItemModel> mModelsList;

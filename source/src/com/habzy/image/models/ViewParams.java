@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 
 public class ViewParams {
 
-    private final static int DEFAULT_NUM_CLUMNS = 3;
+    public final static int DEFAULT_NUM_CLUMNS = 4;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
     private boolean isMutiPick = true;
     private boolean isViewOnlyModel = false;

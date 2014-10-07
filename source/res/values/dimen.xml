@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="photo_width">100dp</dimen>
-    <dimen name="photo_height">100dp</dimen>
+    <dimen name="photo_width">77.5dp</dimen>
+    <dimen name="photo_height">77.5dp</dimen>
+    <dimen name="gridview_padding">5dp</dimen>
+    <dimen name="checkbox_margin">5.33dp</dimen>
 
 </resources>

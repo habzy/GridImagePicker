@@ -15,14 +15,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.habzy.image.models.ItemModel;
+import com.habzy.image.models.ViewParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 public class GalleryAdapter extends BaseAdapter {
 
     private static final String TAG = GalleryAdapter.class.getName();
-    private final static int DEFAULT_NUM_CLUMNS = 3;
-    private int mNumClumns = DEFAULT_NUM_CLUMNS;
+
+    private int mNumClumns = ViewParams.DEFAULT_NUM_CLUMNS;
 
     private ArrayList<ItemModel> data = new ArrayList<ItemModel>();
     private LayoutInflater mInfalter;
@@ -126,9 +127,12 @@ public class GalleryAdapter extends BaseAdapter {
             convertView = mInfalter.inflate(R.layout.gallery_item, null);
             holder = new ViewHolder();
             holder.imgQueue = (ImageView) convertView.findViewById(R.id.imgQueue);
-            LayoutParams params = holder.imgQueue.getLayoutParams();
-            params.height = params.width / mNumClumns * 3;
-            holder.imgQueue.setLayoutParams(params);
+            if (ViewParams.DEFAULT_NUM_CLUMNS != mNumClumns) {
+                LayoutParams params = holder.imgQueue.getLayoutParams();
+                params.height =
+                        params.width = params.width * ViewParams.DEFAULT_NUM_CLUMNS / mNumClumns;
+                holder.imgQueue.setLayoutParams(params);
+            }
 
             holder.imgQueueMultiSelected =
                     (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);

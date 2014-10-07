@@ -12,6 +12,7 @@ public class ViewParams {
     private boolean isMutiPick = true;
     private boolean isViewOnlyModel = false;
     private Drawable mCheckBoxDrawable = null;
+    private Drawable mTakePhotoDrawable = null;
 
     public ViewParams(boolean isMutiPick) {
         this.isMutiPick = isMutiPick;
@@ -65,6 +66,20 @@ public class ViewParams {
      */
     public void setCheckBoxDrawable(Drawable checkBoxDrawable) {
         this.mCheckBoxDrawable = checkBoxDrawable;
+    }
+
+    /**
+     * @return the mTakePhotoDrawable
+     */
+    public Drawable getTakePhotoDrawable() {
+        return mTakePhotoDrawable;
+    }
+
+    /**
+     * @param takePhotoDrawable the mTakePhotoDrawable to set
+     */
+    public void setTakePhotoDrawable(Drawable takePhotoDrawable) {
+        this.mTakePhotoDrawable = takePhotoDrawable;
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +20,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 
 public class GalleryAdapter extends BaseAdapter {
 
+    private static final String TAG = GalleryAdapter.class.getName();
     private final static int DEFAULT_NUM_CLUMNS = 3;
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
 
@@ -28,6 +30,7 @@ public class GalleryAdapter extends BaseAdapter {
 
     private boolean isActionMultiplePick;
     private Drawable mCheckBoxDrawable = null;
+    private Drawable mTakePhotoDrawable = null;
 
     public GalleryAdapter(Context context, ImageLoader imageLoader, int numClumns) {
         mInfalter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -151,7 +154,11 @@ public class GalleryAdapter extends BaseAdapter {
         try {
             if (data.get(position).isCameraPhoto) {
                 holder.imgQueueMultiSelected.setVisibility(View.GONE);
-                holder.imgQueue.setImageResource(R.drawable.take_photo);
+                if (null != mTakePhotoDrawable) {
+                    holder.imgQueue.setImageDrawable(mTakePhotoDrawable);
+                } else {
+                    holder.imgQueue.setImageResource(R.drawable.take_photo);
+                }
             } else {
                 mImageLoader.displayImage("file://" + data.get(position).mPath, holder.imgQueue,
                         new SimpleImageLoadingListener() {
@@ -168,6 +175,7 @@ public class GalleryAdapter extends BaseAdapter {
             }
 
         } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
 
@@ -210,6 +218,13 @@ public class GalleryAdapter extends BaseAdapter {
 
     public void setCheckBoxDrawable(Drawable checkBoxDrawable) {
         this.mCheckBoxDrawable = checkBoxDrawable;
+    }
+
+    /**
+     * @param takePhotoDrawable the mTakePhotoDrawable to set
+     */
+    public void setTakePhotoDrawable(Drawable takePhotoDrawable) {
+        this.mTakePhotoDrawable = takePhotoDrawable;
     }
 
     public void updateStatus(int currentPosition, boolean isSelected) {

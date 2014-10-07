@@ -59,6 +59,7 @@ public class ViewPickerActivity extends FragmentActivity {
         params.setViewOnlyModel(false);
         params.setNumClumns(4);
         params.setCheckBoxDrawable(getResources().getDrawable(R.drawable.on_1_checkbox));
+        params.setTakePhotoDrawable(getResources().getDrawable(R.drawable.icon_take_photo));
     }
 
     ViewPickerListener mViewPickerListener = new ViewPickerListener() {

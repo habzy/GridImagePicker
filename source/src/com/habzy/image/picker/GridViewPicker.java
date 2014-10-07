@@ -56,8 +56,7 @@ public class GridViewPicker {
     /**
      * @param parentView
      */
-    public GridViewPicker(LinearLayout parentView, ViewParams params,
-            ViewPickerListener listener) {
+    public GridViewPicker(LinearLayout parentView, ViewParams params, ViewPickerListener listener) {
         mParentLayout = parentView;
         mParams = params;
         mListener = listener;
@@ -105,13 +104,6 @@ public class GridViewPicker {
         mGridGallery.setFastScrollEnabled(true);
         mImgNoMedia = (ImageView) mImagePicker.findViewById(R.id.imgNoMedia);
 
-        ImageLoader imageLoader = ImageTools.getImageLoader(mContext);
-        mAdapter = new GalleryAdapter(mContext, imageLoader, mParams.getNumClumns());
-        mAdapter.setCheckBoxDrawable(mParams.getCheckBoxDrawable());
-        PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, true, true);
-        mGridGallery.setOnScrollListener(listener);
-        mGridGallery.setAdapter(mAdapter);
-
         mBtnDone = (Button) mTitleBar.findViewById(R.id.picker_done);
         mBtnDone.setOnClickListener(mDoneClickListener);
 
@@ -120,10 +112,18 @@ public class GridViewPicker {
     }
 
     private void updateViews() {
+        ImageLoader imageLoader = ImageTools.getImageLoader(mContext);
+        
+        mAdapter = new GalleryAdapter(mContext, imageLoader, mParams.getNumClumns());
+        PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, true, true);
+        mGridGallery.setOnScrollListener(listener);
+        mGridGallery.setOnItemClickListener(mItemClickListener);
+
         mGridGallery.setNumColumns(mParams.getNumClumns());
         mAdapter.setNumColumns(mParams.getNumClumns());
+        mAdapter.setCheckBoxDrawable(mParams.getCheckBoxDrawable());
+        mAdapter.setTakePhotoDrawable(mParams.getTakePhotoDrawable());
 
-        mGridGallery.setOnItemClickListener(mItemClickListener);
         if (mParams.isMutiPick()) {
             mTitleBar.setVisibility(View.VISIBLE);
             mAdapter.setMultiplePick(true);
@@ -131,6 +131,8 @@ public class GridViewPicker {
             mTitleBar.setVisibility(View.GONE);
             mAdapter.setMultiplePick(false);
         }
+
+        mGridGallery.setAdapter(mAdapter);
     }
 
     private void checkImageStatus() {
@@ -185,7 +187,7 @@ public class GridViewPicker {
 
         @Override
         public void onStatusChanged(int currentPosition, boolean isSelected) {
-            mAdapter.updateStatus(currentPosition,isSelected);
+            mAdapter.updateStatus(currentPosition, isSelected);
         }
 
         @Override

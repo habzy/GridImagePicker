@@ -155,6 +155,7 @@ public class GalleryAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.imgQueue.setTag(position);
+        mImageLoader.cancelDisplayTask(holder.imgQueue);
         try {
             if (data.get(position).isCameraPhoto) {
                 holder.imgQueueMultiSelected.setVisibility(View.GONE);

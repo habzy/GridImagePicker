@@ -101,7 +101,7 @@ public class GridViewPicker {
 
     private void init() {
         mGridGallery = (GridView) mImagePicker.findViewById(R.id.gridGallery);
-        mGridGallery.setFastScrollEnabled(true);
+        // mGridGallery.setFastScrollEnabled(true);
         mImgNoMedia = (ImageView) mImagePicker.findViewById(R.id.imgNoMedia);
 
         mBtnDone = (Button) mTitleBar.findViewById(R.id.picker_done);
@@ -113,7 +113,7 @@ public class GridViewPicker {
 
     private void updateViews() {
         ImageLoader imageLoader = ImageTools.getImageLoader(mContext);
-        
+
         mAdapter = new GalleryAdapter(mContext, imageLoader, mParams.getNumClumns());
         PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, true, true);
         mGridGallery.setOnScrollListener(listener);

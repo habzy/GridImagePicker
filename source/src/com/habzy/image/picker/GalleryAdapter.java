@@ -121,8 +121,10 @@ public class GalleryAdapter extends BaseAdapter {
             holder.imgQueue = (ImageView) convertView.findViewById(R.id.imgQueue);
             if (ViewParams.DEFAULT_NUM_CLUMNS != mParams.getNumClumns()) {
                 LayoutParams params = holder.imgQueue.getLayoutParams();
-                params.width *= ViewParams.DEFAULT_NUM_CLUMNS / mParams.getNumClumns();
-                params.height *= ViewParams.DEFAULT_NUM_CLUMNS / mParams.getNumClumns();
+                params.width =
+                        params.width * ViewParams.DEFAULT_NUM_CLUMNS / mParams.getNumClumns();
+                params.height =
+                        params.height * ViewParams.DEFAULT_NUM_CLUMNS / mParams.getNumClumns();
                 holder.imgQueue.setLayoutParams(params);
             }
 

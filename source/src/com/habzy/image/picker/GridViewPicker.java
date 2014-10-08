@@ -89,8 +89,8 @@ public class GridViewPicker {
 
                     @Override
                     public void run() {
-                        mAdapter.addAll(modelsList);
                         checkImageStatus();
+                        mAdapter.addAll(mModelsList);
                     }
                 });
                 Looper.loop();
@@ -101,7 +101,9 @@ public class GridViewPicker {
 
     private void init() {
         mGridGallery = (GridView) mImagePicker.findViewById(R.id.gridGallery);
-        // mGridGallery.setFastScrollEnabled(true);
+        if (!mParams.isMutiPick()) {
+            mGridGallery.setFastScrollEnabled(true);
+        }
         mImgNoMedia = (ImageView) mImagePicker.findViewById(R.id.imgNoMedia);
 
         mBtnDone = (Button) mTitleBar.findViewById(R.id.picker_done);
@@ -130,7 +132,7 @@ public class GridViewPicker {
     }
 
     private void checkImageStatus() {
-        if (mAdapter.isEmpty()) {
+        if (mModelsList.isEmpty()) {
             mImgNoMedia.setVisibility(View.VISIBLE);
         } else {
             mImgNoMedia.setVisibility(View.GONE);

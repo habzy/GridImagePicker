@@ -114,22 +114,16 @@ public class GridViewPicker {
     private void updateViews() {
         ImageLoader imageLoader = ImageTools.getImageLoader(mContext);
 
-        mAdapter = new GalleryAdapter(mContext, imageLoader, mParams.getNumClumns());
+        mAdapter = new GalleryAdapter(mContext, imageLoader, mParams);
         PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, true, true);
         mGridGallery.setOnScrollListener(listener);
         mGridGallery.setOnItemClickListener(mItemClickListener);
-
         mGridGallery.setNumColumns(mParams.getNumClumns());
-        mAdapter.setNumColumns(mParams.getNumClumns());
-        mAdapter.setCheckBoxDrawable(mParams.getCheckBoxDrawable());
-        mAdapter.setTakePhotoDrawable(mParams.getTakePhotoDrawable());
 
         if (mParams.isMutiPick()) {
             mTitleBar.setVisibility(View.VISIBLE);
-            mAdapter.setMultiplePick(true);
         } else {
             mTitleBar.setVisibility(View.GONE);
-            mAdapter.setMultiplePick(false);
         }
 
         mGridGallery.setAdapter(mAdapter);

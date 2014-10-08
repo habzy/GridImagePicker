@@ -23,20 +23,16 @@ public class GalleryAdapter extends BaseAdapter {
 
     private static final String TAG = GalleryAdapter.class.getName();
 
-    private int mNumClumns = ViewParams.DEFAULT_NUM_CLUMNS;
+    private final ViewParams mParams;
 
     private ArrayList<ItemModel> data = new ArrayList<ItemModel>();
     private LayoutInflater mInfalter;
     private ImageLoader mImageLoader;
 
-    private boolean isActionMultiplePick;
-    private Drawable mCheckBoxDrawable = null;
-    private Drawable mTakePhotoDrawable = null;
-
-    public GalleryAdapter(Context context, ImageLoader imageLoader, int numClumns) {
+    public GalleryAdapter(Context context, ImageLoader imageLoader, ViewParams params) {
         mInfalter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mImageLoader = imageLoader;
-        mNumClumns = numClumns;
+        this.mParams = params;
     }
 
     @Override
@@ -52,10 +48,6 @@ public class GalleryAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
-    }
-
-    public void setMultiplePick(boolean isMultiplePick) {
-        this.isActionMultiplePick = isMultiplePick;
     }
 
     public void selectAll(boolean selection) {
@@ -127,21 +119,22 @@ public class GalleryAdapter extends BaseAdapter {
             convertView = mInfalter.inflate(R.layout.gallery_item, null);
             holder = new ViewHolder();
             holder.imgQueue = (ImageView) convertView.findViewById(R.id.imgQueue);
-            if (ViewParams.DEFAULT_NUM_CLUMNS != mNumClumns) {
+            if (ViewParams.DEFAULT_NUM_CLUMNS != mParams.getNumClumns()) {
                 LayoutParams params = holder.imgQueue.getLayoutParams();
-                params.height =
-                        params.width = params.width * ViewParams.DEFAULT_NUM_CLUMNS / mNumClumns;
+                params.width *= ViewParams.DEFAULT_NUM_CLUMNS / mParams.getNumClumns();
+                params.height *= ViewParams.DEFAULT_NUM_CLUMNS / mParams.getNumClumns();
                 holder.imgQueue.setLayoutParams(params);
             }
 
             holder.imgQueueMultiSelected =
                     (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);
 
-            if (mCheckBoxDrawable != null) {
-                Drawable cloneDrawable = mCheckBoxDrawable.getConstantState().newDrawable();
+            if (mParams.getCheckBoxDrawable() != null) {
+                Drawable cloneDrawable =
+                        mParams.getCheckBoxDrawable().getConstantState().newDrawable();
                 holder.imgQueueMultiSelected.setImageDrawable(cloneDrawable);
             }
-            if (isActionMultiplePick) {
+            if (mParams.isMutiPick()) {
                 holder.imgQueueMultiSelected.setOnClickListener(mCheckboxListener);
                 holder.imgQueueMultiSelected.setTag(position);
                 holder.imgQueueMultiSelected.setVisibility(View.VISIBLE);
@@ -159,8 +152,8 @@ public class GalleryAdapter extends BaseAdapter {
         try {
             if (data.get(position).isCameraPhoto) {
                 holder.imgQueueMultiSelected.setVisibility(View.GONE);
-                if (null != mTakePhotoDrawable) {
-                    holder.imgQueue.setImageDrawable(mTakePhotoDrawable);
+                if (null != mParams.getTakePhotoDrawable()) {
+                    holder.imgQueue.setImageDrawable(mParams.getTakePhotoDrawable());
                 } else {
                     holder.imgQueue.setImageResource(R.drawable.take_photo);
                 }
@@ -169,12 +162,17 @@ public class GalleryAdapter extends BaseAdapter {
                         new SimpleImageLoadingListener() {
                             @Override
                             public void onLoadingStarted(String imageUri, View view) {
-                                holder.imgQueue.setImageResource(R.drawable.no_media);
+                                if (null != mParams.getLoadingImageDrawable()) {
+                                    holder.imgQueue.setImageDrawable(mParams
+                                            .getLoadingImageDrawable());
+                                } else {
+                                    holder.imgQueue.setImageResource(R.drawable.no_media);
+                                }
                                 super.onLoadingStarted(imageUri, view);
                             }
                         });
 
-                if (isActionMultiplePick) {
+                if (mParams.isMutiPick()) {
                     holder.imgQueueMultiSelected.setSelected(data.get(position).isSeleted);
                 }
             }
@@ -202,10 +200,6 @@ public class GalleryAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void setNumColumns(int numClumns) {
-        mNumClumns = numClumns;
-    }
-
     private OnClickListener mCheckboxListener = new OnClickListener() {
 
         @Override
@@ -221,19 +215,9 @@ public class GalleryAdapter extends BaseAdapter {
         }
     };
 
-    public void setCheckBoxDrawable(Drawable checkBoxDrawable) {
-        this.mCheckBoxDrawable = checkBoxDrawable;
-    }
-
-    /**
-     * @param takePhotoDrawable the mTakePhotoDrawable to set
-     */
-    public void setTakePhotoDrawable(Drawable takePhotoDrawable) {
-        this.mTakePhotoDrawable = takePhotoDrawable;
-    }
-
     public void updateStatus(int currentPosition, boolean isSelected) {
         data.get(currentPosition).isSeleted = isSelected;
         notifyDataSetChanged();
     }
+
 }

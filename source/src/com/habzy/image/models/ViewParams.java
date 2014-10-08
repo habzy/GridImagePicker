@@ -4,10 +4,14 @@
 package com.habzy.image.models;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 public class ViewParams {
 
     public final static int DEFAULT_NUM_CLUMNS = 4;
+
+    private static final String TAG = ViewParams.class.getSimpleName();
+
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
     private boolean isMutiPick = true;
     private boolean isViewOnlyModel = false;
@@ -24,7 +28,11 @@ public class ViewParams {
     }
 
     public void setNumClumns(int numClumns) {
-        this.mNumClumns = numClumns;
+        if (numClumns > 0) {
+            this.mNumClumns = numClumns;
+        } else {
+            Log.w(TAG, numClumns + " numClumns is not supported");
+        }
     }
 
     /**

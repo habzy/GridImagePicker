@@ -12,6 +12,7 @@ import com.habzy.image.viewpager.wrap.ViewPagerListener;
 import com.habzy.image.viewpager.wrap.ViewPagerDialogFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import android.annotation.SuppressLint;
 import android.app.DialogFragment;
@@ -22,6 +23,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -51,6 +53,7 @@ public class GridViewPicker {
     private Button mBtnBack;
 
     private FragmentManager mFragmentManager; // Required
+    private ImageLoader mImageLoader;
     private ArrayList<ItemModel> mModelsList;
 
     /**
@@ -89,8 +92,11 @@ public class GridViewPicker {
 
                     @Override
                     public void run() {
-                        checkImageStatus();
-                        mAdapter.addAll(mModelsList);
+                        if (checkImageStatus()) {
+                            mAdapter.clear();
+                        } else {
+                            mAdapter.addAll(mModelsList);
+                        }
                     }
                 });
                 Looper.loop();
@@ -114,10 +120,10 @@ public class GridViewPicker {
     }
 
     private void updateViews() {
-        ImageLoader imageLoader = ImageTools.getImageLoader(mContext);
+        mImageLoader = ImageTools.getImageLoader(mContext);
 
-        mAdapter = new GalleryAdapter(mContext, imageLoader, mParams);
-        PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, true, true);
+        mAdapter = new GalleryAdapter(mContext, mImageLoader, mParams);
+        PauseOnScrollListener listener = new PauseOnScrollListener(mImageLoader, true, true);
         mGridGallery.setOnScrollListener(listener);
         mGridGallery.setOnItemClickListener(mItemClickListener);
         mGridGallery.setNumColumns(mParams.getNumClumns());
@@ -131,12 +137,43 @@ public class GridViewPicker {
         mGridGallery.setAdapter(mAdapter);
     }
 
-    private void checkImageStatus() {
-        if (mModelsList.isEmpty()) {
-            mImgNoMedia.setVisibility(View.VISIBLE);
-        } else {
+    private boolean checkImageStatus() {
+        boolean result = false;
+        switch (mModelsList.size()) {
+            case 1:
+                if (mParams.isViewOnlyModel()) {
+                    result = true;
+                    mImgNoMedia.setVisibility(View.VISIBLE);
+                    mImageLoader.displayImage("file://" + mModelsList.get(0).mPath, mImgNoMedia,
+                            new SimpleImageLoadingListener() {
+                                @Override
+                                public void onLoadingStarted(String imageUri, View view) {
+                                    if (null != mParams.getLoadingImageDrawable()) {
+                                        mImgNoMedia.setImageDrawable(mParams
+                                                .getLoadingImageDrawable());
+                                    } else {
+                                        mImgNoMedia.setImageResource(R.drawable.no_media);
+                                    }
+                                    super.onLoadingStarted(imageUri, view);
+                                }
+                            });
+                    mImgNoMedia.setClickable(true);
+                    mImgNoMedia.setOnClickListener(mOnSingleImageClickListener);
+                }
+                break;
+            case 0:
+                result = true;
+                mImgNoMedia.setVisibility(View.VISIBLE);
+                mImgNoMedia.setImageResource(R.drawable.no_media);
+                mImgNoMedia.setClickable(false);
+                break;
+            default:
+                break;
+        }
+        if (!result) {
             mImgNoMedia.setVisibility(View.GONE);
         }
+        return result;
     }
 
 
@@ -171,13 +208,25 @@ public class GridViewPicker {
                 Log.d(TAG, "======Wana to take photo.");
                 return;
             }
-            ViewPagerDialogFragment fragment =
-                    new ViewPagerDialogFragment(mModelsList, mParams, position);
-            fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
-            fragment.setOnDismissListener(mViewPagerDismissListener);
-            fragment.show(mFragmentManager, "viewpager");
+            showPagerView(position);
         }
     };
+
+    private OnClickListener mOnSingleImageClickListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            showPagerView(mModelsList.size());
+        }
+    };
+
+    private void showPagerView(int position) {
+        ViewPagerDialogFragment fragment =
+                new ViewPagerDialogFragment(mModelsList, mParams, position);
+        fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
+        fragment.setOnDismissListener(mViewPagerDismissListener);
+        fragment.show(mFragmentManager, "viewpager");
+    }
 
     ViewPagerListener mViewPagerDismissListener = new ViewPagerListener() {
 

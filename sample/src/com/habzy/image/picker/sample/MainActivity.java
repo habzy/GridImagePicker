@@ -46,6 +46,8 @@ public class MainActivity extends FragmentActivity {
         params.setMutiPick(false);
         params.setViewOnlyModel(true);
         params.setNumClumns(5);
+        params.setLoadingImageDrawable(getResources().getDrawable(
+                R.drawable.image_view_loading_default));
     }
 
 

@@ -85,18 +85,22 @@ public class ViewPagerDialogFragment extends DialogFragment {
         if (mParams.getCheckBoxDrawable() != null) {
             mCheckBox.setImageDrawable(mParams.getCheckBoxDrawable());
         }
-        if (mParams.isMutiPick()) {
-            mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
-            mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
-        } else {
-            mPagerBottomBar.setVisibility(View.GONE);
-        }
 
-        if (mParams.isViewOnlyModel()) {
-            mBtnDone.setVisibility(View.GONE);
-            mPagerBottomBar.setVisibility(View.GONE);
-        } else {
-            mBtnDone.setVisibility(View.VISIBLE);
+        switch (mParams.getShownStyle()) {
+            case Pick_Multiple:
+                mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
+                mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
+                mPagerBottomBar.setVisibility(View.VISIBLE);
+                break;
+            case Pick_Single:
+                mPagerBottomBar.setVisibility(View.GONE);
+                break;
+            case ViewOnly:
+                mBtnDone.setVisibility(View.GONE);
+                mPagerBottomBar.setVisibility(View.GONE);
+                break;
+            default:
+                break;
         }
     }
 

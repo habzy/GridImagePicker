@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
+import com.habzy.image.models.ViewParams.ShownStyle;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
@@ -138,7 +139,7 @@ public class GalleryAdapter extends BaseAdapter {
                         mParams.getCheckBoxDrawable().getConstantState().newDrawable();
                 holder.imgQueueMultiSelected.setImageDrawable(cloneDrawable);
             }
-            if (mParams.isMutiPick()) {
+            if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
                 holder.imgQueueMultiSelected.setOnClickListener(mCheckboxListener);
                 holder.imgQueueMultiSelected.setTag(position);
                 holder.imgQueueMultiSelected.setVisibility(View.VISIBLE);
@@ -176,7 +177,7 @@ public class GalleryAdapter extends BaseAdapter {
                             }
                         });
 
-                if (mParams.isMutiPick()) {
+                if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
                     holder.imgQueueMultiSelected.setSelected(data.get(position).isSeleted);
                 }
             }

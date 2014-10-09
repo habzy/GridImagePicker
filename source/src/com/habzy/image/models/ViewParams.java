@@ -14,7 +14,6 @@ public class ViewParams {
 
     public final static int DEFAULT_NUM_CLUMNS = 4;
     public final static float DEFAULT_ITEM_PADDING_DIP = 4;
-    public final static TransitionEffect DEFAULT_TRANSITION_EFFECT = TransitionEffect.Accordion;
 
     public enum TransitionEffect {
         Standard,       //
@@ -31,13 +30,23 @@ public class ViewParams {
         Accordion       // I like this one. -- Habzy (:
     }
 
+    public enum ShownStyle {
+        Pick_Multiple,   //
+        Pick_Single,     //
+        ViewOnly,        //
+        // ViewAndDelete //
+    }
+
     private static final String TAG = ViewParams.class.getSimpleName();
+    private final static TransitionEffect DEFAULT_TRANSITION_EFFECT = TransitionEffect.Accordion;
+    private final static ShownStyle DEFAULT_SHOWN_MODEL = ShownStyle.Pick_Multiple;
 
     private final DisplayMetrics mMetics;
 
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
-    private boolean isMutiPick = true;
-    private boolean isViewOnlyModel = false;
+
+    private ShownStyle mShownStyle = DEFAULT_SHOWN_MODEL;
+
     private Drawable mCheckBoxDrawable = null;
     private Drawable mTakePhotoDrawable = null;
     private Drawable mLoadingImageDrawable = null;
@@ -60,34 +69,6 @@ public class ViewParams {
         } else {
             Log.w(TAG, numClumns + " numClumns is not supported");
         }
-    }
-
-    /**
-     * @return the isViewModel
-     */
-    public boolean isViewOnlyModel() {
-        return isViewOnlyModel;
-    }
-
-    /**
-     * @param isViewModel the isViewModel to set
-     */
-    public void setViewOnlyModel(boolean isViewOnlyModel) {
-        this.isViewOnlyModel = isViewOnlyModel;
-    }
-
-    /**
-     * @return the isMutiPick
-     */
-    public boolean isMutiPick() {
-        return isMutiPick;
-    }
-
-    /**
-     * @param isMutiPick the isMutiPick to set
-     */
-    public void setMutiPick(boolean isMutiPick) {
-        this.isMutiPick = isMutiPick;
     }
 
     /**
@@ -164,6 +145,20 @@ public class ViewParams {
     public TransitionEffect getTransitionEffect() {
         int effectPosition = new Random().nextInt(mTransitionEffects.size());
         return mTransitionEffects.get(effectPosition);
+    }
+
+    /**
+     * @return the mShownStyle
+     */
+    public ShownStyle getShownStyle() {
+        return mShownStyle;
+    }
+
+    /**
+     * @param shownStyle the mShownStyle to set
+     */
+    public void setShownStyle(ShownStyle shownStyle) {
+        this.mShownStyle = shownStyle;
     }
 
 }

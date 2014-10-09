@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
+import com.habzy.image.models.ViewParams.ShownStyle;
 import com.habzy.image.models.ViewParams.TransitionEffect;
 import com.habzy.image.picker.GridViewPicker;
 import com.habzy.image.picker.ViewPickerListener;
@@ -51,8 +52,7 @@ public class MainActivity extends FragmentActivity {
         transitionEffects.add(ViewParams.TransitionEffect.FlipVertical);
 
         params.setTransitionEffects(transitionEffects);
-        params.setMutiPick(false);
-        params.setViewOnlyModel(true);
+        params.setShownStyle(ShownStyle.ViewOnly);
         params.setNumClumns(5);
         params.setLoadingImageDrawable(getResources().getDrawable(
                 R.drawable.image_view_loading_default));

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
+import com.habzy.image.models.ViewParams.ShownStyle;
 import com.habzy.image.tools.ImageTools;
 import com.habzy.image.viewpager.wrap.ViewPagerListener;
 import com.habzy.image.viewpager.wrap.ViewPagerDialogFragment;
@@ -107,9 +108,6 @@ public class GridViewPicker {
 
     private void init() {
         mGridGallery = (GridView) mImagePicker.findViewById(R.id.gridGallery);
-        if (!mParams.isMutiPick()) {
-            mGridGallery.setFastScrollEnabled(true);
-        }
         mImgNoMedia = (ImageView) mImagePicker.findViewById(R.id.imgNoMedia);
 
         mBtnDone = (Button) mTitleBar.findViewById(R.id.picker_done);
@@ -128,10 +126,11 @@ public class GridViewPicker {
         mGridGallery.setOnItemClickListener(mItemClickListener);
         mGridGallery.setNumColumns(mParams.getNumClumns());
 
-        if (mParams.isMutiPick()) {
-            mTitleBar.setVisibility(View.VISIBLE);
-        } else {
+        if (mParams.getShownStyle() != ShownStyle.Pick_Multiple) {
+            mGridGallery.setFastScrollEnabled(true);
             mTitleBar.setVisibility(View.GONE);
+        } else {
+            mTitleBar.setVisibility(View.VISIBLE);
         }
 
         mGridGallery.setAdapter(mAdapter);
@@ -141,7 +140,7 @@ public class GridViewPicker {
         boolean result = false;
         switch (mModelsList.size()) {
             case 1:
-                if (mParams.isViewOnlyModel()) {
+                if (ShownStyle.ViewOnly == mParams.getShownStyle()) {
                     result = true;
                     mImgNoMedia.setVisibility(View.VISIBLE);
                     mImageLoader.displayImage("file://" + mModelsList.get(0).mPath, mImgNoMedia,
@@ -232,7 +231,7 @@ public class GridViewPicker {
 
         @Override
         public void onDone(int currentPosition) {
-            if (mParams.isMutiPick()) {
+            if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
                 ArrayList<ItemModel> selected = mAdapter.getSelected();
 
                 String[] paths = new String[selected.size()];
@@ -249,7 +248,7 @@ public class GridViewPicker {
 
         @Override
         public void onDismiss() {
-            if (mParams.isMutiPick()) {
+            if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
                 mAdapter.notifyDataSetChanged();
             }
         }

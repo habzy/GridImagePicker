@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
+import com.habzy.image.models.ViewParams.ShownStyle;
 import com.habzy.image.picker.GridViewPicker;
 import com.habzy.image.picker.ViewPickerListener;
 import com.habzy.image.tools.ImageTools;
@@ -51,12 +52,11 @@ public class ViewPickerActivity extends FragmentActivity {
             finish();
         }
         if (action.equalsIgnoreCase(ViewPickerActivity.ACTION_MULTIPLE_PICK)) {
-            params.setMutiPick(true);
+            params.setShownStyle(ShownStyle.Pick_Multiple);
         } else if (action.equalsIgnoreCase(ViewPickerActivity.ACTION_PICK)) {
-            params.setMutiPick(false);
+            params.setShownStyle(ShownStyle.Pick_Single);
         }
 
-        params.setViewOnlyModel(false);
         params.setCheckBoxDrawable(getResources().getDrawable(R.drawable.on_1_checkbox));
         params.setTakePhotoDrawable(getResources().getDrawable(R.drawable.icon_take_photo));
         params.setLoadingImageDrawable(getResources().getDrawable(

@@ -30,7 +30,7 @@ public class ViewPickerActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.gallery);
 
-        ViewParams params = new ViewParams(true);
+        ViewParams params = new ViewParams(getResources().getDisplayMetrics());
         initParams(params);
 
         mLayout = (LinearLayout) findViewById(R.id.picker_layout);

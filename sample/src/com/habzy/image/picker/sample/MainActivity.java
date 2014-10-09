@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        ViewParams params = new ViewParams(true);
+        ViewParams params = new ViewParams(getResources().getDisplayMetrics());
         initParams(params);
 
         mLayout = (LinearLayout) findViewById(R.id.shown_layout);

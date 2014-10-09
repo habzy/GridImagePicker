@@ -115,21 +115,23 @@ public class GalleryAdapter extends BaseAdapter {
 
         final ViewHolder holder;
         if (convertView == null) {
+            int parent_width = parent.getWidth();
+            int item_padding_pix = (int) (mParams.getDensity() * mParams.getItemPaddingDip());
+            Log.d(TAG, "======parent_width:" + parent_width + ";item_padding_pix:"
+                    + item_padding_pix);
 
             convertView = mInfalter.inflate(R.layout.gallery_item, null);
             holder = new ViewHolder();
             holder.imgQueue = (ImageView) convertView.findViewById(R.id.imgQueue);
-            if (ViewParams.DEFAULT_NUM_CLUMNS != mParams.getNumClumns()) {
-                LayoutParams params = holder.imgQueue.getLayoutParams();
-                params.width =
-                        params.width * ViewParams.DEFAULT_NUM_CLUMNS / mParams.getNumClumns();
-                params.height =
-                        params.height * ViewParams.DEFAULT_NUM_CLUMNS / mParams.getNumClumns();
-                holder.imgQueue.setLayoutParams(params);
-            }
-
             holder.imgQueueMultiSelected =
                     (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);
+
+            LayoutParams params = holder.imgQueue.getLayoutParams();
+            Log.d(TAG, "======params.width:" + params.width);
+            params.width = parent_width / mParams.getNumClumns() - 2 * item_padding_pix;
+            params.height = params.width;
+            Log.d(TAG, "======params.width:" + params.width);
+            holder.imgQueue.setLayoutParams(params);
 
             if (mParams.getCheckBoxDrawable() != null) {
                 Drawable cloneDrawable =

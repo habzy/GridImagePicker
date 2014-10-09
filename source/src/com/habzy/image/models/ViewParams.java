@@ -4,13 +4,17 @@
 package com.habzy.image.models;
 
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 public class ViewParams {
 
     public final static int DEFAULT_NUM_CLUMNS = 4;
+    public final static float DEFAULT_ITEM_PADDING_DIP = 5;
 
     private static final String TAG = ViewParams.class.getSimpleName();
+
+    private final DisplayMetrics mMetics;
 
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
     private boolean isMutiPick = true;
@@ -18,9 +22,10 @@ public class ViewParams {
     private Drawable mCheckBoxDrawable = null;
     private Drawable mTakePhotoDrawable = null;
     private Drawable mLoadingImageDrawable = null;
+    private float mItemPaddingDip = DEFAULT_ITEM_PADDING_DIP;
 
-    public ViewParams(boolean isMutiPick) {
-        this.isMutiPick = isMutiPick;
+    public ViewParams(DisplayMetrics metrics) {
+        this.mMetics = metrics;
     }
 
     public int getNumClumns() {
@@ -104,5 +109,26 @@ public class ViewParams {
     public void setLoadingImageDrawable(Drawable loadingImageDrawable) {
         this.mLoadingImageDrawable = loadingImageDrawable;
     }
+
+    /**
+     * @return the density of this device.
+     */
+    public float getDensity() {
+        return mMetics.density;
+    }
+
+    /**
+     * @return the mItemPaddingDip
+     */
+    public float getItemPaddingDip() {
+        return mItemPaddingDip;
+    }
+
+    // /**
+    // * @param itemPaddingDip the mItemPaddingDip to set
+    // */
+    // public void setItemPaddingDip(float itemPaddingDip) {
+    // this.mItemPaddingDip = itemPaddingDip;
+    // }
 
 }

@@ -19,7 +19,7 @@ public class ViewParams {
     public enum TransitionEffect {
         Standard,       //
         Tablet,         //
-        CubeIn,         //
+        CubeIn,         // There may be some bugs in the model, need to fix JazzyViewPager.
         CubeOut,        //
         FlipVertical,   //
         FlipHorizontal, //

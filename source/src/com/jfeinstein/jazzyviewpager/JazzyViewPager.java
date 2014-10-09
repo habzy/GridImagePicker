@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.habzy.image.models.ItemModel;
+import com.habzy.image.models.ViewParams.TransitionEffect;
 import com.habzy.image.picker.R;
 import com.nineoldandroids.view.ViewHelper;
 
@@ -39,10 +40,6 @@ public class JazzyViewPager extends ViewPager {
     private static final float SCALE_MAX = 0.5f;
     private static final float ZOOM_MAX = 0.5f;
     private static final float ROT_MAX = 15.0f;
-
-    public enum TransitionEffect {
-        Standard, Tablet, CubeIn, CubeOut, FlipVertical, FlipHorizontal, Stack, ZoomIn, ZoomOut, RotateUp, RotateDown, Accordion
-    }
 
     private static final boolean API_11;
     static {

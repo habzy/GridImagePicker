@@ -9,7 +9,6 @@ import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
 import com.habzy.image.picker.R;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
-import com.jfeinstein.jazzyviewpager.JazzyViewPager.TransitionEffect;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -68,7 +67,6 @@ public class ViewPagerDialogFragment extends DialogFragment {
     }
 
     private void initViews() {
-        mJazzy.setTransitionEffect(TransitionEffect.Tablet);
         mJazzy.setImagePath(mModelsList);
         mJazzy.setCurrentItem(mCurrentItem);
         mJazzy.setPageMargin(0);
@@ -80,6 +78,8 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mJazzy.setOnPageChangeListener(mOnPageChangeListener);
         mBtnBack.setOnClickListener(mOnBackClickListener);
         mBtnDone.setOnClickListener(mOnDoneClickListener);
+
+        mJazzy.setTransitionEffect(mParams.getTransitionEffect());
 
         if (mParams.getCheckBoxDrawable() != null) {
             mCheckBox.setImageDrawable(mParams.getCheckBoxDrawable());

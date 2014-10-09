@@ -3,6 +3,9 @@
  */
 package com.habzy.image.models;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -11,6 +14,22 @@ public class ViewParams {
 
     public final static int DEFAULT_NUM_CLUMNS = 4;
     public final static float DEFAULT_ITEM_PADDING_DIP = 4;
+    public final static TransitionEffect DEFAULT_TRANSITION_EFFECT = TransitionEffect.Accordion;
+
+    public enum TransitionEffect {
+        Standard,       //
+        Tablet,         //
+        CubeIn,         //
+        CubeOut,        //
+        FlipVertical,   //
+        FlipHorizontal, //
+        Stack,          //
+        ZoomIn,         //
+        ZoomOut,        //
+        RotateUp,       //
+        RotateDown,     //
+        Accordion       // I like this one. -- Habzy (:
+    }
 
     private static final String TAG = ViewParams.class.getSimpleName();
 
@@ -23,9 +42,12 @@ public class ViewParams {
     private Drawable mTakePhotoDrawable = null;
     private Drawable mLoadingImageDrawable = null;
     private float mItemPaddingDip = DEFAULT_ITEM_PADDING_DIP;
+    private ArrayList<TransitionEffect> mTransitionEffects =
+            new ArrayList<ViewParams.TransitionEffect>();
 
     public ViewParams(DisplayMetrics metrics) {
         this.mMetics = metrics;
+        mTransitionEffects.add(DEFAULT_TRANSITION_EFFECT);
     }
 
     public int getNumClumns() {
@@ -124,11 +146,24 @@ public class ViewParams {
         return mItemPaddingDip;
     }
 
-    // /**
-    // * @param itemPaddingDip the mItemPaddingDip to set
-    // */
-    // public void setItemPaddingDip(float itemPaddingDip) {
-    // this.mItemPaddingDip = itemPaddingDip;
-    // }
+    /**
+     * @param transitionEffects copy values to the mTransitionEffects
+     */
+    public void setTransitionEffects(ArrayList<TransitionEffect> transitionEffects) {
+        if (!transitionEffects.isEmpty()) {
+            this.mTransitionEffects.clear();
+            this.mTransitionEffects.addAll(transitionEffects);
+        } else {
+            Log.w(TAG, "Transition Effects can not be empty");
+        }
+    }
+
+    /**
+     * @return the random value in mTransitionEffects
+     */
+    public TransitionEffect getTransitionEffect() {
+        int effectPosition = new Random().nextInt(mTransitionEffects.size());
+        return mTransitionEffects.get(effectPosition);
+    }
 
 }

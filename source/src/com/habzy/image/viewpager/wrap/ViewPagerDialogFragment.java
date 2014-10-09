@@ -11,6 +11,7 @@ import com.habzy.image.picker.R;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -103,6 +104,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
+            mViewPagerEventListener.onDismiss();
             ViewPagerDialogFragment.this.dismiss();
         }
     };
@@ -124,7 +126,6 @@ public class ViewPagerDialogFragment extends DialogFragment {
             boolean isSelected = mModelsList.get(position).isSeleted;
             mCheckBox.setSelected(!isSelected);
             mModelsList.get(position).isSeleted = !isSelected;
-            mViewPagerEventListener.onStatusChanged(position, !isSelected);
         }
 
     };
@@ -145,8 +146,14 @@ public class ViewPagerDialogFragment extends DialogFragment {
         public void onPageScrollStateChanged(int arg0) {}
     };
 
-    public void setOnDismissListener(ViewPagerListener viewPagerEventListener) {
+    public void setOnEventListener(ViewPagerListener viewPagerEventListener) {
         mViewPagerEventListener = viewPagerEventListener;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        mViewPagerEventListener.onDismiss();
+        super.onDismiss(dialog);
     }
 
 }

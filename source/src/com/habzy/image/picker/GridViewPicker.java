@@ -224,16 +224,11 @@ public class GridViewPicker {
         ViewPagerDialogFragment fragment =
                 new ViewPagerDialogFragment(mModelsList, mParams, position);
         fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
-        fragment.setOnDismissListener(mViewPagerDismissListener);
+        fragment.setOnEventListener(mViewPagerListener);
         fragment.show(mFragmentManager, "viewpager");
     }
 
-    ViewPagerListener mViewPagerDismissListener = new ViewPagerListener() {
-
-        @Override
-        public void onStatusChanged(int currentPosition, boolean isSelected) {
-            mAdapter.updateStatus(currentPosition, isSelected);
-        }
+    ViewPagerListener mViewPagerListener = new ViewPagerListener() {
 
         @Override
         public void onDone(int currentPosition) {
@@ -249,6 +244,13 @@ public class GridViewPicker {
                 String[] paths = new String[1];
                 paths[0] = mModelsList.get(currentPosition).mPath;
                 mListener.onDone(paths);
+            }
+        }
+
+        @Override
+        public void onDismiss() {
+            if (mParams.isMutiPick()) {
+                mAdapter.notifyDataSetChanged();
             }
         }
     };

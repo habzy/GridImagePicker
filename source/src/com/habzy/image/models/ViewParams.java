@@ -10,7 +10,7 @@ import android.util.Log;
 public class ViewParams {
 
     public final static int DEFAULT_NUM_CLUMNS = 4;
-    public final static float DEFAULT_ITEM_PADDING_DIP = 5;
+    public final static float DEFAULT_ITEM_PADDING_DIP = 4;
 
     private static final String TAG = ViewParams.class.getSimpleName();
 

@@ -26,8 +26,8 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/btn_blue"
+        android:background="@color/clarity"
         android:text="@string/done"
-        android:textColor="@color/white" />
+        android:textColor="@color/btn_text_color" />
 
 </RelativeLayout>

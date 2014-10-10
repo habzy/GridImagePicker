@@ -73,6 +73,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mJazzy.setPageMargin(0);
 
         mBtnBack = (Button) mPagerTitleBar.findViewById(R.id.picker_back);
+        mPagerTitleBar.setBackgroundResource(R.color.bg_bottom_bar);
         mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
         mCheckBox = (ImageView) mPagerBottomBar.findViewById(R.id.focus_checkbox);
 

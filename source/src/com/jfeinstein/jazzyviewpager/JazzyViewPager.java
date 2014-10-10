@@ -573,4 +573,8 @@ public class JazzyViewPager extends ViewPager {
     public void notifyChange() {
         mAdapter.notifyDataSetChanged();
     }
+
+    public void setPhotoViewListener(PhotoViewListener photoViewListener) {
+        mAdapter.setPhotoViewListener(photoViewListener);
+    }
 }

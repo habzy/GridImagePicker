@@ -55,6 +55,7 @@ public class GridViewPicker {
     private FragmentManager mFragmentManager; // Required
     private ImageLoader mImageLoader;
     private ArrayList<ItemModel> mModelsList;
+    private boolean isFullScreen = false;
 
     /**
      * @param parentView
@@ -247,6 +248,8 @@ public class GridViewPicker {
 
         @Override
         public void onDismiss() {
+            GridViewPicker.this.isFullScreen = false;
+            mListener.onFullScreen(GridViewPicker.this.isFullScreen);
             switch (mParams.getShownStyle()) {
                 case Pick_Multiple:
                     mAdapter.notifyDataSetChanged();
@@ -259,6 +262,12 @@ public class GridViewPicker {
                 default:
                     break;
             }
+        }
+
+        @Override
+        public void setFullScreen(boolean isFullScreen) {
+            GridViewPicker.this.isFullScreen = isFullScreen;
+            mListener.onFullScreen(GridViewPicker.this.isFullScreen);
         }
     };
 

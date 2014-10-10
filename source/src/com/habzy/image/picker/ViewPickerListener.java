@@ -17,4 +17,6 @@ public interface ViewPickerListener {
     void onDone(String[] paths);
 
     void onTakeingPhoto();
+
+    void onFullScreen(boolean isFullScreen);
 }

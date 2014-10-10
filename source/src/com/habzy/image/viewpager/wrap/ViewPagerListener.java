@@ -8,4 +8,6 @@ public interface ViewPagerListener {
     void onDone(int currentPosition);
 
     void onDismiss();
+
+    void setFullScreen(boolean isFullScreen);
 }

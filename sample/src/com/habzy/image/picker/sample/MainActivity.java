@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -110,5 +111,26 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onTakeingPhoto() {}
+
+        @Override
+        public void onFullScreen(boolean isFullScreen) {
+            if (isFullScreen) {
+                setFullScreen();
+            } else {
+                quitFullScreen();
+            }
+        }
     };
+
+    private void setFullScreen() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void quitFullScreen() {
+        final WindowManager.LayoutParams attrs = getWindow().getAttributes();
+        attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setAttributes(attrs);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    }
 }

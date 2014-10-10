@@ -9,6 +9,7 @@ import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
 import com.habzy.image.picker.R;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
+import com.jfeinstein.jazzyviewpager.PhotoViewListener;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -38,6 +39,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private Button mBtnDone;
     private ImageView mCheckBox;
     private ViewParams mParams;
+    private boolean isFullScreen = false;
 
     public ViewPagerDialogFragment(ArrayList<ItemModel> modelsList, ViewParams params,
             int currentItem) {
@@ -82,7 +84,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mBtnDone.setOnClickListener(mOnDoneClickListener);
 
         mJazzy.setTransitionEffect(mParams.getTransitionEffect());
-
+        mJazzy.setPhotoViewListener(mPhotoViewListener);
 
         switch (mParams.getShownStyle()) {
             case Pick_Multiple:
@@ -109,6 +111,18 @@ public class ViewPagerDialogFragment extends DialogFragment {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void fullScreen() {
+        isFullScreen = !isFullScreen;
+        mViewPagerEventListener.setFullScreen(isFullScreen);
+        if (isFullScreen) {
+            mPagerTitleBar.setVisibility(View.GONE);
+            mPagerBottomBar.setVisibility(View.GONE);
+        } else {
+            mPagerTitleBar.setVisibility(View.VISIBLE);
+            mPagerBottomBar.setVisibility(View.VISIBLE);
         }
     }
 
@@ -172,6 +186,15 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onPageScrollStateChanged(int arg0) {}
+    };
+
+    private PhotoViewListener mPhotoViewListener = new PhotoViewListener() {
+
+        @Override
+        public void onPhotoClicked() {
+            Log.d(TAG, "=======FullScreen");
+            fullScreen();
+        }
     };
 
     public void setOnEventListener(ViewPagerListener viewPagerEventListener) {

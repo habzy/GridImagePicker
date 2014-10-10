@@ -15,4 +15,6 @@ public interface ViewPickerListener {
      * @param paths The images' paths which are picked.
      */
     void onDone(String[] paths);
+
+    void onTakeingPhoto();
 }

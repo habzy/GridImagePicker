@@ -21,7 +21,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +33,7 @@ import android.widget.LinearLayout;
 
 public class GridViewPicker {
 
-    private static final String TAG = GridViewPicker.class.getName();
+    protected static final String TAG = GridViewPicker.class.getName();
     private LayoutInflater mInfalter;
     private ViewGroup mTitleBar;
 
@@ -204,7 +203,7 @@ public class GridViewPicker {
         @Override
         public void onItemClick(AdapterView<?> l, View v, int position, long id) {
             if (mModelsList.get(position).isCameraPhoto) {
-                Log.d(TAG, "======Wana to take photo.");
+                mListener.onTakeingPhoto();
                 return;
             }
             showPagerView(position);

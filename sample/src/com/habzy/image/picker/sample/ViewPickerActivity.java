@@ -12,6 +12,7 @@ import com.habzy.image.tools.ImageTools;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Window;
 import android.widget.LinearLayout;
 
@@ -21,6 +22,7 @@ public class ViewPickerActivity extends FragmentActivity {
     public static final String ACTION_PICK = "com.habzy.image.picker.sample.ACTION_PICK";
 
     public static final String PATH_STRING = "all_path";
+    private static final String TAG = ViewPickerActivity.class.getSimpleName();
 
     private GridViewPicker mImagePicker;
     private LinearLayout mLayout;
@@ -75,6 +77,11 @@ public class ViewPickerActivity extends FragmentActivity {
         @Override
         public void onCanceled() {
             finish();
+        }
+
+        @Override
+        public void onTakeingPhoto() {
+            Log.d(TAG, "======Wana to take photo.");
         }
     };
 }

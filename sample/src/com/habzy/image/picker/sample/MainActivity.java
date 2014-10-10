@@ -107,5 +107,8 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onCanceled() {}
+
+        @Override
+        public void onTakeingPhoto() {}
     };
 }

@@ -117,7 +117,6 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
     private void fullScreen() {
         isFullScreen = !isFullScreen;
-        mViewPagerEventListener.setFullScreen(isFullScreen);
         if (isFullScreen) {
             mPagerTitleBar.setVisibility(View.GONE);
             mPagerBottomBar.setVisibility(View.GONE);

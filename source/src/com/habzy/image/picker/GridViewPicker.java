@@ -55,7 +55,6 @@ public class GridViewPicker {
     private FragmentManager mFragmentManager; // Required
     private ImageLoader mImageLoader;
     private ArrayList<ItemModel> mModelsList;
-    private boolean isFullScreen = false;
 
     /**
      * @param parentView
@@ -220,6 +219,7 @@ public class GridViewPicker {
     };
 
     private void showPagerView(int position) {
+        mListener.onFullScreen(true);
         ViewPagerDialogFragment fragment =
                 new ViewPagerDialogFragment(mModelsList, mParams, position);
         fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
@@ -248,8 +248,7 @@ public class GridViewPicker {
 
         @Override
         public void onDismiss() {
-            GridViewPicker.this.isFullScreen = false;
-            mListener.onFullScreen(GridViewPicker.this.isFullScreen);
+            mListener.onFullScreen(false);
             switch (mParams.getShownStyle()) {
                 case Pick_Multiple:
                     mAdapter.notifyDataSetChanged();
@@ -262,12 +261,6 @@ public class GridViewPicker {
                 default:
                     break;
             }
-        }
-
-        @Override
-        public void setFullScreen(boolean isFullScreen) {
-            GridViewPicker.this.isFullScreen = isFullScreen;
-            mListener.onFullScreen(GridViewPicker.this.isFullScreen);
         }
     };
 

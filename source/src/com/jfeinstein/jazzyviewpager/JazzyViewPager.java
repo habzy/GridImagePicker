@@ -570,4 +570,7 @@ public class JazzyViewPager extends ViewPager {
         setAdapter(mAdapter);
     }
 
+    public void notifyChange() {
+        mAdapter.notifyDataSetChanged();
+    }
 }

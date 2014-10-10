@@ -98,6 +98,10 @@ public class ViewPagerDialogFragment extends DialogFragment {
             case ViewOnly:
                 mBtnDone.setVisibility(View.GONE);
                 mPagerBottomBar.setVisibility(View.GONE);
+            case ViewAndDelete:
+                mCheckBox.setImageResource(R.drawable.icon_delete);
+                mCheckBox.setOnClickListener(mOnDeleteClickedListener);
+                mPagerBottomBar.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;
@@ -130,6 +134,22 @@ public class ViewPagerDialogFragment extends DialogFragment {
             boolean isSelected = mModelsList.get(position).isSeleted;
             mCheckBox.setSelected(!isSelected);
             mModelsList.get(position).isSeleted = !isSelected;
+        }
+
+    };
+
+    private OnClickListener mOnDeleteClickedListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            int position = mJazzy.getCurrentItem();
+            if (mModelsList.size() == 1) {
+                mModelsList.remove(position);
+                mBtnBack.performClick();
+            } else {
+                mModelsList.remove(position);
+                mJazzy.notifyChange();
+            }
         }
 
     };

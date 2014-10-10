@@ -43,6 +43,11 @@ public class JazzyPagerAdapter extends PagerAdapter {
     }
 
     @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
+
+    @Override
     public boolean isViewFromObject(View view, Object obj) {
         if (view instanceof OutlineContainer) {
             return ((OutlineContainer) view).getChildAt(0) == obj;

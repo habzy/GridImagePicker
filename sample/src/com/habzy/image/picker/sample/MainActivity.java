@@ -52,7 +52,7 @@ public class MainActivity extends FragmentActivity {
         transitionEffects.add(ViewParams.TransitionEffect.FlipVertical);
 
         params.setTransitionEffects(transitionEffects);
-        params.setShownStyle(ShownStyle.ViewOnly);
+        params.setShownStyle(ShownStyle.ViewAndDelete);
         params.setNumClumns(5);
         params.setLoadingImageDrawable(getResources().getDrawable(
                 R.drawable.image_view_loading_default));

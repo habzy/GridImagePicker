@@ -248,8 +248,17 @@ public class GridViewPicker {
 
         @Override
         public void onDismiss() {
-            if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
-                mAdapter.notifyDataSetChanged();
+            switch (mParams.getShownStyle()) {
+                case Pick_Multiple:
+                    mAdapter.notifyDataSetChanged();
+                    break;
+                case ViewAndDelete:
+                    if (mModelsList.size() != mAdapter.getCount()) {
+                        mAdapter.addAll(mModelsList);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     };

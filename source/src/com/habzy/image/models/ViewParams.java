@@ -34,7 +34,7 @@ public class ViewParams {
         Pick_Multiple,   //
         Pick_Single,     //
         ViewOnly,        //
-        // ViewAndDelete //
+        ViewAndDelete    //
     }
 
     private static final String TAG = ViewParams.class.getSimpleName();

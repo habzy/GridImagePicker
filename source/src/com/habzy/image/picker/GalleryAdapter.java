@@ -118,8 +118,6 @@ public class GalleryAdapter extends BaseAdapter {
         if (convertView == null) {
             int parent_width = parent.getWidth();
             int item_padding_pix = (int) (mParams.getDensity() * mParams.getItemPaddingDip());
-            Log.d(TAG, "======parent_width:" + parent_width + ";item_padding_pix:"
-                    + item_padding_pix);
 
             convertView = mInfalter.inflate(R.layout.gallery_item, null);
             holder = new ViewHolder();
@@ -128,10 +126,8 @@ public class GalleryAdapter extends BaseAdapter {
                     (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);
 
             LayoutParams params = holder.imgQueue.getLayoutParams();
-            Log.d(TAG, "======params.width:" + params.width);
             params.width = parent_width / mParams.getNumClumns() - 2 * item_padding_pix;
             params.height = params.width;
-            Log.d(TAG, "======params.width:" + params.width);
             holder.imgQueue.setLayoutParams(params);
 
             if (mParams.getCheckBoxDrawable() != null) {
@@ -186,7 +182,6 @@ public class GalleryAdapter extends BaseAdapter {
             Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
-
         return convertView;
     }
 

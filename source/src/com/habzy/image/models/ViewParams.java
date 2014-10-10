@@ -50,6 +50,7 @@ public class ViewParams {
     private Drawable mCheckBoxDrawable = null;
     private Drawable mTakePhotoDrawable = null;
     private Drawable mLoadingImageDrawable = null;
+    private Drawable mDeleteItemDrawable = null;
     private float mItemPaddingDip = DEFAULT_ITEM_PADDING_DIP;
     private ArrayList<TransitionEffect> mTransitionEffects =
             new ArrayList<ViewParams.TransitionEffect>();
@@ -159,6 +160,20 @@ public class ViewParams {
      */
     public void setShownStyle(ShownStyle shownStyle) {
         this.mShownStyle = shownStyle;
+    }
+
+    /**
+     * @return the mDeleteItemDrawable
+     */
+    public Drawable getDeleteItemDrawable() {
+        return mDeleteItemDrawable;
+    }
+
+    /**
+     * @param deleteItemDrawable the mDeleteItemDrawable to set
+     */
+    public void setDeleteItemDrawable(Drawable deleteItemDrawable) {
+        this.mDeleteItemDrawable = deleteItemDrawable;
     }
 
 }

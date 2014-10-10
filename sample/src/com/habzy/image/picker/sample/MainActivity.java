@@ -56,6 +56,7 @@ public class MainActivity extends FragmentActivity {
         params.setNumClumns(5);
         params.setLoadingImageDrawable(getResources().getDrawable(
                 R.drawable.image_view_loading_default));
+        params.setDeleteItemDrawable(getResources().getDrawable(R.drawable.icon_2_delete));
     }
 
 

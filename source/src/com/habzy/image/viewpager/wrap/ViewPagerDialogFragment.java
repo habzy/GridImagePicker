@@ -82,14 +82,14 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         mJazzy.setTransitionEffect(mParams.getTransitionEffect());
 
-        if (mParams.getCheckBoxDrawable() != null) {
-            mCheckBox.setImageDrawable(mParams.getCheckBoxDrawable());
-        }
 
         switch (mParams.getShownStyle()) {
             case Pick_Multiple:
                 mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
                 mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
+                if (mParams.getCheckBoxDrawable() != null) {
+                    mCheckBox.setImageDrawable(mParams.getCheckBoxDrawable());
+                }
                 mPagerBottomBar.setVisibility(View.VISIBLE);
                 break;
             case Pick_Single:
@@ -101,6 +101,9 @@ public class ViewPagerDialogFragment extends DialogFragment {
             case ViewAndDelete:
                 mCheckBox.setImageResource(R.drawable.icon_delete);
                 mCheckBox.setOnClickListener(mOnDeleteClickedListener);
+                if (mParams.getDeleteItemDrawable() != null) {
+                    mCheckBox.setImageDrawable(mParams.getDeleteItemDrawable());
+                }
                 mPagerBottomBar.setVisibility(View.VISIBLE);
                 break;
             default:

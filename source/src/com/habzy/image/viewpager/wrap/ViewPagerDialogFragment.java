@@ -101,6 +101,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
             case ViewOnly:
                 mBtnDone.setVisibility(View.GONE);
                 mPagerBottomBar.setVisibility(View.GONE);
+                break;
             case ViewAndDelete:
                 mCheckBox.setImageResource(R.drawable.icon_delete);
                 mCheckBox.setOnClickListener(mOnDeleteClickedListener);
@@ -122,7 +123,22 @@ public class ViewPagerDialogFragment extends DialogFragment {
             mPagerBottomBar.setVisibility(View.GONE);
         } else {
             mPagerTitleBar.setVisibility(View.VISIBLE);
-            mPagerBottomBar.setVisibility(View.VISIBLE);
+            switch (mParams.getShownStyle()) {
+                case Pick_Multiple:
+                    mPagerBottomBar.setVisibility(View.VISIBLE);
+                    break;
+                case Pick_Single:
+                    mPagerBottomBar.setVisibility(View.GONE);
+                    break;
+                case ViewOnly:
+                    mPagerBottomBar.setVisibility(View.GONE);
+                    break;
+                case ViewAndDelete:
+                    mPagerBottomBar.setVisibility(View.VISIBLE);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

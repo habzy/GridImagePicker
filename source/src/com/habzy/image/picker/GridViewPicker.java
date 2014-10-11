@@ -133,8 +133,8 @@ public class GridViewPicker {
             mTitleBar.setVisibility(View.GONE);
         } else {
             mTitleBar.setVisibility(View.VISIBLE);
-            if(null != mParams.getTitleSt()){
-                TextView title = (TextView)(mTitleBar.findViewById(R.id.picker_title));
+            if (null != mParams.getTitleSt()) {
+                TextView title = (TextView) (mTitleBar.findViewById(R.id.picker_title));
                 title.setText(mParams.getTitleSt());
             }
         }

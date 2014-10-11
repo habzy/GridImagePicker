@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class ViewPagerDialogFragment extends DialogFragment {
 
@@ -165,11 +166,31 @@ public class ViewPagerDialogFragment extends DialogFragment {
         public void onClick(View v) {
             int position = mJazzy.getCurrentItem();
             boolean isSelected = mModelsList.get(position).isSeleted;
+            if (!isSelected && getSelected() >= mParams.getMaxPickSize()) {
+                if (null != mParams.getToastForReachingMax()) {
+                    Toast.makeText(v.getContext(), mParams.getToastForReachingMax(),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(v.getContext(), R.string.reached_max_size, Toast.LENGTH_SHORT)
+                            .show();
+                }
+                return;
+            }
             mCheckBox.setSelected(!isSelected);
             mModelsList.get(position).isSeleted = !isSelected;
         }
 
     };
+
+    private int getSelected() {
+        int size = 0;
+        for (int i = 0; i < mModelsList.size(); i++) {
+            if (mModelsList.get(i).isSeleted) {
+                size = size + 1;
+            }
+        }
+        return size;
+    }
 
     private OnClickListener mOnDeleteClickedListener = new OnClickListener() {
 

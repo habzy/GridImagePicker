@@ -14,6 +14,7 @@ public class ViewParams {
 
     public final static int DEFAULT_NUM_CLUMNS = 4;
     public final static float DEFAULT_ITEM_PADDING_DIP = 4;
+    public final static int DEFAULT_MAX_PICK_SIZE = 9;
 
     public enum TransitionEffect {
         Standard,       //
@@ -55,6 +56,8 @@ public class ViewParams {
     private ArrayList<TransitionEffect> mTransitionEffects =
             new ArrayList<ViewParams.TransitionEffect>();
     private String mTitleSt = null;
+    private int mMaxPickSize = DEFAULT_MAX_PICK_SIZE;
+    private String mToastForReachingMax = null;
 
     public ViewParams(DisplayMetrics metrics) {
         this.mMetics = metrics;
@@ -181,8 +184,24 @@ public class ViewParams {
         return mTitleSt;
     }
 
-    public void setTitleSt(String mTitleSt) {
-        this.mTitleSt = mTitleSt;
+    public void setTitleSt(String titleSt) {
+        this.mTitleSt = titleSt;
+    }
+
+    public int getMaxPickSize() {
+        return mMaxPickSize;
+    }
+
+    public void setMaxPickSize(int maxPickSize) {
+        this.mMaxPickSize = maxPickSize;
+    }
+
+    public String getToastForReachingMax() {
+        return mToastForReachingMax;
+    }
+
+    public void setToastForReachingMax(String toastForReachingMax) {
+        this.mToastForReachingMax = toastForReachingMax;
     }
 
 }

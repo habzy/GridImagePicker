@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
@@ -205,6 +206,16 @@ public class GalleryAdapter extends BaseAdapter {
             if (data.get(position).isSeleted) {
                 data.get(position).isSeleted = false;
             } else {
+                if (getSelected().size() >= mParams.getMaxPickSize()) {
+                    if (null != mParams.getToastForReachingMax()) {
+                        Toast.makeText(v.getContext(), mParams.getToastForReachingMax(),
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(v.getContext(), R.string.reached_max_size,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    return;
+                }
                 data.get(position).isSeleted = true;
             }
 

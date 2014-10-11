@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="image_picker">Pick image</string>
     <string name="done">Done</string>
+    <string name="reached_max_size">Has picked the max allow size!</string>
 
     <string-array name="jazzy_effects">
         <item>Standard</item>

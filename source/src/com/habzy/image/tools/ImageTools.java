@@ -18,7 +18,7 @@ import android.util.TypedValue;
 
 import com.habzy.image.models.ItemModel;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -37,14 +37,14 @@ public class ImageTools {
             File cacheDir = StorageUtils.getOwnCacheDirectory(context, CACHE_DIR);
 
             DisplayImageOptions defaultOptions =
-                    new DisplayImageOptions.Builder().cacheOnDisk(true)
+                    new DisplayImageOptions.Builder().cacheOnDisk(true).cacheInMemory(true)
                             .imageScaleType(ImageScaleType.EXACTLY)
                             .bitmapConfig(Bitmap.Config.RGB_565).build();
             ImageLoaderConfiguration.Builder builder =
                     new ImageLoaderConfiguration.Builder(context)
-                            .defaultDisplayImageOptions(defaultOptions)
+                            .defaultDisplayImageOptions(defaultOptions).threadPoolSize(5)
                             .diskCache(new UnlimitedDiscCache(cacheDir))
-                            .memoryCache(new WeakMemoryCache());
+                            .memoryCache(new UsingFreqLimitedMemoryCache(1024 * 1024 * 20));
 
             ImageLoaderConfiguration config = builder.build();
             imageLoader = ImageLoader.getInstance();
@@ -89,7 +89,8 @@ public class ImageTools {
     }
 
     public static int dpToPx(Resources res, int dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.getDisplayMetrics());
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                res.getDisplayMetrics());
     }
 
 }

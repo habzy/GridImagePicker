@@ -16,6 +16,7 @@ import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -174,6 +176,18 @@ public class GridViewPicker {
         return result;
     }
 
+    private void setFullScreen() {
+        ((Activity) mContext).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void quitFullScreen() {
+        final WindowManager.LayoutParams attrs = ((Activity) mContext).getWindow().getAttributes();
+        attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        ((Activity) mContext).getWindow().setAttributes(attrs);
+        ((Activity) mContext).getWindow().clearFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    }
 
     View.OnClickListener mDoneClickListener = new View.OnClickListener() {
 
@@ -219,7 +233,7 @@ public class GridViewPicker {
     };
 
     private void showPagerView(int position) {
-        mListener.onFullScreen(true);
+        setFullScreen();
         ViewPagerDialogFragment fragment =
                 new ViewPagerDialogFragment(mModelsList, mParams, position);
         fragment.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.viewpager);
@@ -248,7 +262,7 @@ public class GridViewPicker {
 
         @Override
         public void onDismiss() {
-            mListener.onFullScreen(false);
+            quitFullScreen();
             switch (mParams.getShownStyle()) {
                 case Pick_Multiple:
                     mAdapter.notifyDataSetChanged();

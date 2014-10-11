@@ -63,6 +63,7 @@ public class ViewPickerActivity extends FragmentActivity {
         params.setTakePhotoDrawable(getResources().getDrawable(R.drawable.icon_take_photo));
         params.setLoadingImageDrawable(getResources().getDrawable(
                 R.drawable.image_view_loading_default));
+        params.setTitleSt(getResources().getString(R.string.pick_title));
     }
 
     ViewPickerListener mViewPickerListener = new ViewPickerListener() {

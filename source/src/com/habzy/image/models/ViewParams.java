@@ -54,6 +54,7 @@ public class ViewParams {
     private float mItemPaddingDip = DEFAULT_ITEM_PADDING_DIP;
     private ArrayList<TransitionEffect> mTransitionEffects =
             new ArrayList<ViewParams.TransitionEffect>();
+    private String mTitleSt = null;
 
     public ViewParams(DisplayMetrics metrics) {
         this.mMetics = metrics;
@@ -174,6 +175,14 @@ public class ViewParams {
      */
     public void setDeleteItemDrawable(Drawable deleteItemDrawable) {
         this.mDeleteItemDrawable = deleteItemDrawable;
+    }
+
+    public String getTitleSt() {
+        return mTitleSt;
+    }
+
+    public void setTitleSt(String mTitleSt) {
+        this.mTitleSt = mTitleSt;
     }
 
 }

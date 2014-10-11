@@ -4,5 +4,6 @@
     <string name="app_name">Picker</string>
     <string name="btn_pick">Pick From Gallery(Only One)</string>
     <string name="btn_pick_mul">Pick From Gallery (Multiple)</string>
+    <string name="pick_title">Please select images</string>
 
 </resources>

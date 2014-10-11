@@ -2,8 +2,8 @@
 <resources>
 
     <color name="white">#FFFFFFFF</color>
-    <color name="bg_title_bar">#4e83a8</color>
-    <color name="bg_bottom_bar">#AA4e83a8</color>
+    <color name="bg_bar_opacity">#4e83a8</color>
+    <color name="bg_bar_clarity">#AA4e83a8</color>
     <color name="holo_blue">#FF33E5B5</color>
     <color name="clarity">#00000000</color>
 

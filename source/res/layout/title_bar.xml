@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/bg_title_bar" >
+    android:background="@color/bg_bar_opacity" >
 
     <Button
         android:id="@+id/picker_back"

@@ -49,17 +49,10 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mParams = params;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "====== OnCreate.");
-    }
-
     @SuppressLint("InflateParams")
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "====== onCreateView.");
         View view_pager = inflater.inflate(R.layout.view_pager, null);
         mJazzy = (JazzyViewPager) view_pager.findViewById(R.id.jazzy_pager);
         mPagerTitleBar = (RelativeLayout) view_pager.findViewById(R.id.pager_title_bar);
@@ -76,16 +69,16 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mJazzy.setPageMargin(0);
 
         mBtnBack = (Button) mPagerTitleBar.findViewById(R.id.picker_back);
-        mPagerTitleBar.setBackgroundResource(R.color.bg_bottom_bar);
         mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
         mCheckBox = (ImageView) mPagerBottomBar.findViewById(R.id.focus_checkbox);
 
         mJazzy.setOnPageChangeListener(mOnPageChangeListener);
+        mJazzy.setPhotoViewListener(mPhotoViewListener);
         mBtnBack.setOnClickListener(mOnBackClickListener);
         mBtnDone.setOnClickListener(mOnDoneClickListener);
 
         mJazzy.setTransitionEffect(mParams.getTransitionEffect());
-        mJazzy.setPhotoViewListener(mPhotoViewListener);
+        mPagerTitleBar.setBackgroundResource(R.color.bg_bar_clarity);
 
         switch (mParams.getShownStyle()) {
             case Pick_Multiple:

@@ -15,14 +15,14 @@
 
     <ImageView
         android:id="@+id/imgQueueMultiSelected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/checkbox_width"
+        android:layout_height="@dimen/checkbox_height"
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/checkbox_margin"
         android:layout_marginTop="@dimen/checkbox_margin"
         android:contentDescription="@string/app_name"
         android:gravity="center"
-        android:scaleType="center"
+        android:scaleType="fitCenter"
         android:src="@drawable/on_focus_checkbox"
         android:visibility="gone" />
 

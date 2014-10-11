@@ -10,6 +10,7 @@ import com.habzy.image.picker.ViewPickerListener;
 import com.habzy.image.tools.ImageTools;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -59,11 +60,13 @@ public class ViewPickerActivity extends FragmentActivity {
             params.setShownStyle(ShownStyle.Pick_Single);
         }
 
-        params.setCheckBoxDrawable(getResources().getDrawable(R.drawable.on_1_checkbox));
-        params.setTakePhotoDrawable(getResources().getDrawable(R.drawable.icon_take_photo));
-        params.setLoadingImageDrawable(getResources().getDrawable(
-                R.drawable.image_view_loading_default));
-        params.setTitleSt(getResources().getString(R.string.pick_title));
+        Resources res = getResources();
+        params.setCheckBoxDrawable(res.getDrawable(R.drawable.on_1_checkbox));
+        params.setTakePhotoDrawable(res.getDrawable(R.drawable.icon_take_photo));
+        params.setLoadingImageDrawable(res.getDrawable(R.drawable.image_view_loading_default));
+        params.setTitleSt(res.getString(R.string.pick_title));
+        params.setBarBgColorOpacity(res.getColor(R.color.bg_1_bar_opacity));
+        params.setBarBgColorClarity(res.getColor(R.color.bg_1_bar_clarity));
     }
 
     ViewPickerListener mViewPickerListener = new ViewPickerListener() {

@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white" >
+    android:background="@color/bg_1_bar_opacity" >
 
     <TextView
         android:id="@+id/tvTitleText"

@@ -33,6 +33,7 @@
             style="@style/btn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@color/bg_1_bar_opacity"
             android:text="@string/btn_pick" />
 
         <Button
@@ -41,6 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:background="@color/bg_1_bar_opacity"
             android:text="@string/btn_pick_mul" />
     </LinearLayout>
 

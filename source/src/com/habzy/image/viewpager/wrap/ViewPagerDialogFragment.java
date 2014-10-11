@@ -78,7 +78,13 @@ public class ViewPagerDialogFragment extends DialogFragment {
         mBtnDone.setOnClickListener(mOnDoneClickListener);
 
         mJazzy.setTransitionEffect(mParams.getTransitionEffect());
-        mPagerTitleBar.setBackgroundResource(R.color.bg_bar_clarity);
+        if (-1 != mParams.getBarBgColorClarity()) {
+            mPagerTitleBar.setBackgroundColor(mParams.getBarBgColorClarity());
+            mPagerBottomBar.setBackgroundColor(mParams.getBarBgColorClarity());
+        } else {
+            mPagerTitleBar.setBackgroundResource(R.color.bg_bar_clarity);
+            mPagerBottomBar.setBackgroundResource(R.color.bg_bar_clarity);
+        }
 
         switch (mParams.getShownStyle()) {
             case Pick_Multiple:

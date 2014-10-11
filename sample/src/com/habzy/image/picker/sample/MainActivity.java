@@ -57,6 +57,8 @@ public class MainActivity extends FragmentActivity {
         params.setLoadingImageDrawable(getResources().getDrawable(
                 R.drawable.image_view_loading_default));
         params.setDeleteItemDrawable(getResources().getDrawable(R.drawable.icon_2_delete));
+        params.setBarBgColorOpacity(getResources().getColor(R.color.bg_1_bar_opacity));
+        params.setBarBgColorClarity(getResources().getColor(R.color.bg_1_bar_clarity));
     }
 
 

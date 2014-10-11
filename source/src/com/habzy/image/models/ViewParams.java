@@ -58,6 +58,8 @@ public class ViewParams {
     private String mTitleSt = null;
     private int mMaxPickSize = DEFAULT_MAX_PICK_SIZE;
     private String mToastForReachingMax = null;
+    private int mBarBgColorOpacity = -1;
+    private int mBarBgColorClarity = -1;
 
     public ViewParams(DisplayMetrics metrics) {
         this.mMetics = metrics;
@@ -202,6 +204,28 @@ public class ViewParams {
 
     public void setToastForReachingMax(String toastForReachingMax) {
         this.mToastForReachingMax = toastForReachingMax;
+    }
+
+    public int getBarBgColorOpacity() {
+        return mBarBgColorOpacity;
+    }
+
+    public void setBarBgColorOpacity(int barBgColorOpacity) {
+        this.mBarBgColorOpacity = barBgColorOpacity;
+    }
+
+    /**
+     * @return the mBarBgColorClarity
+     */
+    public int getBarBgColorClarity() {
+        return mBarBgColorClarity;
+    }
+
+    /**
+     * @param barBgColorClarity the mBarBgColorClarity to set
+     */
+    public void setBarBgColorClarity(int barBgColorClarity) {
+        this.mBarBgColorClarity = barBgColorClarity;
     }
 
 }

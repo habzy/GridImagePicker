@@ -5,6 +5,7 @@
     <color name="bg_bar_opacity">#4e83a8</color>
     <color name="bg_bar_clarity">#AA4e83a8</color>
     <color name="holo_blue">#FF33E5B5</color>
+    <color name="text_down">#FFAAE5B5</color>
     <color name="clarity">#00000000</color>
 
 </resources>

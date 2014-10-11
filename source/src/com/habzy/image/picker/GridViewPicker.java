@@ -137,6 +137,11 @@ public class GridViewPicker {
                 TextView title = (TextView) (mTitleBar.findViewById(R.id.picker_title));
                 title.setText(mParams.getTitleSt());
             }
+            if (-1 != mParams.getBarBgColorOpacity()) {
+                mTitleBar.setBackgroundColor(mParams.getBarBgColorOpacity());
+            } else {
+                mTitleBar.setBackgroundResource(R.color.bg_bar_opacity);
+            }
         }
 
         mGridGallery.setAdapter(mAdapter);

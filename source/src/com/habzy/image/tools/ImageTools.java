@@ -17,7 +17,7 @@ import android.provider.MediaStore;
 import android.util.TypedValue;
 
 import com.habzy.image.models.ItemModel;
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -43,7 +43,7 @@ public class ImageTools {
             ImageLoaderConfiguration.Builder builder =
                     new ImageLoaderConfiguration.Builder(context)
                             .defaultDisplayImageOptions(defaultOptions)
-                            .diskCache(new UnlimitedDiskCache(cacheDir))
+                            .diskCache(new UnlimitedDiscCache(cacheDir))
                             .memoryCache(new WeakMemoryCache());
 
             ImageLoaderConfiguration config = builder.build();

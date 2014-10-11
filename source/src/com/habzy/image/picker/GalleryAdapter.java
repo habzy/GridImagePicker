@@ -121,17 +121,17 @@ public class GalleryAdapter extends BaseAdapter {
             holder.imgQueue = (ImageView) convertView.findViewById(R.id.imgQueue);
             holder.imgCheckBox = (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);
 
-            LayoutParams params = holder.imgQueue.getLayoutParams();
-            int parent_width = parent.getWidth();
-            int item_padding_pix = (int) (mParams.getDensity() * mParams.getItemPaddingDip());
-            params.width = parent_width / mParams.getNumClumns() - 2 * item_padding_pix;
-            params.height = params.width;
-            holder.imgQueue.setLayoutParams(params);
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        LayoutParams params = holder.imgQueue.getLayoutParams();
+        int parent_width = parent.getWidth();
+        int item_padding_pix = (int) (mParams.getDensity() * mParams.getItemPaddingDip());
+        params.width = parent_width / mParams.getNumClumns() - 2 * item_padding_pix;
+        params.height = params.width;
+        holder.imgQueue.setLayoutParams(params);
 
         if (mParams.getCheckBoxDrawable() != null) {
             Drawable cloneDrawable = mParams.getCheckBoxDrawable().getConstantState().newDrawable();

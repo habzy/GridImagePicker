@@ -116,43 +116,40 @@ public class GalleryAdapter extends BaseAdapter {
 
         final ViewHolder holder;
         if (convertView == null) {
-            int parent_width = parent.getWidth();
-            int item_padding_pix = (int) (mParams.getDensity() * mParams.getItemPaddingDip());
-
             convertView = mInfalter.inflate(R.layout.gallery_item, null);
             holder = new ViewHolder();
             holder.imgQueue = (ImageView) convertView.findViewById(R.id.imgQueue);
-            holder.imgQueueMultiSelected =
-                    (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);
+            holder.imgCheckBox = (ImageView) convertView.findViewById(R.id.imgQueueMultiSelected);
 
             LayoutParams params = holder.imgQueue.getLayoutParams();
+            int parent_width = parent.getWidth();
+            int item_padding_pix = (int) (mParams.getDensity() * mParams.getItemPaddingDip());
             params.width = parent_width / mParams.getNumClumns() - 2 * item_padding_pix;
             params.height = params.width;
             holder.imgQueue.setLayoutParams(params);
 
-            if (mParams.getCheckBoxDrawable() != null) {
-                Drawable cloneDrawable =
-                        mParams.getCheckBoxDrawable().getConstantState().newDrawable();
-                holder.imgQueueMultiSelected.setImageDrawable(cloneDrawable);
-            }
-            if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
-                holder.imgQueueMultiSelected.setOnClickListener(mCheckboxListener);
-                holder.imgQueueMultiSelected.setTag(position);
-                holder.imgQueueMultiSelected.setVisibility(View.VISIBLE);
-            } else {
-                holder.imgQueueMultiSelected.setVisibility(View.GONE);
-            }
-
             convertView.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        if (mParams.getCheckBoxDrawable() != null) {
+            Drawable cloneDrawable = mParams.getCheckBoxDrawable().getConstantState().newDrawable();
+            holder.imgCheckBox.setImageDrawable(cloneDrawable);
+        }
+        if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
+            holder.imgCheckBox.setOnClickListener(mCheckboxListener);
+            holder.imgCheckBox.setTag(position);
+            holder.imgCheckBox.setVisibility(View.VISIBLE);
+        } else {
+            holder.imgCheckBox.setVisibility(View.GONE);
+        }
+
         holder.imgQueue.setTag(position);
-        mImageLoader.cancelDisplayTask(holder.imgQueue);
         try {
+            mImageLoader.cancelDisplayTask(holder.imgQueue);
             if (data.get(position).isCameraPhoto) {
-                holder.imgQueueMultiSelected.setVisibility(View.GONE);
+                holder.imgCheckBox.setVisibility(View.GONE);
                 if (null != mParams.getTakePhotoDrawable()) {
                     holder.imgQueue.setImageDrawable(mParams.getTakePhotoDrawable());
                 } else {
@@ -174,7 +171,7 @@ public class GalleryAdapter extends BaseAdapter {
                         });
 
                 if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
-                    holder.imgQueueMultiSelected.setSelected(data.get(position).isSeleted);
+                    holder.imgCheckBox.setSelected(data.get(position).isSeleted);
                 }
             }
 
@@ -187,7 +184,7 @@ public class GalleryAdapter extends BaseAdapter {
 
     public class ViewHolder {
         ImageView imgQueue;
-        ImageView imgQueueMultiSelected;
+        ImageView imgCheckBox;
     }
 
     public void clearCache() {

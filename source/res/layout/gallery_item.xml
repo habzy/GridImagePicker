@@ -18,12 +18,9 @@
         android:layout_width="@dimen/checkbox_width"
         android:layout_height="@dimen/checkbox_height"
         android:layout_gravity="right"
-        android:layout_marginRight="@dimen/checkbox_margin"
-        android:layout_marginTop="@dimen/checkbox_margin"
         android:contentDescription="@string/app_name"
         android:gravity="center"
         android:scaleType="fitCenter"
-        android:src="@drawable/on_focus_checkbox"
-        android:visibility="gone" />
+        android:src="@drawable/on_focus_checkbox" />
 
 </FrameLayout>

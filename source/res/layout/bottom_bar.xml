@@ -5,7 +5,7 @@
     android:background="@color/bg_bar_clarity" >
 
     <ImageView
-        android:id="@+id/focus_checkbox"
+        android:id="@+id/bottom_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"

@@ -38,7 +38,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private RelativeLayout mPagerBottomBar;
     private Button mBtnBack;
     private Button mBtnDone;
-    private ImageView mCheckBox;
+    private ImageView mBottonIcon;
     private ViewParams mParams;
     private boolean isFullScreen = false;
 
@@ -70,7 +70,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         mBtnBack = (Button) mPagerTitleBar.findViewById(R.id.picker_back);
         mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
-        mCheckBox = (ImageView) mPagerBottomBar.findViewById(R.id.focus_checkbox);
+        mBottonIcon = (ImageView) mPagerBottomBar.findViewById(R.id.bottom_icon);
 
         mJazzy.setOnPageChangeListener(mOnPageChangeListener);
         mJazzy.setPhotoViewListener(mPhotoViewListener);
@@ -94,10 +94,10 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         switch (mParams.getShownStyle()) {
             case Pick_Multiple:
-                mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
-                mCheckBox.setOnClickListener(mOnCheckBoxClickedListener);
+                mBottonIcon.setSelected(mModelsList.get(mCurrentItem).isSeleted);
+                mBottonIcon.setOnClickListener(mOnCheckBoxClickedListener);
                 if (mParams.getCheckBoxDrawable() != null) {
-                    mCheckBox.setImageDrawable(mParams.getCheckBoxDrawable());
+                    mBottonIcon.setImageDrawable(mParams.getCheckBoxDrawable());
                 }
                 mPagerBottomBar.setVisibility(View.VISIBLE);
                 break;
@@ -110,10 +110,10 @@ public class ViewPagerDialogFragment extends DialogFragment {
                 break;
             case ViewAndDelete:
                 mBtnDone.setVisibility(View.GONE);
-                mCheckBox.setImageResource(R.drawable.icon_delete);
-                mCheckBox.setOnClickListener(mOnDeleteClickedListener);
+                mBottonIcon.setImageResource(R.drawable.icon_delete);
+                mBottonIcon.setOnClickListener(mOnDeleteClickedListener);
                 if (mParams.getDeleteItemDrawable() != null) {
-                    mCheckBox.setImageDrawable(mParams.getDeleteItemDrawable());
+                    mBottonIcon.setImageDrawable(mParams.getDeleteItemDrawable());
                 }
                 mPagerBottomBar.setVisibility(View.VISIBLE);
                 break;
@@ -182,7 +182,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
                 }
                 return;
             }
-            mCheckBox.setSelected(!isSelected);
+            mBottonIcon.setSelected(!isSelected);
             mModelsList.get(position).isSeleted = !isSelected;
         }
 
@@ -220,7 +220,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         public void onPageSelected(int position) {
             mCurrentItem = position;
             boolean isSelected = mModelsList.get(position).isSeleted;
-            mCheckBox.setSelected(isSelected);
+            mBottonIcon.setSelected(isSelected);
         }
 
         @Override

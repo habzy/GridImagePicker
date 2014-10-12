@@ -142,6 +142,11 @@ public class GridViewPicker {
             } else {
                 mTitleBar.setBackgroundResource(R.color.bg_bar_opacity);
             }
+            if (null != mParams.getBtnBackDrawable()) {
+                mBtnBack.setBackgroundDrawable(mParams.getBtnBackDrawable());
+            } else {
+                mBtnBack.setBackgroundResource(R.drawable.icon_back);
+            }
         }
 
         mGridGallery.setAdapter(mAdapter);

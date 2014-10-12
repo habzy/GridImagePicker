@@ -86,6 +86,12 @@ public class ViewPagerDialogFragment extends DialogFragment {
             mPagerBottomBar.setBackgroundResource(R.color.bg_bar_clarity);
         }
 
+        if (null != mParams.getBtnBackDrawable()) {
+            mBtnBack.setBackgroundDrawable(mParams.getBtnBackDrawable());
+        } else {
+            mBtnBack.setBackgroundResource(R.drawable.icon_back);
+        }
+
         switch (mParams.getShownStyle()) {
             case Pick_Multiple:
                 mCheckBox.setSelected(mModelsList.get(mCurrentItem).isSeleted);
@@ -103,6 +109,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
                 mPagerBottomBar.setVisibility(View.GONE);
                 break;
             case ViewAndDelete:
+                mBtnDone.setVisibility(View.GONE);
                 mCheckBox.setImageResource(R.drawable.icon_delete);
                 mCheckBox.setOnClickListener(mOnDeleteClickedListener);
                 if (mParams.getDeleteItemDrawable() != null) {

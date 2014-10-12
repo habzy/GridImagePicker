@@ -52,6 +52,7 @@ public class ViewParams {
     private Drawable mTakePhotoDrawable = null;
     private Drawable mLoadingImageDrawable = null;
     private Drawable mDeleteItemDrawable = null;
+    private Drawable mBtnBackDrawable = null;
     private float mItemPaddingDip = DEFAULT_ITEM_PADDING_DIP;
     private ArrayList<TransitionEffect> mTransitionEffects =
             new ArrayList<ViewParams.TransitionEffect>();
@@ -226,6 +227,20 @@ public class ViewParams {
      */
     public void setBarBgColorClarity(int barBgColorClarity) {
         this.mBarBgColorClarity = barBgColorClarity;
+    }
+
+    /**
+     * @return the mBtnBackDrawable
+     */
+    public Drawable getBtnBackDrawable() {
+        return mBtnBackDrawable;
+    }
+
+    /**
+     * @param btnBackDrawable the mBtnBackDrawable to set
+     */
+    public void setBtnBackDrawable(Drawable btnBackDrawable) {
+        this.mBtnBackDrawable = btnBackDrawable;
     }
 
 }

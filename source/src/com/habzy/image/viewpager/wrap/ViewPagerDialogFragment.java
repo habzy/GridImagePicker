@@ -91,6 +91,11 @@ public class ViewPagerDialogFragment extends DialogFragment {
         } else {
             mBtnBack.setBackgroundResource(R.drawable.icon_back);
         }
+        if (null != mParams.getBtnDoneBgDrawable()) {
+            mBtnDone.setBackgroundDrawable(mParams.getBtnDoneBgDrawable());
+        } else {
+            mBtnDone.setBackgroundResource(R.color.clarity);
+        }
 
         switch (mParams.getShownStyle()) {
             case Pick_Multiple:

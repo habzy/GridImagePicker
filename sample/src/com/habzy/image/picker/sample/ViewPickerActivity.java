@@ -65,6 +65,7 @@ public class ViewPickerActivity extends FragmentActivity {
         params.setTakePhotoDrawable(res.getDrawable(R.drawable.icon_take_photo));
         params.setLoadingImageDrawable(res.getDrawable(R.drawable.image_view_loading_default));
         params.setBtnBackDrawable(res.getDrawable(R.drawable.icon_1_back));
+        params.setBtnDoneBgDrawable(res.getDrawable(R.drawable.bg_1_done));
         params.setTitleSt(res.getString(R.string.pick_title));
         params.setBarBgColorOpacity(res.getColor(R.color.bg_1_bar_opacity));
         params.setBarBgColorClarity(res.getColor(R.color.bg_1_bar_clarity));

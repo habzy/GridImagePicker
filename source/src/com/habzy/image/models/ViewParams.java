@@ -53,6 +53,7 @@ public class ViewParams {
     private Drawable mLoadingImageDrawable = null;
     private Drawable mDeleteItemDrawable = null;
     private Drawable mBtnBackDrawable = null;
+    private Drawable mBtnDoneBgDrawable = null;
     private float mItemPaddingDip = DEFAULT_ITEM_PADDING_DIP;
     private ArrayList<TransitionEffect> mTransitionEffects =
             new ArrayList<ViewParams.TransitionEffect>();
@@ -241,6 +242,20 @@ public class ViewParams {
      */
     public void setBtnBackDrawable(Drawable btnBackDrawable) {
         this.mBtnBackDrawable = btnBackDrawable;
+    }
+
+    /**
+     * @return the mBtnDoneBgDrawable
+     */
+    public Drawable getBtnDoneBgDrawable() {
+        return mBtnDoneBgDrawable;
+    }
+
+    /**
+     * @param btnDoneBgDrawable the mBtnDoneBgDrawable to set
+     */
+    public void setBtnDoneBgDrawable(Drawable btnDoneBgDrawable) {
+        this.mBtnDoneBgDrawable = btnDoneBgDrawable;
     }
 
 }

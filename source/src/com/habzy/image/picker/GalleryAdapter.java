@@ -26,15 +26,18 @@ public class GalleryAdapter extends BaseAdapter {
     private static final String TAG = GalleryAdapter.class.getName();
 
     private final ViewParams mParams;
+    private final AdpterEventListener mEventListener;
 
     private ArrayList<ItemModel> data = new ArrayList<ItemModel>();
     private LayoutInflater mInfalter;
     private ImageLoader mImageLoader;
 
-    public GalleryAdapter(Context context, ImageLoader imageLoader, ViewParams params) {
+    public GalleryAdapter(Context context, ImageLoader imageLoader, ViewParams params,
+            AdpterEventListener eventListener) {
         mInfalter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mImageLoader = imageLoader;
         this.mParams = params;
+        this.mEventListener = eventListener;
     }
 
     @Override
@@ -220,12 +223,17 @@ public class GalleryAdapter extends BaseAdapter {
             }
 
             v.setSelected(data.get(position).isSeleted);
+            mEventListener.onItemSelectedStatusChange(position, data.get(position).isSeleted);
         }
     };
 
     public void updateStatus(int currentPosition, boolean isSelected) {
         data.get(currentPosition).isSeleted = isSelected;
         notifyDataSetChanged();
+    }
+
+    interface AdpterEventListener {
+        void onItemSelectedStatusChange(int position, boolean isSelected);
     }
 
 }

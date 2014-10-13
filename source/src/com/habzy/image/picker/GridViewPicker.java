@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
 import com.habzy.image.models.ViewParams.ShownStyle;
+import com.habzy.image.picker.GalleryAdapter.AdpterEventListener;
 import com.habzy.image.tools.ImageTools;
 import com.habzy.image.viewpager.wrap.ViewPagerListener;
 import com.habzy.image.viewpager.wrap.ViewPagerDialogFragment;
@@ -122,7 +123,7 @@ public class GridViewPicker {
     private void updateViews() {
         mImageLoader = ImageTools.getImageLoader(mContext);
 
-        mAdapter = new GalleryAdapter(mContext, mImageLoader, mParams);
+        mAdapter = new GalleryAdapter(mContext, mImageLoader, mParams, mAdapterEventListener);
         PauseOnScrollListener listener = new PauseOnScrollListener(mImageLoader, true, true);
         mGridGallery.setOnScrollListener(listener);
         mGridGallery.setOnItemClickListener(mItemClickListener);
@@ -152,9 +153,15 @@ public class GridViewPicker {
             } else {
                 mBtnDone.setBackgroundResource(R.color.clarity);
             }
+            updateDoneNumbers();
         }
 
         mGridGallery.setAdapter(mAdapter);
+    }
+
+    private void updateDoneNumbers() {
+        mBtnDone.setText("Done(" + mAdapter.getSelected().size() + "/" + mParams.getMaxPickSize()
+                + ")");
     }
 
     private boolean checkImageStatus() {
@@ -283,6 +290,7 @@ public class GridViewPicker {
         @Override
         public void onDismiss() {
             quitFullScreen();
+            updateDoneNumbers();
             switch (mParams.getShownStyle()) {
                 case Pick_Multiple:
                     mAdapter.notifyDataSetChanged();
@@ -295,6 +303,14 @@ public class GridViewPicker {
                 default:
                     break;
             }
+        }
+    };
+
+    private AdpterEventListener mAdapterEventListener = new AdpterEventListener() {
+
+        @Override
+        public void onItemSelectedStatusChange(int position, boolean isSelected) {
+            updateDoneNumbers();
         }
     };
 

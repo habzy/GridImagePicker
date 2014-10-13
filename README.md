@@ -1,16 +1,29 @@
 GridImagePicker
-===============
+=============
 
-Gallery and Image Picker with ImagePager
+View & Pick(Select) & Manager Images in GridView and ViewPager.
+
+Support features:
+=============
+
+>- View & pick(select) images in GridView.
+>- View & pick(select) images in ViewPager.
+>- Support view & picking image from local or network.
+>- Zoom out images when view image in full screen with ViewPager.
+>- Delete picked image.
+>- Muliple styles' animations when page changed in ViewPager.
+>- Customizable for all icons and buttons.
+>- Customizable for the NumClumns of GridView and auto-addjust the size of items.
+>- Provide taking photo event interface if needed.
 
 Reference
-==============
+=============
 
 [MultipleImagePick](https://github.com/habzy/MultipleImagePick)
 
 [JazzyViewPager](https://github.com/jfeinstein10/JazzyViewPager)
 
-Library
+Library Dependence
 =============
 
 [Android-Universal-Image-Loader](https://github.com/nostra13/Android-Universal-Image-Loader)

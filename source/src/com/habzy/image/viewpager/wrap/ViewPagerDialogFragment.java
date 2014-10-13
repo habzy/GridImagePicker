@@ -134,7 +134,13 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
     private void updateTitle() {
         mTitle.setText("" + (mCurrentItem + 1) + "/" + mModelsList.size());
-        mBtnDone.setText("Done(" + getSelected() + "/" + mParams.getMaxPickSize() + ")");
+        String doneSt = null;
+        if (null != mParams.getDoneSt()) {
+            doneSt = mParams.getDoneSt();
+        } else {
+            doneSt = mJazzy.getResources().getString(R.string.done);
+        }
+        mBtnDone.setText(doneSt + "(" + getSelectedSize() + "/" + mParams.getMaxPickSize() + ")");
     }
 
     private void fullScreen() {
@@ -187,7 +193,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         public void onClick(View v) {
             int position = mJazzy.getCurrentItem();
             boolean isSelected = mModelsList.get(position).isSeleted;
-            if (!isSelected && getSelected() >= mParams.getMaxPickSize()) {
+            if (!isSelected && getSelectedSize() >= mParams.getMaxPickSize()) {
                 if (null != mParams.getToastForReachingMax()) {
                     Toast.makeText(v.getContext(), mParams.getToastForReachingMax(),
                             Toast.LENGTH_SHORT).show();
@@ -204,7 +210,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
     };
 
-    private int getSelected() {
+    private int getSelectedSize() {
         int size = 0;
         for (int i = 0; i < mModelsList.size(); i++) {
             if (mModelsList.get(i).isSeleted) {

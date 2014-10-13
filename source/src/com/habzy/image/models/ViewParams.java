@@ -58,6 +58,7 @@ public class ViewParams {
     private ArrayList<TransitionEffect> mTransitionEffects =
             new ArrayList<ViewParams.TransitionEffect>();
     private String mTitleSt = null;
+    private String mDoneSt = null;
     private int mMaxPickSize = DEFAULT_MAX_PICK_SIZE;
     private String mToastForReachingMax = null;
     private int mBarBgColorOpacity = -1;
@@ -256,6 +257,20 @@ public class ViewParams {
      */
     public void setBtnDoneBgDrawable(Drawable btnDoneBgDrawable) {
         this.mBtnDoneBgDrawable = btnDoneBgDrawable;
+    }
+
+    /**
+     * @return the mDoneSt
+     */
+    public String getDoneSt() {
+        return mDoneSt;
+    }
+
+    /**
+     * @param doneSt the mDoneSt to set
+     */
+    public void setDoneSt(String doneSt) {
+        this.mDoneSt = doneSt;
     }
 
 }

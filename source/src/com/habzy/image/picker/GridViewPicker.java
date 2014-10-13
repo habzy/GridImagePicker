@@ -160,8 +160,14 @@ public class GridViewPicker {
     }
 
     private void updateDoneNumbers() {
-        mBtnDone.setText("Done(" + mAdapter.getSelected().size() + "/" + mParams.getMaxPickSize()
-                + ")");
+        String doneSt = null;
+        if (null != mParams.getDoneSt()) {
+            doneSt = mParams.getDoneSt();
+        } else {
+            doneSt = mParentLayout.getResources().getString(R.string.done);
+        }
+        mBtnDone.setText(doneSt + "(" + mAdapter.getSelected().size() + "/"
+                + mParams.getMaxPickSize() + ")");
     }
 
     private boolean checkImageStatus() {

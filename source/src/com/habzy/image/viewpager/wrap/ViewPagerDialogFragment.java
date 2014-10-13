@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ViewPagerDialogFragment extends DialogFragment {
@@ -37,6 +38,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private RelativeLayout mPagerTitleBar;
     private RelativeLayout mPagerBottomBar;
     private Button mBtnBack;
+    private TextView mTitle;
     private Button mBtnDone;
     private ImageView mBottonIcon;
     private ViewParams mParams;
@@ -70,6 +72,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         mBtnBack = (Button) mPagerTitleBar.findViewById(R.id.picker_back);
         mBtnDone = (Button) mPagerTitleBar.findViewById(R.id.picker_done);
+        mTitle = (TextView) (mPagerTitleBar.findViewById(R.id.picker_title));
         mBottonIcon = (ImageView) mPagerBottomBar.findViewById(R.id.bottom_icon);
 
         mJazzy.setOnPageChangeListener(mOnPageChangeListener);
@@ -85,6 +88,8 @@ public class ViewPagerDialogFragment extends DialogFragment {
             mPagerTitleBar.setBackgroundResource(R.color.bg_bar_clarity);
             mPagerBottomBar.setBackgroundResource(R.color.bg_bar_clarity);
         }
+
+        updateTitle();
 
         if (null != mParams.getBtnBackDrawable()) {
             mBtnBack.setBackgroundDrawable(mParams.getBtnBackDrawable());
@@ -125,6 +130,11 @@ public class ViewPagerDialogFragment extends DialogFragment {
             default:
                 break;
         }
+    }
+
+    private void updateTitle() {
+        mTitle.setText("" + (mCurrentItem + 1) + "/" + mModelsList.size());
+        mBtnDone.setText("Done(" + getSelected() + "/" + mParams.getMaxPickSize() + ")");
     }
 
     private void fullScreen() {
@@ -189,6 +199,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
             }
             mBottonIcon.setSelected(!isSelected);
             mModelsList.get(position).isSeleted = !isSelected;
+            updateTitle();
         }
 
     };
@@ -214,6 +225,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
             } else {
                 mModelsList.remove(position);
                 mJazzy.notifyChange();
+                updateTitle();
             }
         }
 
@@ -226,6 +238,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
             mCurrentItem = position;
             boolean isSelected = mModelsList.get(position).isSeleted;
             mBottonIcon.setSelected(isSelected);
+            updateTitle();
         }
 
         @Override

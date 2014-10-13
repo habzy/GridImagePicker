@@ -177,7 +177,7 @@ public class GridViewPicker {
                 if (ShownStyle.ViewOnly == mParams.getShownStyle()) {
                     result = true;
                     mImgNoMedia.setVisibility(View.VISIBLE);
-                    mImageLoader.displayImage("file://" + mModelsList.get(0).mPath, mImgNoMedia,
+                    mImageLoader.displayImage(mModelsList.get(0).mPath, mImgNoMedia,
                             new SimpleImageLoadingListener() {
                                 @Override
                                 public void onLoadingStarted(String imageUri, View view) {

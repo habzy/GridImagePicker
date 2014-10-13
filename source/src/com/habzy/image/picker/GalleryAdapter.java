@@ -160,7 +160,7 @@ public class GalleryAdapter extends BaseAdapter {
                     holder.imgQueue.setImageResource(R.drawable.take_photo);
                 }
             } else {
-                mImageLoader.displayImage("file://" + data.get(position).mPath, holder.imgQueue,
+                mImageLoader.displayImage(data.get(position).mPath, holder.imgQueue,
                         new SimpleImageLoadingListener() {
                             @Override
                             public void onLoadingStarted(String imageUri, View view) {

@@ -30,7 +30,7 @@ public class JazzyPagerAdapter extends PagerAdapter {
         final PhotoView photoView = new PhotoView(container.getContext());
         photoView.setClickable(true);
         photoView.setOnPhotoTapListener(mOnPhotoTapListener);
-        mImageLoader.displayImage("file://" + mModelList.get(position).mPath, photoView);
+        mImageLoader.displayImage(mModelList.get(position).mPath, photoView);
         container.addView(photoView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         mJazzy.setObjectForPosition(photoView, position);
         return photoView;

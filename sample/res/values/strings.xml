@@ -2,8 +2,9 @@
 <resources>
 
     <string name="app_name">Picker</string>
-    <string name="btn_pick">Pick From Gallery(Only One)</string>
-    <string name="btn_pick_mul">Pick From Gallery (Multiple)</string>
+    <string name="btn_pick">Pick Only One(View Only)</string>
+    <string name="btn_pick_mul">Pick From Gallery (Fixed Height, View Only)</string>
+    <string name="btn_pick_mul2">Pick Multiple(Wrap Content)</string>
     <string name="pick_title">Select Images</string>
     <string name="btn_done">Done</string>
 

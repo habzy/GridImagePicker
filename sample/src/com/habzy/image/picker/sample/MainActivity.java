@@ -20,14 +20,26 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends FragmentActivity {
 
-    private LinearLayout mLayout;
+    private LinearLayout mLayout1;
+    private LinearLayout mLayout2;
+    private LinearLayout mLayout3;
     private Button mBtnGalleryPick;
     private Button mBtnGalleryPickMul;
+    private Button mBtnGalleryPickMul2;
 
     /*
      * The grid view to manage all images.
      */
     private GridViewPicker mImagePicker;
+    /*
+     * The grid view to manage all images.
+     */
+    private GridViewPicker mImagePicker2;
+
+    /*
+     * The grid view to manage all images.
+     */
+    private GridViewPicker mImagePicker3;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,9 +50,19 @@ public class MainActivity extends FragmentActivity {
         ViewParams params = new ViewParams(getResources().getDisplayMetrics());
         initParams(params);
 
-        mLayout = (LinearLayout) findViewById(R.id.shown_layout);
-        mImagePicker = new GridViewPicker(mLayout, params, mViewPickerListener);
+        mLayout1 = (LinearLayout) findViewById(R.id.shown_layout1);
+        mImagePicker = new GridViewPicker(mLayout1, params, mViewPickerListener);
         mImagePicker.initialize(getSupportFragmentManager());
+
+        mLayout2 = (LinearLayout) findViewById(R.id.shown_layout2);
+        mImagePicker2 = new GridViewPicker(mLayout2, params, mViewPickerListener);
+        mImagePicker2.initialize(getSupportFragmentManager());
+
+        ViewParams params2 = new ViewParams(getResources().getDisplayMetrics());
+        initDeltableParams(params2);
+        mLayout3 = (LinearLayout) findViewById(R.id.shown_layout3);
+        mImagePicker3 = new GridViewPicker(mLayout3, params2, mViewPickerListener);
+        mImagePicker3.initialize(getSupportFragmentManager());
         init();
     }
 
@@ -52,8 +74,26 @@ public class MainActivity extends FragmentActivity {
         transitionEffects.add(ViewParams.TransitionEffect.FlipVertical);
 
         params.setTransitionEffects(transitionEffects);
-        params.setShownStyle(ShownStyle.ViewAndDelete);
+        params.setShownStyle(ShownStyle.ViewOnly);
         params.setNumClumns(5);
+        params.setLoadingImageDrawable(getResources().getDrawable(
+                R.drawable.image_view_loading_default));
+        params.setBtnBackDrawable(getResources().getDrawable(R.drawable.icon_1_back));
+        params.setDeleteItemDrawable(getResources().getDrawable(R.drawable.icon_1_delete));
+        params.setBarBgColorOpacity(getResources().getColor(R.color.bg_1_bar_opacity));
+        params.setBarBgColorClarity(getResources().getColor(R.color.bg_1_bar_clarity));
+    }
+
+    private void initDeltableParams(ViewParams params) {
+        ArrayList<TransitionEffect> transitionEffects =
+                new ArrayList<ViewParams.TransitionEffect>();
+        transitionEffects.add(ViewParams.TransitionEffect.CubeOut);
+        transitionEffects.add(ViewParams.TransitionEffect.FlipHorizontal);
+        transitionEffects.add(ViewParams.TransitionEffect.FlipVertical);
+
+        params.setTransitionEffects(transitionEffects);
+        params.setShownStyle(ShownStyle.ViewAndDelete);
+        params.setNumClumns(4);
         params.setLoadingImageDrawable(getResources().getDrawable(
                 R.drawable.image_view_loading_default));
         params.setBtnBackDrawable(getResources().getDrawable(R.drawable.icon_1_back));
@@ -70,7 +110,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ViewPickerActivity.ACTION_PICK);
-                startActivityForResult(i, 200);
+                startActivityForResult(i, 100);
 
             }
         });
@@ -81,6 +121,15 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent i = new Intent(ViewPickerActivity.ACTION_MULTIPLE_PICK);
                 startActivityForResult(i, 200);
+            }
+        });
+
+        mBtnGalleryPickMul2 = (Button) findViewById(R.id.btnGalleryPickMul2);
+        mBtnGalleryPickMul2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ViewPickerActivity.ACTION_MULTIPLE_PICK);
+                startActivityForResult(i, 300);
             }
         });
 
@@ -99,7 +148,13 @@ public class MainActivity extends FragmentActivity {
                 item.mPath = string;
                 dataT.add(item);
             }
-            mImagePicker.setImagePath(dataT);
+            if (requestCode == 100) {
+                mImagePicker.setImagePath(dataT);
+            } else if (requestCode == 200) {
+                mImagePicker2.setImagePath(dataT);
+            } else {
+                mImagePicker3.setImagePath(dataT);
+            }
         }
     }
 

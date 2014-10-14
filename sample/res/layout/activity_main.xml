@@ -1,49 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white"
-    android:orientation="vertical" >
-
-    <include
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/titlebar" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
 
     <LinearLayout
-        android:id="@+id/shown_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="@color/white"
-        android:contentDescription="@string/app_name"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/llBottomContainer"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp" >
+        android:background="@color/white"
+        android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/btnGalleryPick"
-            style="@style/btn"
+        <include
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_1_bar_opacity"
-            android:text="@string/btn_pick" />
+            layout="@layout/titlebar" />
 
-        <Button
-            android:id="@+id/btnGalleryPickMul"
-            style="@style/btn"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/bg_1_bar_opacity"
-            android:text="@string/btn_pick_mul" />
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/shown_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/btnGalleryPick"
+                style="@style/btn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_1_bar_opacity"
+                android:text="@string/btn_pick" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/shown_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/btnGalleryPickMul"
+                style="@style/btn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_1_bar_opacity"
+                android:text="@string/btn_pick_mul" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/shown_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:contentDescription="@string/app_name"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/btnGalleryPickMul2"
+                style="@style/btn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/bg_1_bar_opacity"
+                android:text="@string/btn_pick_mul2" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

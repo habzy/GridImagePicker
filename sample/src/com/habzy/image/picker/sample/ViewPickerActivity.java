@@ -70,6 +70,7 @@ public class ViewPickerActivity extends FragmentActivity {
         params.setDoneSt(res.getString(R.string.btn_done));
         params.setBarBgColorOpacity(res.getColor(R.color.bg_1_bar_opacity));
         params.setBarBgColorClarity(res.getColor(R.color.bg_1_bar_clarity));
+        params.setMaxPickSize(20);
     }
 
     ViewPickerListener mViewPickerListener = new ViewPickerListener() {

@@ -16,6 +16,23 @@ Support features:
 >- Customizable for the NumClumns of GridView and auto-addjust the size of items.
 >- Provide taking photo event interface if needed.
 
+Snapshot
+======
+
+###Support display models:
+
+![Features](https://github.com/habzy/GridImagePicker/blob/master/snapshot/features.jpg)
+
+###View & pick images
+![Picker](https://github.com/habzy/GridImagePicker/blob/master/snapshot/pick_gridview.jpg)
+
+###View & pick image in ViewPager
+![ViewPager](https://github.com/habzy/GridImagePicker/blob/master/snapshot/pick_viewpager.jpg) ==> ![full screen](https://github.com/habzy/GridImagePicker/blob/master/snapshot/pick_viewpager_zoomout.jpg)
+
+###Animation when change page
+![Animate](https://github.com/habzy/GridImagePicker/blob/master/snapshot/change.jpg)
+
+
 Reference
 =============
 

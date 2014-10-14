@@ -47,6 +47,7 @@ public class ViewParams {
     private int mNumClumns = DEFAULT_NUM_CLUMNS;
 
     private ShownStyle mShownStyle = DEFAULT_SHOWN_MODEL;
+    private boolean mIsGridViewScrollEnable = true;
 
     private Drawable mCheckBoxDrawable = null;
     private Drawable mTakePhotoDrawable = null;
@@ -271,6 +272,20 @@ public class ViewParams {
      */
     public void setDoneSt(String doneSt) {
         this.mDoneSt = doneSt;
+    }
+
+    /**
+     * @return the mIsGridViewScrollEnable
+     */
+    public boolean isGridViewScrollEnable() {
+        return mIsGridViewScrollEnable;
+    }
+
+    /**
+     * @param isGridViewScrollEnable the mIsGridViewScrollEnable to set
+     */
+    public void setGridViewScrollEnable(boolean isGridViewScrollEnable) {
+        this.mIsGridViewScrollEnable = isGridViewScrollEnable;
     }
 
 }

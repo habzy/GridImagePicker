@@ -30,7 +30,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,7 +41,7 @@ public class GridViewPicker {
     private ViewGroup mTitleBar;
 
     private View mImagePicker;
-    private GridView mGridGallery;
+    private CustGridView mGridGallery;
     private GalleryAdapter mAdapter;
     private ImageView mImgNoMedia;
 
@@ -110,7 +109,7 @@ public class GridViewPicker {
     }
 
     private void init() {
-        mGridGallery = (GridView) mImagePicker.findViewById(R.id.gridGallery);
+        mGridGallery = (CustGridView) mImagePicker.findViewById(R.id.gridGallery);
         mImgNoMedia = (ImageView) mImagePicker.findViewById(R.id.imgNoMedia);
 
         mBtnDone = (Button) mTitleBar.findViewById(R.id.picker_done);
@@ -128,6 +127,8 @@ public class GridViewPicker {
         mGridGallery.setOnScrollListener(listener);
         mGridGallery.setOnItemClickListener(mItemClickListener);
         mGridGallery.setNumColumns(mParams.getNumClumns());
+
+        mGridGallery.setSrollable(mParams.isGridViewScrollEnable());
 
         if (mParams.getShownStyle() != ShownStyle.Pick_Multiple) {
             mGridGallery.setFastScrollEnabled(true);

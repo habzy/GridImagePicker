@@ -33,7 +33,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
     private static final String TAG = ViewPagerDialogFragment.class.getSimpleName();
     private JazzyViewPager mJazzy;
     private int mCurrentItem;
-    private ArrayList<ItemModel> mModelsList;
+    private ArrayList<ItemModel> mModelsList = new ArrayList<ItemModel>();
     private ViewPagerListener mViewPagerEventListener;
     private RelativeLayout mPagerTitleBar;
     private RelativeLayout mPagerBottomBar;
@@ -46,9 +46,22 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
     public ViewPagerDialogFragment(ArrayList<ItemModel> modelsList, ViewParams params,
             int currentItem) {
-        mModelsList = modelsList;
+        mModelsList.addAll(modelsList);
         mCurrentItem = currentItem;
+        removeFunctionItems();
         mParams = params;
+    }
+
+    private void removeFunctionItems() {
+        for (int i = 0; i < mModelsList.size(); i++) {
+            if (mModelsList.get(i).isFunctionItem) {
+                if (mCurrentItem > i) {
+                    mCurrentItem = mCurrentItem - 1;
+                }
+                mModelsList.remove(i);
+                i--;
+            }
+        }
     }
 
     @SuppressLint("InflateParams")
@@ -233,6 +246,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
         @Override
         public void onClick(View v) {
             int position = mJazzy.getCurrentItem();
+            mModelsList.get(position).isSeleted = true;
             if (mModelsList.size() == 1) {
                 mModelsList.remove(position);
                 mBtnBack.performClick();

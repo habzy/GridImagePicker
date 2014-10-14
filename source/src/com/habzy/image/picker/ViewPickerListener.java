@@ -3,6 +3,8 @@
  */
 package com.habzy.image.picker;
 
+import com.habzy.image.models.ItemModel;
+
 public interface ViewPickerListener {
 
     /**
@@ -16,7 +18,7 @@ public interface ViewPickerListener {
      */
     void onDone(String[] paths);
 
-    void onTakeingPhoto();
+    void onFunctionItemClicked(ItemModel item);
 
     /**
      * When picking images changed, such as delete images.

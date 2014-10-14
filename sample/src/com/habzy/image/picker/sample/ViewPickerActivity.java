@@ -23,6 +23,7 @@ public class ViewPickerActivity extends FragmentActivity {
     public static final String ACTION_PICK = "com.habzy.image.picker.sample.ACTION_PICK";
 
     public static final String PATH_STRING = "all_path";
+    private static final int ITEM_TAKE_PHOTO_TAG = 1;
     private static final String TAG = ViewPickerActivity.class.getSimpleName();
 
     private GridViewPicker mImagePicker;
@@ -44,6 +45,8 @@ public class ViewPickerActivity extends FragmentActivity {
         ArrayList<ItemModel> modelList = new ArrayList<ItemModel>();
         ItemModel item = new ItemModel();
         item.isFunctionItem = true;
+        item.functionItemDrawale = getResources().getDrawable(R.drawable.icon_take_photo);
+        item.tag = ITEM_TAKE_PHOTO_TAG;
         modelList.add(item);
         modelList.addAll(ImageTools.getGalleryPhotos(getContentResolver()));
         mImagePicker.setImagePath(modelList);
@@ -62,7 +65,6 @@ public class ViewPickerActivity extends FragmentActivity {
 
         Resources res = getResources();
         params.setCheckBoxDrawable(res.getDrawable(R.drawable.on_1_checkbox));
-        params.setTakePhotoDrawable(res.getDrawable(R.drawable.icon_take_photo));
         params.setLoadingImageDrawable(res.getDrawable(R.drawable.image_view_loading_default));
         params.setBtnBackDrawable(res.getDrawable(R.drawable.icon_1_back));
         params.setBtnDoneBgDrawable(res.getDrawable(R.drawable.bg_1_done));
@@ -88,12 +90,12 @@ public class ViewPickerActivity extends FragmentActivity {
         }
 
         @Override
-        public void onTakeingPhoto() {
-            Log.d(TAG, "======Wana to take photo.");
-        }
+        public void onImageDataChanged() {}
 
         @Override
-        public void onImageDataChanged() {}
+        public void onFunctionItemClicked(ItemModel item) {
+            Log.d(TAG, "Fucntion item clicked: " + item.tag);
+        }
 
     };
 

@@ -17,4 +17,9 @@ public interface ViewPickerListener {
     void onDone(String[] paths);
 
     void onTakeingPhoto();
+
+    /**
+     * When picking images changed, such as delete images.
+     */
+    void onImageDataChanged();
 }

@@ -314,6 +314,8 @@ public class GridViewPicker {
                 case ViewAndDelete:
                     if (mModelsList.size() != mAdapter.getCount()) {
                         mAdapter.addAll(mModelsList);
+
+                        mListener.onImageDataChanged();
                     }
                     break;
                 default:

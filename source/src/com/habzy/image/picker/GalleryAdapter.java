@@ -152,7 +152,7 @@ public class GalleryAdapter extends BaseAdapter {
         holder.imgQueue.setTag(position);
         try {
             mImageLoader.cancelDisplayTask(holder.imgQueue);
-            if (data.get(position).isCameraPhoto) {
+            if (data.get(position).isFunctionItem) {
                 holder.imgCheckBox.setVisibility(View.GONE);
                 if (null != mParams.getTakePhotoDrawable()) {
                     holder.imgQueue.setImageDrawable(mParams.getTakePhotoDrawable());

@@ -154,8 +154,8 @@ public class GalleryAdapter extends BaseAdapter {
             mImageLoader.cancelDisplayTask(holder.imgQueue);
             if (data.get(position).isFunctionItem) {
                 holder.imgCheckBox.setVisibility(View.GONE);
-                if (null != mParams.getTakePhotoDrawable()) {
-                    holder.imgQueue.setImageDrawable(mParams.getTakePhotoDrawable());
+                if (null != data.get(position).functionItemDrawale) {
+                    holder.imgQueue.setImageDrawable(data.get(position).functionItemDrawale);
                 } else {
                     holder.imgQueue.setImageResource(R.drawable.take_photo);
                 }

@@ -260,7 +260,7 @@ public class GridViewPicker {
         @Override
         public void onItemClick(AdapterView<?> l, View v, int position, long id) {
             if (mModelsList.get(position).isFunctionItem) {
-                mListener.onTakeingPhoto();
+                mListener.onFunctionItemClicked(mModelsList.get(position));
                 return;
             }
             showPagerView(position);

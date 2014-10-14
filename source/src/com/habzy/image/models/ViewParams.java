@@ -50,7 +50,6 @@ public class ViewParams {
     private boolean mIsGridViewScrollEnable = true;
 
     private Drawable mCheckBoxDrawable = null;
-    private Drawable mTakePhotoDrawable = null;
     private Drawable mLoadingImageDrawable = null;
     private Drawable mDeleteItemDrawable = null;
     private Drawable mBtnBackDrawable = null;
@@ -94,20 +93,6 @@ public class ViewParams {
      */
     public void setCheckBoxDrawable(Drawable checkBoxDrawable) {
         this.mCheckBoxDrawable = checkBoxDrawable;
-    }
-
-    /**
-     * @return the mTakePhotoDrawable
-     */
-    public Drawable getTakePhotoDrawable() {
-        return mTakePhotoDrawable;
-    }
-
-    /**
-     * @param takePhotoDrawable the mTakePhotoDrawable to set
-     */
-    public void setTakePhotoDrawable(Drawable takePhotoDrawable) {
-        this.mTakePhotoDrawable = takePhotoDrawable;
     }
 
     /**

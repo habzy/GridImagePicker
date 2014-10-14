@@ -7,5 +7,6 @@
     <color name="holo_blue">#FF33E5B5</color>
     <color name="text_down">#FFAAE5B5</color>
     <color name="clarity">#00000000</color>
+    <color name="view_pager">#e62a2a2a</color>
 
 </resources>

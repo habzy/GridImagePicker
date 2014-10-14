@@ -140,7 +140,15 @@ public class ViewPagerDialogFragment extends DialogFragment {
         } else {
             doneSt = mJazzy.getResources().getString(R.string.done);
         }
-        mBtnDone.setText(doneSt + "(" + getSelectedSize() + "/" + mParams.getMaxPickSize() + ")");
+        switch (mParams.getShownStyle()) {
+            case Pick_Multiple:
+                mBtnDone.setText(doneSt + "(" + getSelectedSize() + "/" + mParams.getMaxPickSize()
+                        + ")");
+                break;
+            default:
+                mBtnDone.setText(doneSt);
+                break;
+        }
     }
 
     private void fullScreen() {

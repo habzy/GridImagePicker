@@ -153,21 +153,28 @@ public class GridViewPicker {
             } else {
                 mBtnDone.setBackgroundResource(R.color.clarity);
             }
-            updateDoneNumbers();
+            updateDoneString();
         }
 
         mGridGallery.setAdapter(mAdapter);
     }
 
-    private void updateDoneNumbers() {
+    private void updateDoneString() {
         String doneSt = null;
         if (null != mParams.getDoneSt()) {
             doneSt = mParams.getDoneSt();
         } else {
             doneSt = mParentLayout.getResources().getString(R.string.done);
         }
-        mBtnDone.setText(doneSt + "(" + mAdapter.getSelected().size() + "/"
-                + mParams.getMaxPickSize() + ")");
+        switch (mParams.getShownStyle()) {
+            case Pick_Multiple:
+                mBtnDone.setText(doneSt + "(" + mAdapter.getSelected().size() + "/"
+                        + mParams.getMaxPickSize() + ")");
+                break;
+            default:
+                mBtnDone.setText(doneSt);
+                break;
+        }
     }
 
     private boolean checkImageStatus() {
@@ -296,7 +303,7 @@ public class GridViewPicker {
         @Override
         public void onDismiss() {
             quitFullScreen();
-            updateDoneNumbers();
+            updateDoneString();
             switch (mParams.getShownStyle()) {
                 case Pick_Multiple:
                     mAdapter.notifyDataSetChanged();
@@ -316,7 +323,7 @@ public class GridViewPicker {
 
         @Override
         public void onItemSelectedStatusChange(int position, boolean isSelected) {
-            updateDoneNumbers();
+            updateDoneString();
         }
     };
 

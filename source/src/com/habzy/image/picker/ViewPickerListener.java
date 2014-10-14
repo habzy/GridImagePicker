@@ -20,7 +20,6 @@ public interface ViewPickerListener {
 
     /**
      * When picking images changed, such as delete images.
-     * @param paths The image paths which are picked.
      */
-    void onImageChanged(String[] paths);
+    void onImageDataChanged();
 }

@@ -318,9 +318,9 @@ public class GridViewPicker {
                     mAdapter.notifyDataSetChanged();
                     break;
                 case ViewAndDelete:
+                    removeDeletedItems();
                     if (mModelsList.size() != mAdapter.getCount()) {
                         mAdapter.addAll(mModelsList);
-
                         mListener.onImageDataChanged();
                     }
                     break;
@@ -328,7 +328,18 @@ public class GridViewPicker {
                     break;
             }
         }
+
     };
+
+    private void removeDeletedItems() {
+        for (int i = 0; i < mModelsList.size(); i++) {
+            if (mModelsList.get(i).isSeleted) {
+                mModelsList.remove(i);
+                i--;
+            }
+        }
+
+    }
 
     private AdpterEventListener mAdapterEventListener = new AdpterEventListener() {
 

@@ -167,11 +167,12 @@ public class MainActivity extends FragmentActivity {
         @Override
         public void onCanceled() {}
 
-        @Override
-        public void onTakeingPhoto() {}
 
         @Override
         public void onImageDataChanged() {}
+
+        @Override
+        public void onFunctionItemClicked(ItemModel item) {}
     };
 
 }

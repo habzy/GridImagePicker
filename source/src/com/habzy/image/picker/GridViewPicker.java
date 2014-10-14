@@ -294,7 +294,6 @@ public class GridViewPicker {
 
         @Override
         public void onDone(int currentPosition) {
-            if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
                 ArrayList<ItemModel> selected = mAdapter.getSelected();
 
                 String[] paths = new String[selected.size()];
@@ -302,11 +301,6 @@ public class GridViewPicker {
                     paths[i] = selected.get(i).mPath;
                 }
                 mListener.onDone(paths);
-            } else {
-                String[] paths = new String[1];
-                paths[0] = mModelsList.get(currentPosition).mPath;
-                mListener.onDone(paths);
-            }
         }
 
         @Override

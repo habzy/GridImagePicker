@@ -203,6 +203,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
+            mModelsList.get(mCurrentItem).isSeleted = true;;
             mViewPagerEventListener.onDone(mCurrentItem);
             ViewPagerDialogFragment.this.dismiss();
         }

@@ -4,6 +4,6 @@ public class ItemModel {
 
 	public String mPath;
 	public boolean isSeleted = false;
-	public boolean isCameraPhoto = false;
+	public boolean isFunctionItem = false;
 
 }

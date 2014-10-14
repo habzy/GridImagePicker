@@ -259,7 +259,7 @@ public class GridViewPicker {
 
         @Override
         public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-            if (mModelsList.get(position).isCameraPhoto) {
+            if (mModelsList.get(position).isFunctionItem) {
                 mListener.onTakeingPhoto();
                 return;
             }

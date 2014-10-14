@@ -130,33 +130,39 @@ public class GridViewPicker {
 
         mGridGallery.setSrollable(mParams.isGridViewScrollEnable());
 
-        if (mParams.getShownStyle() != ShownStyle.Pick_Multiple) {
-            mGridGallery.setFastScrollEnabled(true);
-            mTitleBar.setVisibility(View.GONE);
-        } else {
-            mTitleBar.setVisibility(View.VISIBLE);
-            if (null != mParams.getTitleSt()) {
-                TextView title = (TextView) (mTitleBar.findViewById(R.id.picker_title));
-                title.setText(mParams.getTitleSt());
-            }
-            if (-1 != mParams.getBarBgColorOpacity()) {
-                mTitleBar.setBackgroundColor(mParams.getBarBgColorOpacity());
-            } else {
-                mTitleBar.setBackgroundResource(R.color.bg_bar_opacity);
-            }
-            if (null != mParams.getBtnBackDrawable()) {
-                mBtnBack.setBackgroundDrawable(mParams.getBtnBackDrawable());
-            } else {
-                mBtnBack.setBackgroundResource(R.drawable.icon_back);
-            }
-            if (null != mParams.getBtnDoneBgDrawable()) {
-                mBtnDone.setBackgroundDrawable(mParams.getBtnDoneBgDrawable());
-            } else {
-                mBtnDone.setBackgroundResource(R.color.clarity);
-            }
-            updateDoneString();
+        switch (mParams.getShownStyle()) {
+            case Pick_Single:
+                mBtnDone.setVisibility(View.GONE);
+                mGridGallery.setFastScrollEnabled(true);
+                // Go on whit multiple setting.
+            case Pick_Multiple:
+                mTitleBar.setVisibility(View.VISIBLE);
+                if (null != mParams.getTitleSt()) {
+                    TextView title = (TextView) (mTitleBar.findViewById(R.id.picker_title));
+                    title.setText(mParams.getTitleSt());
+                }
+                if (-1 != mParams.getBarBgColorOpacity()) {
+                    mTitleBar.setBackgroundColor(mParams.getBarBgColorOpacity());
+                } else {
+                    mTitleBar.setBackgroundResource(R.color.bg_bar_opacity);
+                }
+                if (null != mParams.getBtnBackDrawable()) {
+                    mBtnBack.setBackgroundDrawable(mParams.getBtnBackDrawable());
+                } else {
+                    mBtnBack.setBackgroundResource(R.drawable.icon_back);
+                }
+                if (null != mParams.getBtnDoneBgDrawable()) {
+                    mBtnDone.setBackgroundDrawable(mParams.getBtnDoneBgDrawable());
+                } else {
+                    mBtnDone.setBackgroundResource(R.color.clarity);
+                }
+                updateDoneString();
+                break;
+            default:
+                mGridGallery.setFastScrollEnabled(true);
+                mTitleBar.setVisibility(View.GONE);
+                break;
         }
-
         mGridGallery.setAdapter(mAdapter);
     }
 

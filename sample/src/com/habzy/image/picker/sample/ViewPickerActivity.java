@@ -43,7 +43,7 @@ public class ViewPickerActivity extends FragmentActivity {
 
         ArrayList<ItemModel> modelList = new ArrayList<ItemModel>();
         ItemModel item = new ItemModel();
-        item.isCameraPhoto = true;
+        item.isFunctionItem = true;
         modelList.add(item);
         modelList.addAll(ImageTools.getGalleryPhotos(getContentResolver()));
         mImagePicker.setImagePath(modelList);

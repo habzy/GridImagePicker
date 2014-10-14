@@ -14,7 +14,8 @@
         <com.jfeinstein.jazzyviewpager.JazzyViewPager
             android:id="@+id/jazzy_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#e62a2a2a" />
 
         <include
             android:id="@+id/pager_title_bar"

@@ -170,7 +170,7 @@ public class MainActivity extends FragmentActivity {
         public void onTakeingPhoto() {}
 
         @Override
-        public void onImageChanged(String[] paths) {}
+        public void onImageDataChanged() {}
     };
 
 }

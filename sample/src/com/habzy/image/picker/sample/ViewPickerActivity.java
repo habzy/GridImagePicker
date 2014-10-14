@@ -93,7 +93,7 @@ public class ViewPickerActivity extends FragmentActivity {
         }
 
         @Override
-        public void onImageChanged(String[] paths) {}
+        public void onImageDataChanged() {}
 
     };
 

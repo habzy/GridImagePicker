@@ -314,11 +314,7 @@ public class GridViewPicker {
                     if (mModelsList.size() != mAdapter.getCount()) {
                         mAdapter.addAll(mModelsList);
 
-                        String[] paths = new String[mModelsList.size()];
-                        for (int i = 0; i < paths.length; i++) {
-                            paths[i] = mModelsList.get(i).mPath;
-                        }
-                        mListener.onImageChanged(paths);
+                        mListener.onImageDataChanged();
                     }
                     break;
                 default:

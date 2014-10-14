@@ -92,6 +92,9 @@ public class ViewPickerActivity extends FragmentActivity {
             Log.d(TAG, "======Wana to take photo.");
         }
 
+        @Override
+        public void onImageChanged(String[] paths) {}
+
     };
 
 }

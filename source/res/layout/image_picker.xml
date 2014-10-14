@@ -5,16 +5,15 @@
     android:layout_weight="1"
     android:background="@color/white" >
 
-    <GridView
+    <com.habzy.image.picker.CustGridView
         android:id="@+id/gridGallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_margin="@dimen/gridview_padding"
         android:numColumns="4"
-        android:scrollbars="none"
         tools:listitem="@layout/gallery_item" >
-    </GridView>
+    </com.habzy.image.picker.CustGridView>
 
     <ImageView
         android:id="@+id/imgNoMedia"

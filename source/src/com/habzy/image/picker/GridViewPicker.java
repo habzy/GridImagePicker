@@ -202,10 +202,12 @@ public class GridViewPicker {
                 }
                 break;
             case 0:
-                result = true;
-                mImgNoMedia.setVisibility(View.VISIBLE);
-                mImgNoMedia.setImageResource(R.drawable.no_media);
-                mImgNoMedia.setClickable(false);
+                if (ShownStyle.ViewAndDelete != mParams.getShownStyle()) {
+                    result = true;
+                    mImgNoMedia.setVisibility(View.VISIBLE);
+                    mImgNoMedia.setImageResource(R.drawable.no_media);
+                    mImgNoMedia.setClickable(false);
+                }
                 break;
             default:
                 break;

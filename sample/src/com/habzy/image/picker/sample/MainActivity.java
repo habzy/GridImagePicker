@@ -169,6 +169,9 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onTakeingPhoto() {}
+
+        @Override
+        public void onImageDataChanged() {}
     };
 
 }

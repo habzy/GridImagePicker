@@ -93,6 +93,7 @@ public class MainActivity extends FragmentActivity {
 
         params.setTransitionEffects(transitionEffects);
         params.setShownStyle(ShownStyle.ViewAndDelete);
+        params.setGridViewScrollEnable(false);
         params.setNumClumns(4);
         params.setLoadingImageDrawable(getResources().getDrawable(
                 R.drawable.image_view_loading_default));

@@ -9,6 +9,7 @@ import com.habzy.image.models.ViewParams.TransitionEffect;
 import com.habzy.image.picker.GridViewPicker;
 import com.habzy.image.picker.ViewPickerListener;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,11 +42,15 @@ public class MainActivity extends FragmentActivity {
      */
     private GridViewPicker mImagePicker3;
 
+    private ActionBar mActionBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        mActionBar = getActionBar();
+        mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        mActionBar.setCustomView(R.layout.titlebar);
 
         ViewParams params = new ViewParams(getResources().getDisplayMetrics());
         initParams(params);

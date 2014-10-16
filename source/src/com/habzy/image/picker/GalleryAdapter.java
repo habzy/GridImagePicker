@@ -160,19 +160,23 @@ public class GalleryAdapter extends BaseAdapter {
                     holder.imgQueue.setImageResource(R.drawable.take_photo);
                 }
             } else {
-                mImageLoader.displayImage(data.get(position).mPath, holder.imgQueue,
-                        new SimpleImageLoadingListener() {
-                            @Override
-                            public void onLoadingStarted(String imageUri, View view) {
-                                if (null != mParams.getLoadingImageDrawable()) {
-                                    holder.imgQueue.setImageDrawable(mParams
-                                            .getLoadingImageDrawable());
-                                } else {
-                                    holder.imgQueue.setImageResource(R.drawable.no_media);
-                                }
-                                super.onLoadingStarted(imageUri, view);
-                            }
-                        });
+                String path = null;
+                if (null != data.get(position).mThumbnail) {
+                    path = data.get(position).mThumbnail;
+                } else {
+                    path = data.get(position).mPath;
+                }
+                mImageLoader.displayImage(path, holder.imgQueue, new SimpleImageLoadingListener() {
+                    @Override
+                    public void onLoadingStarted(String imageUri, View view) {
+                        if (null != mParams.getLoadingImageDrawable()) {
+                            holder.imgQueue.setImageDrawable(mParams.getLoadingImageDrawable());
+                        } else {
+                            holder.imgQueue.setImageResource(R.drawable.no_media);
+                        }
+                        super.onLoadingStarted(imageUri, view);
+                    }
+                });
 
                 if (mParams.getShownStyle() == ShownStyle.Pick_Multiple) {
                     holder.imgCheckBox.setSelected(data.get(position).isSeleted);

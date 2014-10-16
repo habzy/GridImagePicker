@@ -290,7 +290,6 @@ public class GridViewPicker {
 
         @Override
         public void onDismiss() {
-            // quitFullScreen();
             updateDoneString();
             switch (mParams.getShownStyle()) {
                 case Pick_Multiple:

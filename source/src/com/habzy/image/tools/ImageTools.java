@@ -27,7 +27,16 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 
 public class ImageTools {
 
-    public static ImageLoader getImageLoader(Context context) {
+    private static ImageLoader instance = null;
+
+    public static ImageLoader getImageLoaderInstance(Context context) {
+        if (null == instance) {
+            instance = getImageLoader(context);
+        }
+        return instance;
+    }
+
+    private static ImageLoader getImageLoader(Context context) {
         ImageLoader imageLoader = null;
         try {
             String CACHE_DIR =

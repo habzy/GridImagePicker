@@ -21,7 +21,7 @@ public class JazzyPagerAdapter extends PagerAdapter {
     private PhotoViewListener mPhotoViewListener;
 
     public JazzyPagerAdapter(JazzyViewPager jazzy) {
-        mImageLoader = ImageTools.getImageLoader(jazzy.getContext());
+        mImageLoader = ImageTools.getImageLoaderInstance(jazzy.getContext());
         mJazzy = jazzy;
     }
 

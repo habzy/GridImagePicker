@@ -118,7 +118,7 @@ public class GridViewPicker {
     }
 
     private void updateViews() {
-        mImageLoader = ImageTools.getImageLoader(mContext);
+        mImageLoader = ImageTools.getImageLoaderInstance(mContext);
 
         mAdapter = new GalleryAdapter(mContext, mImageLoader, mParams, mAdapterEventListener);
         PauseOnScrollListener listener = new PauseOnScrollListener(mImageLoader, true, true);

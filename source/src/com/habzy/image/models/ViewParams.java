@@ -51,6 +51,7 @@ public class ViewParams {
 
     private Drawable mCheckBoxDrawable = null;
     private Drawable mLoadingImageDrawable = null;
+    private Drawable mLoadingFailedDrawable = null;
     private Drawable mDeleteItemDrawable = null;
     private Drawable mBtnBackDrawable = null;
     private Drawable mBtnDoneBgDrawable = null;
@@ -271,6 +272,14 @@ public class ViewParams {
      */
     public void setGridViewScrollEnable(boolean isGridViewScrollEnable) {
         this.mIsGridViewScrollEnable = isGridViewScrollEnable;
+    }
+
+    public Drawable getLoadingFailedDrawable() {
+        return mLoadingFailedDrawable;
+    }
+
+    public void setLoadingFailedDrawable(Drawable loadingFailedDrawable) {
+        this.mLoadingFailedDrawable = loadingFailedDrawable;
     }
 
 }

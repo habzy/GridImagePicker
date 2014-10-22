@@ -80,7 +80,7 @@ public class ViewPagerDialogFragment extends DialogFragment {
     }
 
     private void initViews() {
-        mJazzy.setImagePath(mModelsList);
+        mJazzy.setImagePath(mModelsList, mParams);
         mJazzy.setCurrentItem(mCurrentItem);
         mJazzy.setPageMargin(0);
 

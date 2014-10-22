@@ -3,8 +3,12 @@ package com.jfeinstein.jazzyviewpager;
 import java.util.ArrayList;
 
 import com.habzy.image.models.ItemModel;
+import com.habzy.image.models.ViewParams;
+import com.habzy.image.picker.R;
 import com.habzy.image.tools.ImageTools;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher.OnPhotoTapListener;
@@ -19,10 +23,12 @@ public class JazzyPagerAdapter extends PagerAdapter {
     ArrayList<ItemModel> mModelList;
     private JazzyViewPager mJazzy;
     private PhotoViewListener mPhotoViewListener;
+    private final ViewParams mParams;
 
-    public JazzyPagerAdapter(JazzyViewPager jazzy) {
+    public JazzyPagerAdapter(JazzyViewPager jazzy, ViewParams params) {
         mImageLoader = ImageTools.getImageLoaderInstance(jazzy.getContext());
         mJazzy = jazzy;
+        mParams = params;
     }
 
     @Override
@@ -30,7 +36,30 @@ public class JazzyPagerAdapter extends PagerAdapter {
         final PhotoView photoView = new PhotoView(container.getContext());
         photoView.setClickable(true);
         photoView.setOnPhotoTapListener(mOnPhotoTapListener);
-        mImageLoader.displayImage(mModelList.get(position).mPath, photoView);
+
+        mImageLoader.displayImage(mModelList.get(position).mPath, photoView,
+                new SimpleImageLoadingListener() {
+                    @Override
+                    public void onLoadingStarted(String imageUri, View view) {
+                        if (null != mParams.getLoadingImageDrawable()) {
+                            photoView.setImageDrawable(mParams.getLoadingImageDrawable());
+                        } else {
+                            photoView.setImageResource(R.drawable.no_media);
+                        }
+                        super.onLoadingStarted(imageUri, view);
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                        if (null != mParams.getLoadingFailedDrawable()) {
+                            photoView.setImageDrawable(mParams.getLoadingFailedDrawable());
+                        } else {
+                            photoView.setImageResource(R.drawable.failed);
+                        }
+                        super.onLoadingFailed(imageUri, view, failReason);
+                    }
+                });
+
         container.addView(photoView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         mJazzy.setObjectForPosition(photoView, position);
         return photoView;

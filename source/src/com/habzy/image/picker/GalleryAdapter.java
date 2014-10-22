@@ -19,6 +19,7 @@ import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
 import com.habzy.image.models.ViewParams.ShownStyle;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 public class GalleryAdapter extends BaseAdapter {
@@ -175,6 +176,16 @@ public class GalleryAdapter extends BaseAdapter {
                             holder.imgQueue.setImageResource(R.drawable.no_media);
                         }
                         super.onLoadingStarted(imageUri, view);
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                        if (null != mParams.getLoadingFailedDrawable()) {
+                            holder.imgQueue.setImageDrawable(mParams.getLoadingFailedDrawable());
+                        } else {
+                            holder.imgQueue.setImageResource(R.drawable.failed);
+                        }
+                        super.onLoadingFailed(imageUri, view, failReason);
                     }
                 });
 

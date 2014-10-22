@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.habzy.image.models.ItemModel;
 import com.habzy.image.models.ViewParams;
+import com.habzy.image.models.ViewParams.ShownStyle;
 import com.habzy.image.picker.R;
 import com.jfeinstein.jazzyviewpager.JazzyViewPager;
 import com.jfeinstein.jazzyviewpager.PhotoViewListener;
@@ -203,7 +204,9 @@ public class ViewPagerDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            mModelsList.get(mCurrentItem).isSeleted = true;;
+            if (ShownStyle.Pick_Single == mParams.getShownStyle()) {
+                mModelsList.get(mCurrentItem).isSeleted = true;
+            }
             mViewPagerEventListener.onDone(mCurrentItem);
             ViewPagerDialogFragment.this.dismiss();
         }

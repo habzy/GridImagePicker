@@ -23,8 +23,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -57,6 +59,8 @@ public class GridViewPicker {
     private ImageLoader mImageLoader;
     private ArrayList<ItemModel> mModelsList;
 
+    private OnTouchListener mOnTouchListener;
+
     /**
      * @param parentView
      */
@@ -80,6 +84,10 @@ public class GridViewPicker {
         mParentLayout.addView(mTitleBar);
         mParentLayout.addView(mImagePicker);
         updateViews();
+    }
+
+    public void setOnTouchListener(OnTouchListener listener) {
+        mOnTouchListener = listener;
     }
 
     public void setImagePath(final ArrayList<ItemModel> modelsList) {
@@ -107,8 +115,20 @@ public class GridViewPicker {
     }
 
     private void init() {
+        OnTouchListener touchListener = new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (mOnTouchListener != null) {
+                    mOnTouchListener.onTouch(v, event);
+                }
+                return false;
+            }
+        };
+
         mGridGallery = (CustGridView) mImagePicker.findViewById(R.id.gridGallery);
+        mGridGallery.setOnTouchListener(touchListener);
         mImgNoMedia = (ImageView) mImagePicker.findViewById(R.id.imgNoMedia);
+        mImgNoMedia.setOnTouchListener(touchListener);
 
         mBtnDone = (Button) mTitleBar.findViewById(R.id.picker_done);
         mBtnDone.setOnClickListener(mDoneClickListener);

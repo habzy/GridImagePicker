@@ -19,17 +19,16 @@ Support features:
 Snapshot
 ======
 
-###Support display models:
-
+###Support display models:<br/>
 ![Features](https://github.com/habzy/GridImagePicker/blob/master/snapshot/features.jpg)
 
-###View & pick images
+###View & pick images:<br/>
 ![Picker](https://github.com/habzy/GridImagePicker/blob/master/snapshot/pick_gridview.jpg)
 
-###View & pick image in ViewPager
+###View & pick image in ViewPager:<br/>
 ![ViewPager](https://github.com/habzy/GridImagePicker/blob/master/snapshot/pick_viewpager.jpg) ==> ![full screen](https://github.com/habzy/GridImagePicker/blob/master/snapshot/pick_viewpager_zoomout.jpg)
 
-###Animation when change page
+###Animation when change page:<br/>
 ![Animate](https://github.com/habzy/GridImagePicker/blob/master/snapshot/change.jpg)
 
 
